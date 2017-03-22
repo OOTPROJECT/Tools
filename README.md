@@ -41,3 +41,8 @@
 u = admin@kingmath
 pw = 12345678
 
+# Atom editor set indent (4 space or 1 tab)
+1. คลิกที่ menu >> Packages >> Setting View >> Open
+2. เมนูด้านซ้าน เลือก editor >> เลื่อน scroll bar มาที่ Tab Length ใส่เลข 4 แทนเลข 2 (Laravel ใช้ 1 Tab, atom default: 2 space ให้เปลี่ยนเป็น 4)
+
+
