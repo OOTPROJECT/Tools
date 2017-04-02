@@ -9,6 +9,7 @@
 @endsection
 
 @section('main-content')
+
 <div class="box">
 	<div class="box-header with-border">
 		<h3 class="box-title"></h3>
@@ -32,82 +33,119 @@
 						</ul>
 					</div>
 					@endif
-					<div class="row">
-						<div class="col-sm-8 col-md-8"></div>
-						<div class="col-sm-2 col-md-2 text-right">รหัสนักเรียน:</div>
-						<div class="col-sm-2 col-md-2 text-left">
-							<div class="form-group {{ $errors->has('std_code') ? 'has-error' : '' }}">
-								<input type="text" name="std_code" class="form-control" placeholder="" disabled="disabled">
-								<span class="text-danger">{{ $errors->first('std_code') }}</span>
-							</div>
-						</div>
-					</div></br>
-					<div class="row">
-						<div class="col-sm-1 col-md-1 text-right">วันที่:</div>
-						<div class="col-sm-3 col-md-3">
-							<div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
-								<div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-									<input class="form-control" type="text" name="reg_date" readonly />
-									<span class="input-group-addon">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</span>
-								</div>
-								<span class="text-danger">{{ $errors->first('reg_date') }}</span>
-							</div>
-						</div>
-						<div class="col-sm-1 col-md-1 text-right">Login:</div>
-						<div class="col-sm-3 col-md-3 text-left">
-							<div class="form-group {{ $errors->has('std_username') ? 'has-error' : '' }}">
-								<input type="text" name="std_username" class="form-control"
-								placeholder="ไม่เกิน 8 ตัวต้องเป็น a-z, A-Z, 0-9">
-								<span class="text-danger">{{ $errors->first('std_username') }}</span>
-							</div>
-						</div>
-						<div class="col-sm-1 col-md-1 text-right">Password:</div>
-						<div class="col-sm-3 col-md-3 text-left">
-							<div class="form-group {{ $errors->has('std_password') ? 'has-error' : '' }}">
-								<input type="password" name="std_password" class="form-control"
-								placeholder="ไม่เกิน 6 ตัวต้องเป็น a-z, A-Z, 0-9">
-								<span class="text-danger">{{ $errors->first('std_password') }}</span>
-							</div>
-						</div>
-					</div></br>
-					<div class="row">
-						<div class="col-sm-1 col-md-1 text-right">ชื่อ:</div>
-						<div class="col-sm-3 col-md-3 text-left">
-							<div class="form-group {{ $errors->has('std_fname') ? 'has-error' : '' }}">
-								<input type="text" name="std_fname" class="form-control"
-								placeholder="">
-								<span class="text-danger">{{ $errors->first('std_fname') }}</span>
-							</div>
-						</div>
-						<div class="col-sm-1 col-md-1 text-right">นามสกุล:</div>
-						<div class="col-sm-3 col-md-3 text-left">
-							<div class="form-group {{ $errors->has('std_lname') ? 'has-error' : '' }}">
-								<input type="text" name="std_lname" class="form-control"
-								placeholder="" value="{{ old('std_lname') }}">
-								<span class="text-danger">{{ $errors->first('std_lname') }}</span>
-							</div>
-						</div>
-						<div class="col-sm-1 col-md-1 text-right">ชื่อเล่น:</div>
-						<div class="col-sm-3 col-md-3 text-left">
-							<div class="form-group {{ $errors->has('std_nname') ? 'has-error' : '' }}">
-								<input type="text" name="std_nname" class="form-control"
-								placeholder="" value="{{ old('std_nname') }}">
-								<span class="text-danger">{{ $errors->first('std_nname') }}</span>
-							</div>
-						</div>
-					</div></br>
-					<div class="row">
-						<div class="col-sm-10 col-md-11"></div>
-						<div class="col-sm-2 col-md-1 text-right">
-							<button type="submit" class="btn btn-primary">บันทีก</button>
+
+				</br>
+
+				<div class="row">
+					<div class="col-sm-1 col-md-1 text-center">ชื่อ </div>
+					<div class="col-sm-5 col-md-5 text-center">
+						<div class="form-group {{ $errors->has('std_fname') ? 'has-error' : '' }}">
+							<input type="text" name="std_fname" class="form-control"
+							placeholder="">
+							<span class="text-danger">{{ $errors->first('std_fname') }}</span>
 						</div>
 					</div>
-				</form>
+					<div class="col-sm-1 col-md-1 text-center">นามสกุล </div>
+					<div class="col-sm-5 col-md-5 text-center">
+						<div class="form-group {{ $errors->has('std_lname') ? 'has-error' : '' }}">
+							<input type="text" name="std_lname" class="form-control"
+							placeholder="" value="{{ old('std_lname') }}">
+							<span class="text-danger">{{ $errors->first('std_lname') }}</span>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-sm-1 col-md-1 text-center">ชื่อเล่น</div>
+					<div class="col-sm-11 col-md-5 text-left">
+						<div class="form-group {{ $errors->has('std_nname') ? 'has-error' : '' }}">
+							<input type="text" name="std_nname" class="form-control"
+							placeholder="" value="{{ old('std_nname') }}">
+							<span class="text-danger">{{ $errors->first('std_nname') }}</span>
+						</div>
+					</div>
+				</div>
+				<div class="row"><div class="col-sm-1 col-md-1 text-center">วันเดือนปีเกิด</div>
+				<div class="col-sm-11 col-md-5 text-left">
+					<input type='text' class="form-control text-center" id="datepicker"  />
+				</div>
+
+
+			</div><br>
+			<div class="row"><div class="col-sm-1 col-md-1 text-center">เพศ</div><div class="col-sm-11 col-md-3 text-center">
+				<label class="radio-inline"> <input type="radio" name="optradio">	&nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
+				</label>
+				<label class="radio-inline">
+					<input type="radio" name="optradio">  หญิง&nbsp;&nbsp;&nbsp;
+				</label>
+			</div></div>
+			<br>
+			<div class="row"><div class="col-sm-1 col-md-1 text-center">ชื่อสถานศึกษา</div><div class="col-sm-11 col-md-5 text-center">
+				<input type='text' class="form-control text-center" /></div>
+			<div class="col-sm-1 col-md-1 text-center">จังหวัด</div>
+				<div class="col-sm-11 col-md-5 text-left">
+					<select class="form-control">
+
+     </select>
+				</div>
+
 			</div>
-		</div>
+
+			<div class="row">
+			<div class="col-sm-1 col-md-1 text-center">ชั้นประถมศึกษาปีที่ </div>
+			<div class="col-sm-5 col-md-5 text-center">
+					<input type="text" class="form-control">
+				</div>
+			</div>
+			<div class="row"><div class="col-sm-1 col-md-1 text-center">ชื่อผู้ปกครอง </div>
+			<div class="col-sm-5 col-md-5 text-center">
+
+					<input type="text"  class="form-control">
+
+				</div>
+
+			<div class="col-sm-1 col-md-1 text-center">นามสกุล </div>
+			<div class="col-sm-5 col-md-5 text-center">
+
+					<input type="text"  class="form-control">
+				</div>
+			</div>
+			<div class="row"><div class="col-sm-1 col-md-1 text-center">ความสัมพันธ์กับนักเรียน</div> <div class="col-sm-5 col-md-5 text-center">
+
+					<input type="text"  class="form-control">
+
+				</div></div>
+				<div class="row"><div class="col-sm-1 col-md-1 text-center">วันเดือนปีเกิด</div>
+				<div class="col-sm-11 col-md-5 text-left">
+				<input type='text' class="form-control text-center" id="datepicker"  />
+				</div>
+				<div class="row"><div class="col-sm-1 col-md-1 text-center">อาชีพ</div>
+				<div class="col-sm-11 col-md-5 text-left">
+					<input type='text' class="form-control text-center"   />
+				</div>
+
+
+
+
+
+
+			<br>
+				<div class="row">
+					<div class="col-sm-12 col-md-12"></div>
+					<div class="col-sm-12 col-md-12 text-center">
+						<button type="submit" class="btn btn-primary">บันทีก</button>
+						<button type="submit" class="btn">รีเซ็ต</button>
+					</div>
+				</div>
+			</div></div>
+		</form>
 	</div>
-	<!-- /.box-body -->
 </div>
+</div>
+</div>
+<!-- /.box-body -->
+</div>
+<script type="text/javascript">
+$('.datepicker').datepicker(
+	format: 'dd/MM/yyyy'
+);</script>
 @endsection
