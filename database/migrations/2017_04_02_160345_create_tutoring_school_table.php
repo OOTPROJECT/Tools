@@ -74,7 +74,6 @@ class CreateTutoringSchoolTable extends Migration
             $table->string('start_time');
             $table->string('end_time');
             $table->string('day');
-            $table->integer('price');
             $table->string('room_no');
             $table->timestamps();
             $table->softDeletes();
@@ -88,6 +87,8 @@ class CreateTutoringSchoolTable extends Migration
             $table->foreign('teacher_id')->references('teacher_id')->on('teachers');
             $table->integer('time_table_id')->unsigned();
             $table->foreign('time_table_id')->references('time_table_id')->on('time_table');
+            $table->integer('course_hours');
+            $table->integer('price');
             $table->integer('student_max');
             $table->string('status', 10);
             $table->timestamps();
