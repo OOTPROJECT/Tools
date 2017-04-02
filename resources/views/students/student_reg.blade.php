@@ -37,7 +37,7 @@
 						<div class="col-sm-2 col-md-2 text-right">รหัสนักเรียน:</div>
 						<div class="col-sm-2 col-md-2 text-left">
 							<div class="form-group {{ $errors->has('std_code') ? 'has-error' : '' }}">
-								<input type="text" name="std_code" class="form-control" placeholder="">
+								<input type="text" name="std_code" class="form-control" placeholder="" disabled="disabled">
 								<span class="text-danger">{{ $errors->first('std_code') }}</span>
 							</div>
 						</div>
@@ -66,7 +66,7 @@
 						<div class="col-sm-1 col-md-1 text-right">Password:</div>
 						<div class="col-sm-3 col-md-3 text-left">
 							<div class="form-group {{ $errors->has('std_password') ? 'has-error' : '' }}">
-								<input type="text" name="std_password" class="form-control"
+								<input type="password" name="std_password" class="form-control"
 								placeholder="ไม่เกิน 6 ตัวต้องเป็น a-z, A-Z, 0-9">
 								<span class="text-danger">{{ $errors->first('std_password') }}</span>
 							</div>
