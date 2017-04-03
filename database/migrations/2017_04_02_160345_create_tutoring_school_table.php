@@ -83,12 +83,21 @@ class CreateTutoringSchoolTable extends Migration
             $table->increments('course_id');
             $table->integer('subject_id')->unsigned();
             $table->foreign('subject_id')->references('subject_id')->on('subjects');
+            $table->string('course_name', 255);
+            $table->integer('course_hours');
+            $table->integer('price');
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('course_schedule', function (Blueprint $table) {
+            $table->increments('course_schedule_id');
+            $table->integer('course_id')->unsigned();
+            $table->foreign('course_id')->references('course_id')->on('courses');
             $table->integer('teacher_id')->unsigned();
             $table->foreign('teacher_id')->references('teacher_id')->on('teachers');
             $table->integer('time_table_id')->unsigned();
             $table->foreign('time_table_id')->references('time_table_id')->on('time_table');
-            $table->integer('course_hours');
-            $table->integer('price');
             $table->integer('student_max');
             $table->string('status', 10);
             $table->timestamps();
@@ -98,8 +107,8 @@ class CreateTutoringSchoolTable extends Migration
         Schema::create('course_enroll', function (Blueprint $table) {
 
             $table->increments('corse_enroll_id');
-            $table->integer('course_id')->unsigned();
-            $table->foreign('course_id')->references('course_id')->on('courses');
+            $table->integer('course_schedule_id')->unsigned();
+            $table->foreign('course_schedule_id')->references('course_schedule_id')->on('course_schedule');
             $table->integer('student_id')->unsigned();
             $table->foreign('student_id')->references('student_id')->on('students');
             $table->timestamps();
@@ -108,11 +117,39 @@ class CreateTutoringSchoolTable extends Migration
 
         Schema::create('payroll', function (Blueprint $table) {
             $table->increments('payroll_id');
-            $table->integer('course_id')->unsigned();
-            $table->foreign('course_id')->references('course_id')->on('courses');
+            $table->integer('course_schedule_id')->unsigned();
+            $table->foreign('course_schedule_id')->references('course_schedule_id')->on('course_schedule');
             $table->integer('teacher_id')->unsigned();
             $table->foreign('teacher_id')->references('teacher_id')->on('teachers');
-            $table->string('hire');
+            $table->integer('hire');
+            $table->string('status', 10);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('provinces', function (Blueprint $table) {
+            $table->increments('province_id');
+            $table->string('province_name', 255);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('districts', function (Blueprint $table) {
+            $table->increments('district_id');
+            $table->integer('province_id')->unsigned();
+            $table->foreign('province_id')->references('province_id')->on('provinces');
+            $table->string('district_name', 255);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('sub_districts', function (Blueprint $table) {
+            $table->increments('sub_district_id');
+            $table->integer('province_id')->unsigned();
+            $table->foreign('province_id')->references('province_id')->on('provinces');
+            $table->integer('district_id')->unsigned();
+            $table->foreign('district_id')->references('district_id')->on('districts');
+            $table->string('sub_district_name', 255);
             $table->timestamps();
             $table->softDeletes();
         });
@@ -125,12 +162,16 @@ class CreateTutoringSchoolTable extends Migration
      */
     public function down()
     {
-        Schema::drop('students');
+        /*Schema::drop('students');
         Schema::drop('teachers');
         Schema::drop('subjects');
         Schema::drop('time_table');
         Schema::drop('courses');
+        Schema::drop('course_schedule');
         Schema::drop('course_enroll');
         Schema::drop('payroll');
+        Schema::drop('provinces');
+        Schema::drop('districts');
+        Schema::drop('sub_districts');*/
     }
 }
