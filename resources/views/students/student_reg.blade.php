@@ -96,7 +96,7 @@
 					<input type="text" class="form-control">
 				</div>
 			</div>
-			<div class="row"><div class="col-sm-2 col-md-2 text-right">ชื่อผู้ปกครอง </div>
+			<div class="row"><div class="col-sm-2 col-md-2 text-right">ชื่อผู้ปกครอง  </div>
 			<div class="col-sm-4 col-md-4 text-center">
 
 				<input type="text"  class="form-control">
