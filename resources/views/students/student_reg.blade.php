@@ -67,8 +67,15 @@
 				<div class="row">
 					<div class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</div>
 					<div class="col-sm-10 col-md-4 text-left">
-					    <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-						<input type='text' class="form-control text-center" id="datepicker"  /></div>
+						<div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
+							<div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+								<input class="form-control" type="text" name="reg_date" readonly />
+								<span class="input-group-addon">
+									<i class="glyphicon glyphicon-calendar"></i>
+								</span>
+							</div>
+							<span class="text-danger">{{ $errors->first('reg_date') }}</span>
+						</div>
 					</div>
 
 
@@ -122,8 +129,15 @@
 </div>
 		</div></div>
 		<div class="row"><div class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</div>
-		<div class="col-sm-10 col-md-4 text-left"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-			<input type='text' class="form-control text-center" id="datepicker"  /></div>
+		<div class="col-sm-10 col-md-4 text-left">     <div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
+				<div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+					<input class="form-control" type="text" name="reg_date" readonly />
+					<span class="input-group-addon">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</span>
+				</div>
+				<span class="text-danger">{{ $errors->first('reg_date') }}</span>
+			</div>
 		</div>
 
 		<div class="col-sm-2 col-md-2 text-right">อาชีพ</div>
@@ -197,8 +211,5 @@
 </div>
 <!-- /.box-body -->
 </div>
-<script type="text/javascript">
-$('.datepicker').datepicker(
-	format: 'dd/MM/yyyy'
-);</script>
+
 @endsection
