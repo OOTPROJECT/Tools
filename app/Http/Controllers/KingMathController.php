@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Models\Students;
+use App\Models\City;
 
 class KingMathController extends Controller
 {
@@ -16,6 +17,7 @@ class KingMathController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        $this->city = new City();
     }
 
     /**
@@ -80,7 +82,10 @@ class KingMathController extends Controller
      */
     public function callTeacherRegPage()
     {
-        return view('teachers.teacher_reg');
+        $prov = $this->city->getProvinces();
+
+        return view('teachers.teacher_reg')
+                ->with('prov', $prov);
     }
 
     /**
@@ -121,5 +126,30 @@ class KingMathController extends Controller
     public function callClassMgtPage()
     {
         return view('classroom.class_mgt');
+    }
+
+    /**
+     * Return districts data.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getDistricts(Request $request)
+    {
+        $dist = $this->city->getDistrictsByProvID(trim($request->prov_id));
+
+        return $dist;
+    }
+
+    /**
+     * Return sub districts data.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getSubDistricts(Request $request)
+    {
+        $sub_dist = $this->city->getSubDistrictsByID(trim($request->prov_id),
+                    trim($request->dist_id));
+
+        return $sub_dist;
     }
 }

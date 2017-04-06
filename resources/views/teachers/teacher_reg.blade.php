@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('layouts.partials.scripts')
 
 @section('htmlheader_title')
 การสมัครสอนพิเศษ
@@ -143,19 +144,24 @@
                     <div class="row">
                         <div class="col-sm-2 col-md-2 text-right">จังหวัด:</div>
                         <div class="col-sm-4 col-md-4">
-                            <select class="form-control">
+                            <select class="form-control" id="provinces_selection">
+                                @foreach($prov as $prov_list)
+                                    <option value="{{ $prov_list->province_id }}">
+                                        {{ $prov_list->province_name }}
+                                    </option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="col-sm-2 col-md-2 text-right">เขต/อำเภอ:</div>
                         <div class="col-sm-4 col-md-4 text-left">
-                            <select class="form-control">
+                            <select class="form-control" id="districts_selection">
                             </select>
                         </div>
                     </div></br>
                     <div class="row">
                         <div class="col-sm-2 col-md-2 text-right">แขวง/ตำบล:</div>
                         <div class="col-sm-4 col-md-4 text-left">
-                            <select class="form-control">
+                            <select class="form-control" id="sub_districts_selection">
                             </select>
                         </div>
                         <div class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์:</div>
@@ -210,12 +216,62 @@
     </div>
 <!-- /.box-body -->
 </div>
-<<<<<<< HEAD
-cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js
-=======
+
 <script type="text/javascript">
-$('.datepicker').datepicker(
-	format: 'dd/MM/yyyy'
-);</script>
->>>>>>> master
+    $(document).ready(function(){
+        $("#provinces_selection").change(function (){
+            var prov_dd = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('/districts') }}",
+                data: { prov_id: prov_dd },
+                dataType: 'json',
+                success: function (data) {
+                    var select = $("#districts_selection");
+                    select.empty();
+                    select.append($('<option/>', {
+                        value: 0,
+                        text: "กรุณาเลือกเขต/อำเภอ"
+                    }));
+                    $.each(data, function (index, dist_data) {
+                        select.append($('<option/>', {
+                            value: dist_data.district_id,
+                            text: dist_data.district_name
+                        }));
+                    });
+                    //console.log(data);
+                }
+            });
+        });
+
+        $("#districts_selection").change(function (){
+            var prov_id = $("#provinces_selection").val();
+            var dist_dd = $(this).val();
+            $.ajax({
+                type: 'GET',
+                url: "{{ url('/sub_districts') }}",
+                data: { prov_id: prov_id, dist_id: dist_dd },
+                dataType: 'json',
+                success: function (data) {
+                    var select = $("#sub_districts_selection");
+                    select.empty();
+                    select.append($('<option/>', {
+                        value: 0,
+                        text: "กรุณาเลือกแขวง/ตำบล"
+                    }));
+                    $.each(data, function (index, sub_dist_data) {
+                        select.append($('<option/>', {
+                            value: sub_dist_data.sub_district_id,
+                            text: sub_dist_data.sub_district_name
+                        }));
+                    });
+                    //console.log(data);
+                }
+            });
+        });
+    });
+
+
+    //$('.datepicker').datepicker( format: 'dd/MM/yyyy');
+</script>
 @endsection

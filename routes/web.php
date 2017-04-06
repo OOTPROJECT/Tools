@@ -42,6 +42,10 @@ Route::get('/HireCal', 'KingMathController@callHireCalPage');
 // Classroom
 Route::get('/ClassMgt', 'KingMathController@callClassMgtPage');
 
+// City
+Route::get('/districts', 'KingMathController@getDistricts');
+Route::get('/sub_districts', 'KingMathController@getSubDistricts');
+
 Route::resource('profile', 'ProfileController');
 Route::patch('profile/{profile}/password', 'ProfileController@update_password');
 Route::resource('admin', 'AdminController');
