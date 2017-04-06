@@ -13,6 +13,33 @@ class CreateTutoringSchoolTable extends Migration
      */
     public function up()
     {
+        Schema::create('provinces', function (Blueprint $table) {
+            $table->increments('province_id');
+            $table->string('province_name', 255);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('districts', function (Blueprint $table) {
+            $table->increments('district_id');
+            $table->integer('province_id')->unsigned();
+            $table->foreign('province_id')->references('province_id')->on('provinces');
+            $table->string('district_name', 255);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
+        Schema::create('sub_districts', function (Blueprint $table) {
+            $table->increments('sub_district_id');
+            $table->integer('province_id')->unsigned();
+            $table->foreign('province_id')->references('province_id')->on('provinces');
+            $table->integer('district_id')->unsigned();
+            $table->foreign('district_id')->references('district_id')->on('districts');
+            $table->string('sub_district_name', 255);
+            $table->timestamps();
+            $table->softDeletes();
+        });
+
         Schema::create('students', function (Blueprint $table) {
             $table->increments('student_id');
             $table->string('firstname', 50);
@@ -23,14 +50,17 @@ class CreateTutoringSchoolTable extends Migration
             $table->string('schoolname', 255);
             $table->string('school_province_id', 3);
             $table->string('school_level', 1);
-            // $table->string('parent_fname', 50);
+            $table->string('parent_fname', 50);
             $table->string('parent_lname', 50);
             $table->string('student_relationship', 10);
             $table->date('parent_birthdate');
             $table->string('addr', 255);
-            $table->string('sub_district_id', 5);
-            $table->string('district_id', 3);
-            $table->string('province_id');
+            $table->integer('province_id')->unsigned();
+            $table->foreign('province_id')->references('province_id')->on('provinces');
+            $table->integer('district_id')->unsigned();
+            $table->foreign('district_id')->references('district_id')->on('districts');
+            $table->integer('sub_district_id')->unsigned();
+            $table->foreign('sub_district_id')->references('sub_district_id')->on('sub_districts');
             $table->string('postcode', 5);
             $table->string('email', 100);
             $table->string('mobile', 10);
@@ -44,11 +74,15 @@ class CreateTutoringSchoolTable extends Migration
             $table->string('firstname', 50);
             $table->string('lastname', 50);
             $table->date('birthdate');
+            $table->string('gender', 1);
             $table->string('personal_id', 13);
             $table->string('addr', 255);
-            $table->string('sub_district_id', 5);
-            $table->string('district_id', 3);
-            $table->string('province_id');
+            $table->integer('province_id')->unsigned();
+            $table->foreign('province_id')->references('province_id')->on('provinces');
+            $table->integer('district_id')->unsigned();
+            $table->foreign('district_id')->references('district_id')->on('districts');
+            $table->integer('sub_district_id')->unsigned();
+            $table->foreign('sub_district_id')->references('sub_district_id')->on('sub_districts');
             $table->string('postcode', 5);
             $table->string('email', 100);
             $table->string('mobile', 10);
@@ -170,8 +204,14 @@ class CreateTutoringSchoolTable extends Migration
         Schema::drop('course_schedule');
         Schema::drop('course_enroll');
         Schema::drop('payroll');
+<<<<<<<
         Schema::drop('provinces');
         Schema::drop('districts');
         Schema::drop('sub_districts');*/
+=======
+        Schema::drop('provinces');
+        Schema::drop('districts');
+        Schema::drop('sub_districts');
+>>>>>>>
     }
 }
