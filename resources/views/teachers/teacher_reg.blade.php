@@ -54,17 +54,17 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-2 col-md-2 text-right">วันเกิด:</div>
-						<div class="col-sm-4 col-md-4">
-							<div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
-								<div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-									<input class="form-control" type="text" name="reg_date" readonly />
-									<span class="input-group-addon">
-										<i class="glyphicon glyphicon-calendar"></i>
-									</span>
-								</div>
-								<span class="text-danger">{{ $errors->first('reg_date') }}</span>
-							</div>
-						</div>
+                        <div class="col-sm-4 col-md-4">
+                            <div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
+                                <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+                                    <input class="form-control" type="text" name="reg_date" readonly />
+                                    <span class="input-group-addon">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </span>
+                                </div>
+                                <span class="text-danger">{{ $errors->first('reg_date') }}</span>
+                            </div>
+                        </div>
                         <div class="col-sm-2 col-md-2 text-right">รหัสประจำตัวประชาชน:</div>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
@@ -76,17 +76,17 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-2 col-md-2 text-right">เพศ:</div>
-						<div class="col-sm-4 col-md-4">
-							<div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
+                        <div class="col-sm-4 col-md-4">
+                            <div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
                                 <label class="radio-inline">
                                     <input type="radio" name="optradio">&nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
-                				</label>
-                				<label class="radio-inline">
-                					<input type="radio" name="optradio">หญิง&nbsp;&nbsp;&nbsp;
-                				</label>
-								<span class="text-danger">{{ $errors->first('reg_date') }}</span>
-							</div>
-						</div>
+                                </label>
+                                <label class="radio-inline">
+                                    <input type="radio" name="optradio">หญิง&nbsp;&nbsp;&nbsp;
+                                </label>
+                                <span class="text-danger">{{ $errors->first('reg_date') }}</span>
+                            </div>
+                        </div>
                         <div class="col-sm-2 col-md-2 text-right">อีเมล์:</div>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
@@ -98,16 +98,14 @@
                     </div>
                     <div class="row">
                         <div class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์:</div>
-						<div class="col-sm-4 col-md-4">
-							<div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
-                                <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-                                    <input type="text" name="teacher_lname" class="form-control"
-                                    placeholder="" value="{{ old('std_lname') }}">
-                                    <span class="text-danger">{{ $errors->first('std_lname') }}</span>
-                                </div>
-								<span class="text-danger">{{ $errors->first('reg_date') }}</span>
-							</div>
-						</div>
+                        <div class="col-sm-4 col-md-4">
+                            <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+                                <input type="text" name="teacher_lname" class="form-control"
+                                placeholder="" value="{{ old('std_lname') }}">
+                                <span class="text-danger">{{ $errors->first('std_lname') }}</span>
+                            </div>
+                            <span class="text-danger">{{ $errors->first('reg_date') }}</span>
+                        </div>
                         <div class="col-sm-2 col-md-2 text-right">เบอร์บ้าน:</div>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
@@ -119,102 +117,92 @@
                     </div>
                 </br>
 
-                    <h3 style="border-bottom:1px;">&nbsp;ที่อยู่</h3>
-                    <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">บ้านเลขที่:</div>
-						<div class="col-sm-4 col-md-4">
-							<div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
-                                <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-                                    <input type="text" name="teacher_lname" class="form-control"
-                                    placeholder="" value="{{ old('std_lname') }}">
-                                    <span class="text-danger">{{ $errors->first('std_lname') }}</span>
-                                </div>
-								<span class="text-danger">{{ $errors->first('reg_date') }}</span>
-							</div>
-						</div>
-                        <div class="col-sm-2 col-md-2 text-right">ถนน:</div>
-                        <div class="col-sm-4 col-md-4 text-left">
-                            <div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
-                                <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-                                    <input type="text" name="teacher_lname" class="form-control"
-                                    placeholder="" value="{{ old('std_lname') }}">
-                                    <span class="text-danger">{{ $errors->first('std_lname') }}</span>
-                                </div>
-								<span class="text-danger">{{ $errors->first('reg_date') }}</span>
-							</div>
+                <h3 style="border-bottom:1px;">&nbsp;ที่อยู่</h3>
+                <div class="row">
+                    <div class="col-sm-2 col-md-2 text-right">บ้านเลขที่:</div>
+                    <div class="col-sm-4 col-md-4">
+                        <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+                            <input type="text" name="teacher_lname" class="form-control"
+                            placeholder="" value="{{ old('std_lname') }}">
+                            <span class="text-danger">{{ $errors->first('std_lname') }}</span>
                         </div>
+                        <span class="text-danger">{{ $errors->first('reg_date') }}</span>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">จังหวัด:</div>
-						<div class="col-sm-4 col-md-4">
-                            <select class="form-control">
-                            </select>
-						</div>
-                        <div class="col-sm-2 col-md-2 text-right">เขต/อำเภอ:</div>
-                        <div class="col-sm-4 col-md-4 text-left">
-                            <select class="form-control">
-                            </select>
+                    <div class="col-sm-2 col-md-2 text-right">ถนน:</div>
+                    <div class="col-sm-4 col-md-4 text-left">
+                        <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+                            <input type="text" name="teacher_lname" class="form-control"
+                            placeholder="" value="{{ old('std_lname') }}">
+                            <span class="text-danger">{{ $errors->first('std_lname') }}</span>
                         </div>
-                    </div></br>
-                    <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">แขวง/ตำบล:</div>
-                        <div class="col-sm-4 col-md-4 text-left">
-                            <select class="form-control">
-                            </select>
-                        </div>
-                        <div class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์:</div>
-                        <div class="col-sm-4 col-md-4 text-left">
-                            <div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
-                                <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-                                    <input type="text" name="teacher_lname" class="form-control"
-                                    placeholder="" value="{{ old('std_lname') }}">
-                                    <span class="text-danger">{{ $errors->first('std_lname') }}</span>
-                                </div>
-								<span class="text-danger">{{ $errors->first('reg_date') }}</span>
-							</div>
-                        </div>
-                    </div></br>
-                    <h3 style="border-bottom:1px;">&nbsp;ระดับการศึกษา</h3>
-                    <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">ระดับ:</div>
-                        <div class="col-sm-4 col-md-4 text-left">
-                            <select class="form-control">
-                            </select>
-                        </div>
-                        <div class="col-sm-2 col-md-2 text-right">สาขา:</div>
-                        <div class="col-sm-4 col-md-4 text-left">
-                            <div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
-                                <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-                                    <input type="text" name="teacher_lname" class="form-control"
-                                    placeholder="" value="{{ old('std_lname') }}">
-                                    <span class="text-danger">{{ $errors->first('std_lname') }}</span>
-                                </div>
-								<span class="text-danger">{{ $errors->first('reg_date') }}</span>
-							</div>
-                        </div>
+                        <span class="text-danger">{{ $errors->first('reg_date') }}</span>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">มหาวิทยาลัย:</div>
-                        <div class="col-sm-4 col-md-4 text-left">
-                            <div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
-                                <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-                                    <input type="text" name="teacher_lname" class="form-control"
-                                    placeholder="" value="{{ old('std_lname') }}">
-                                    <span class="text-danger">{{ $errors->first('std_lname') }}</span>
-                                </div>
-								<span class="text-danger">{{ $errors->first('reg_date') }}</span>
-							</div>
-                        </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 col-md-2 text-right">จังหวัด:</div>
+                    <div class="col-sm-4 col-md-4">
+                        <select class="form-control">
+                        </select>
                     </div>
+                    <div class="col-sm-2 col-md-2 text-right">เขต/อำเภอ:</div>
+                    <div class="col-sm-4 col-md-4 text-left">
+                        <select class="form-control">
+                        </select>
+                    </div>
+                </div></br>
+                <div class="row">
+                    <div class="col-sm-2 col-md-2 text-right">แขวง/ตำบล:</div>
+                    <div class="col-sm-4 col-md-4 text-left">
+                        <select class="form-control">
+                        </select>
+                    </div>
+                    <div class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์:</div>
+                    <div class="col-sm-4 col-md-4 text-left">
+                        <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+                            <input type="text" name="teacher_lname" class="form-control"
+                            placeholder="" value="{{ old('std_lname') }}">
+                            <span class="text-danger">{{ $errors->first('std_lname') }}</span>
+                        </div>
+                        <span class="text-danger">{{ $errors->first('reg_date') }}</span>
+                    </div>
+                </div></br>
+                <h3 style="border-bottom:1px;">&nbsp;ระดับการศึกษา</h3>
+                <div class="row">
+                    <div class="col-sm-2 col-md-2 text-right">ระดับ:</div>
+                    <div class="col-sm-4 col-md-4 text-left">
+                        <select class="form-control">
+                        </select>
+                    </div>
+                    <div class="col-sm-2 col-md-2 text-right">สาขา:</div>
+                    <div class="col-sm-4 col-md-4 text-left">
+                        <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+                            <input type="text" name="teacher_lname" class="form-control"
+                            placeholder="" value="{{ old('std_lname') }}">
+                            <span class="text-danger">{{ $errors->first('std_lname') }}</span>
+                        </div>
+                        <span class="text-danger">{{ $errors->first('reg_date') }}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-2 col-md-2 text-right">มหาวิทยาลัย:</div>
+                    <div class="col-sm-4 col-md-4 text-left">
+                        <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+                            <input type="text" name="teacher_lname" class="form-control"
+                            placeholder="" value="{{ old('std_lname') }}">
+                            <span class="text-danger">{{ $errors->first('std_lname') }}</span>
+                        </div>
+                        <span class="text-danger">{{ $errors->first('reg_date') }}</span>
+                    </div>
+                </div>
 
-                </form>
-            </div>
-
+            </form>
         </div>
 
-
     </div>
-    <!-- /.box-body -->
+
+
+</div>
+<!-- /.box-body -->
 </div>
 
 @endsection
