@@ -64,114 +64,123 @@
 						</div>
 					</div>
 				</div>
-				<div class="row"><div class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</div>
-				<div class="col-sm-10 col-md-4 text-left">
-					<input type='text' class="form-control text-center" id="datepicker"  />
+				<div class="row">
+					<div class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</div>
+					<div class="col-sm-10 col-md-4 text-left">
+					    <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+						<input type='text' class="form-control text-center" id="datepicker"  /></div>
+					</div>
+
+
+				</div><br>
+				<div class="row"><div class="col-sm-2 col-md-2 text-right">เพศ</div>
+				<div class="col-sm-11 col-md-3 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+					<label class="radio-inline"> <input type="radio" name="optradio">	&nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
+					</label>
+					<label class="radio-inline">
+						<input type="radio" name="optradio">  หญิง&nbsp;&nbsp;&nbsp;
+					</label></div>
 				</div>
-
-
-			</div><br>
-			<div class="row"><div class="col-sm-2 col-md-2 text-right">เพศ</div><div class="col-sm-11 col-md-3 text-center">
-				<label class="radio-inline"> <input type="radio" name="optradio">	&nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
-				</label>
-				<label class="radio-inline">
-					<input type="radio" name="optradio">  หญิง&nbsp;&nbsp;&nbsp;
-				</label>
-			</div></div>
+			</div>
 			<br>
 			<div class="row"><div class="col-sm-2 col-md-2 text-right">ชื่อสถานศึกษา</div>
-			<div class="col-sm-10 col-md-4 text-center">
-				<input type='text' class="form-control text-center" /></div>
+			<div class="col-sm-10 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+				<input type='text' class="form-control text-center" /></div></div>
 				<div class="col-sm-2 col-md-2 text-right">จังหวัด</div>
 				<div class="col-sm-10 col-md-4 text-left">
+					 <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 					<select class="form-control">
-					</select>
+					</select></div>
 				</div>
 
 			</div>
 
 			<div class="row">
 				<div class="col-sm-2 col-md-2 text-right">ชั้นประถมศึกษาปีที่ </div>
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 					<input type="text" class="form-control">
-				</div>
+				</div></div>
 			</div>
 			<div class="row"><div class="col-sm-2 col-md-2 text-right">ชื่อผู้ปกครอง  </div>
 			<div class="col-sm-4 col-md-4 text-center">
-
+ <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 				<input type="text"  class="form-control">
-
+</div>
 			</div>
 
 			<div class="col-sm-2 col-md-2 text-right">นามสกุล </div>
-			<div class="col-sm-4 col-md-4 text-center">
 
+			<div class="col-sm-4 col-md-4 text-center"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 				<input type="text"  class="form-control">
+	</div>
 			</div>
 		</div>
 		<div class="row"><div class="col-sm-2 col-md-2 text-right">ความสัมพันธ์กับนักเรียน</div>
-		<div class="col-sm-4 col-md-4 text-center">
-			<input type="text"  class="form-control">
+		<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 
+			<input type="text"  class="form-control">
+</div>
 		</div></div>
 		<div class="row"><div class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</div>
-		<div class="col-sm-10 col-md-4 text-left">
-			<input type='text' class="form-control text-center" id="datepicker"  />
+		<div class="col-sm-10 col-md-4 text-left"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+			<input type='text' class="form-control text-center" id="datepicker"  /></div>
 		</div>
 
-			<div class="col-sm-2 col-md-2 text-right">อาชีพ</div>
+		<div class="col-sm-2 col-md-2 text-right">อาชีพ</div>
+		<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+			<input type='text' class="form-control"   /></div>
+		</div></div>
+
+		<div class="row"><div class="col-sm-2 col-md-2 text-right">บ้านเลขที่</div>
+		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+			<input type='text' class="form-control text-center"  /></div>
+		</div>
+
+		<div class="col-sm-2 col-md-2 text-right">ซอย</div>
+		<div class="col-sm-4 col-md-4 text-center"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+			<input type='text' class="form-control"   /></div>
+		</div></div>
+		<div class="row"><div class="col-sm-2 col-md-2 text-right">ถนน</div>
+		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+			<input type='text' class="form-control text-center"  /></div>
+		</div>
+		<div class="col-sm-2 col-md-2 text-right">จังหวัด</div>
+		<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+			<select class="form-control">
+			</select></div>
+		</div></div>
+
+		<div class="row">
+			<div class="col-sm-2 col-md-2 text-right">อำเภอ/เขต</div>
+		<div class="col-sm-10 col-md-4 text-left">
+		<div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+			<select class="form-control">
+			</select></div>
+		</div>
+		<div class="col-sm-2 col-md-2 text-right">ตำบล/แขวง</div>
+		<div class="col-sm-4 col-md-4 text-center"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+			<select class="form-control">
+			</select></div>
+		</div></div>
+
+		<div class="row"><div class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์</div>
+		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+			<input type='text' class="form-control text-center"  /></div>
+		</div>
+
+		<div class="col-sm-2 col-md-2 text-right">อีเมล</div>
+		<div class="col-sm-4 col-md-4 text-center"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+			<input type='text' class="form-control"   /></div>
+		</div></div>
+		<div class="row"><div class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์</div>
+		<div class="col-sm-10 col-md-4 text-left">
+			<input type='text' class="form-control text-center"  />
+		</div>
+
+		<div class="col-sm-2 col-md-2 text-right">เบอร์บ้าน</div>
 		<div class="col-sm-4 col-md-4 text-center">
 			<input type='text' class="form-control"   />
 		</div></div>
-
-	<div class="row"><div class="col-sm-2 col-md-2 text-right">บ้านเลขที่</div>
-	<div class="col-sm-10 col-md-4 text-left">
-		<input type='text' class="form-control text-center"  />
-	</div>
-
-		<div class="col-sm-2 col-md-2 text-right">ซอย</div>
-	<div class="col-sm-4 col-md-4 text-center">
-		<input type='text' class="form-control"   />
-	</div></div>
-	<div class="row"><div class="col-sm-2 col-md-2 text-right">ถนน</div>
-	<div class="col-sm-10 col-md-4 text-left">
-		<input type='text' class="form-control text-center"  />
-	</div>
-
-		<div class="col-sm-2 col-md-2 text-right">ตำบล/แขวง</div>
-	<div class="col-sm-4 col-md-4 text-center">
-		<select class="form-control">
-		</select>
-	</div></div>
-	<div class="row"><div class="col-sm-2 col-md-2 text-right">อำเภอ/เขต</div>
-	<div class="col-sm-10 col-md-4 text-left">
-		<select class="form-control">
-		</select>
-	</div>
-
-		<div class="col-sm-2 col-md-2 text-right">จังหวัด</div>
-	<div class="col-sm-4 col-md-4 text-center">
-		<select class="form-control">
-		</select>
-	</div></div>
-	<div class="row"><div class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์</div>
-	<div class="col-sm-10 col-md-4 text-left">
-		<input type='text' class="form-control text-center"  />
-	</div>
-
-		<div class="col-sm-2 col-md-2 text-right">อีเมล</div>
-	<div class="col-sm-4 col-md-4 text-center">
-		<input type='text' class="form-control"   />
-	</div></div>
-	<div class="row"><div class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์</div>
-	<div class="col-sm-10 col-md-4 text-left">
-		<input type='text' class="form-control text-center"  />
-	</div>
-
-		<div class="col-sm-2 col-md-2 text-right">เบอร์บ้าน</div>
-	<div class="col-sm-4 col-md-4 text-center">
-		<input type='text' class="form-control"   />
-	</div></div>
 		<br><br>
 		<div class="row">
 			<div class="col-sm-12 col-md-12"></div>
