@@ -37,16 +37,16 @@
 				</br>
 
 				<div class="row">
-					<div class="col-sm-1 col-md-1 text-center">ชื่อ </div>
-					<div class="col-sm-5 col-md-5 text-center">
+					<div class="col-sm-2 col-md-2 text-right">ชื่อ </div>
+					<div class="col-sm-4 col-md-4 text-right">
 						<div class="form-group {{ $errors->has('std_fname') ? 'has-error' : '' }}">
 							<input type="text" name="std_fname" class="form-control"
 							placeholder="">
 							<span class="text-danger">{{ $errors->first('std_fname') }}</span>
 						</div>
 					</div>
-					<div class="col-sm-1 col-md-1 text-center">นามสกุล </div>
-					<div class="col-sm-5 col-md-5 text-center">
+					<div class="col-sm-2 col-md-2 text-right">นามสกุล </div>
+					<div class="col-sm-4 col-md-4 text-right">
 						<div class="form-group {{ $errors->has('std_lname') ? 'has-error' : '' }}">
 							<input type="text" name="std_lname" class="form-control"
 							placeholder="" value="{{ old('std_lname') }}">
@@ -55,8 +55,8 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-1 col-md-1 text-center">ชื่อเล่น</div>
-					<div class="col-sm-11 col-md-5 text-left">
+					<div class="col-sm-2 col-md-2 text-right">ชื่อเล่น</div>
+					<div class="col-sm-10 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('std_nname') ? 'has-error' : '' }}">
 							<input type="text" name="std_nname" class="form-control"
 							placeholder="" value="{{ old('std_nname') }}">
@@ -64,14 +64,14 @@
 						</div>
 					</div>
 				</div>
-				<div class="row"><div class="col-sm-1 col-md-1 text-center">วันเดือนปีเกิด</div>
-				<div class="col-sm-11 col-md-5 text-left">
+				<div class="row"><div class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</div>
+				<div class="col-sm-10 col-md-4 text-left">
 					<input type='text' class="form-control text-center" id="datepicker"  />
 				</div>
 
 
 			</div><br>
-			<div class="row"><div class="col-sm-1 col-md-1 text-center">เพศ</div><div class="col-sm-11 col-md-3 text-center">
+			<div class="row"><div class="col-sm-2 col-md-2 text-right">เพศ</div><div class="col-sm-11 col-md-3 text-center">
 				<label class="radio-inline"> <input type="radio" name="optradio">	&nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
 				</label>
 				<label class="radio-inline">
@@ -79,66 +79,110 @@
 				</label>
 			</div></div>
 			<br>
-			<div class="row"><div class="col-sm-1 col-md-1 text-center">ชื่อสถานศึกษา</div><div class="col-sm-11 col-md-5 text-center">
+			<div class="row"><div class="col-sm-2 col-md-2 text-right">ชื่อสถานศึกษา</div>
+			<div class="col-sm-10 col-md-4 text-center">
 				<input type='text' class="form-control text-center" /></div>
-			<div class="col-sm-1 col-md-1 text-center">จังหวัด</div>
-				<div class="col-sm-11 col-md-5 text-left">
+				<div class="col-sm-2 col-md-2 text-right">จังหวัด</div>
+				<div class="col-sm-10 col-md-4 text-left">
 					<select class="form-control">
-
-     </select>
+					</select>
 				</div>
 
 			</div>
 
 			<div class="row">
-			<div class="col-sm-1 col-md-1 text-center">ชั้นประถมศึกษาปีที่ </div>
-			<div class="col-sm-5 col-md-5 text-center">
+				<div class="col-sm-2 col-md-2 text-right">ชั้นประถมศึกษาปีที่ </div>
+				<div class="col-sm-4 col-md-4 text-center">
 					<input type="text" class="form-control">
 				</div>
 			</div>
-			<div class="row"><div class="col-sm-1 col-md-1 text-center">ชื่อผู้ปกครอง </div>
-			<div class="col-sm-5 col-md-5 text-center">
+			<div class="row"><div class="col-sm-2 col-md-2 text-right">ชื่อผู้ปกครอง </div>
+			<div class="col-sm-4 col-md-4 text-center">
 
-					<input type="text"  class="form-control">
+				<input type="text"  class="form-control">
 
-				</div>
-
-			<div class="col-sm-1 col-md-1 text-center">นามสกุล </div>
-			<div class="col-sm-5 col-md-5 text-center">
-
-					<input type="text"  class="form-control">
-				</div>
 			</div>
-			<div class="row"><div class="col-sm-1 col-md-1 text-center">ความสัมพันธ์กับนักเรียน</div> <div class="col-sm-5 col-md-5 text-center">
 
-					<input type="text"  class="form-control">
+			<div class="col-sm-2 col-md-2 text-right">นามสกุล </div>
+			<div class="col-sm-4 col-md-4 text-center">
 
-				</div></div>
-				<div class="row"><div class="col-sm-1 col-md-1 text-center">วันเดือนปีเกิด</div>
-				<div class="col-sm-11 col-md-5 text-left">
-				<input type='text' class="form-control text-center" id="datepicker"  />
-				</div>
-				<div class="row"><div class="col-sm-1 col-md-1 text-center">อาชีพ</div>
-				<div class="col-sm-11 col-md-5 text-left">
-					<input type='text' class="form-control text-center"   />
-				</div>
+				<input type="text"  class="form-control">
+			</div>
+		</div>
+		<div class="row"><div class="col-sm-2 col-md-2 text-right">ความสัมพันธ์กับนักเรียน</div>
+		<div class="col-sm-4 col-md-4 text-center">
+			<input type="text"  class="form-control">
 
+		</div></div>
+		<div class="row"><div class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</div>
+		<div class="col-sm-10 col-md-4 text-left">
+			<input type='text' class="form-control text-center" id="datepicker"  />
+		</div>
 
+			<div class="col-sm-2 col-md-2 text-right">อาชีพ</div>
+		<div class="col-sm-4 col-md-4 text-center">
+			<input type='text' class="form-control"   />
+		</div></div>
 
-
-
-
-			<br>
-				<div class="row">
-					<div class="col-sm-12 col-md-12"></div>
-					<div class="col-sm-12 col-md-12 text-center">
-						<button type="submit" class="btn btn-primary">บันทีก</button>
-						<button type="submit" class="btn">รีเซ็ต</button>
-					</div>
-				</div>
-			</div></div>
-		</form>
+	<div class="row"><div class="col-sm-2 col-md-2 text-right">บ้านเลขที่</div>
+	<div class="col-sm-10 col-md-4 text-left">
+		<input type='text' class="form-control text-center"  />
 	</div>
+
+		<div class="col-sm-2 col-md-2 text-right">ซอย</div>
+	<div class="col-sm-4 col-md-4 text-center">
+		<input type='text' class="form-control"   />
+	</div></div>
+	<div class="row"><div class="col-sm-2 col-md-2 text-right">ถนน</div>
+	<div class="col-sm-10 col-md-4 text-left">
+		<input type='text' class="form-control text-center"  />
+	</div>
+
+		<div class="col-sm-2 col-md-2 text-right">ตำบล/แขวง</div>
+	<div class="col-sm-4 col-md-4 text-center">
+		<select class="form-control">
+		</select>
+	</div></div>
+	<div class="row"><div class="col-sm-2 col-md-2 text-right">อำเภอ/เขต</div>
+	<div class="col-sm-10 col-md-4 text-left">
+		<select class="form-control">
+		</select>
+	</div>
+
+		<div class="col-sm-2 col-md-2 text-right">จังหวัด</div>
+	<div class="col-sm-4 col-md-4 text-center">
+		<select class="form-control">
+		</select>
+	</div></div>
+	<div class="row"><div class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์</div>
+	<div class="col-sm-10 col-md-4 text-left">
+		<input type='text' class="form-control text-center"  />
+	</div>
+
+		<div class="col-sm-2 col-md-2 text-right">อีเมล</div>
+	<div class="col-sm-4 col-md-4 text-center">
+		<input type='text' class="form-control"   />
+	</div></div>
+	<div class="row"><div class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์</div>
+	<div class="col-sm-10 col-md-4 text-left">
+		<input type='text' class="form-control text-center"  />
+	</div>
+
+		<div class="col-sm-2 col-md-2 text-right">เบอร์บ้าน</div>
+	<div class="col-sm-4 col-md-4 text-center">
+		<input type='text' class="form-control"   />
+	</div></div>
+		<br><br>
+		<div class="row">
+			<div class="col-sm-12 col-md-12"></div>
+			<div class="col-sm-12 col-md-12 text-center">
+				<button type="submit" class="btn btn-primary">บันทีก</button>
+				<button type="submit" class="btn">รีเซ็ต</button>
+			</div>
+		</div>
+	</div></div>
+</form>
+</div>
 </div>
 </div>
 </div>
