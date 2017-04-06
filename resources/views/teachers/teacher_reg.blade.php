@@ -204,5 +204,8 @@
 </div>
 <!-- /.box-body -->
 </div>
-
+<script type="text/javascript">
+$('.datepicker').datepicker(
+	format: 'dd/MM/yyyy'
+);</script>
 @endsection
