@@ -23,6 +23,11 @@
     <!-- SweetAlert2 -->
     <link href="{{ asset('/css/sweetalert2.min.css') }}" rel="stylesheet" type="text/css"/>
     <!-- datepicker Bootstrap cdn -->
+
+
+
+    <link href="{{asset('/css/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css"/>
+
     <link href="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/css/datepicker.css"
     type="text/css" rel="stylesheet">
     @yield('header-extra')
