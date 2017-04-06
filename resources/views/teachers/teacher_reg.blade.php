@@ -204,5 +204,12 @@
 </div>
 <!-- /.box-body -->
 </div>
+<<<<<<< HEAD
 cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js
+=======
+<script type="text/javascript">
+$('.datepicker').datepicker(
+	format: 'dd/MM/yyyy'
+);</script>
+>>>>>>> master
 @endsection

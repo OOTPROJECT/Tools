@@ -133,6 +133,8 @@
                     <i class="fa fa-child" aria-hidden="true"></i> <span>สมัครเรียน</span></a></li>
                     <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('studentInfo') }}">
                         <i class="fa fa-file-text-o" aria-hidden="true"></i> <span>ข้อมูลนักเรียน</span></a></li>
+                    <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('studentInfo') }}">
+                        <i class="fa fa-credit-card" aria-hidden="true"></i> <span>ซื้อคอร์สเรียน</span></a></li>
                         <!--<li class="{{ Request::is('admin*') ? 'active' : '' }}"><a href="{{ url('admin') }}"><i
                         class='fa fa-cogs'></i> <span>Admin Panel</span></a></li>-->
                         <li class="header">ครู</li>
@@ -141,13 +143,11 @@
                             <i class="fa fa-user" aria-hidden="true"></i> <span>สมัครสอนพิเศษ</span></a></li>
                             <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('teacherInfo') }}">
                                 <i class="fa fa-file-text-o" aria-hidden="true"></i> <span>ข้อมูลครู</span></a></li>
-                                <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('teachRec') }}">
-                                    <i class="fa fa-pencil-square-o" aria-hidden="true"></i> <span>บันทึกการสอน</span></a></li>
                                     <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('HireCal') }}">
                                         <i class="fa fa-calculator" aria-hidden="true"></i> <span>คำนวณค่าจ้างครู</span></a></li>
-                                        <li class="header">ห้องเรียน</li>
+                                        <li class="header">คอร์สเรียน</li>
                                         <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('ClassMgt') }}">
-                                            <i class="fa fa-university" aria-hidden="true"></i> <span>จัดห้องเรียน</span></a></li>
+                                            <i class="fa fa-calendar" aria-hidden="true"></i> <span>ตารางเรียน</span></a></li>
 
                                         </ul><!-- /.sidebar-menu -->
                                     </section>

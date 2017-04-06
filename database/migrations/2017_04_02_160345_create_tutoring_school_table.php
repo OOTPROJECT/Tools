@@ -103,8 +103,6 @@ class CreateTutoringSchoolTable extends Migration
 
         Schema::create('time_table', function (Blueprint $table) {
             $table->increments('time_table_id');
-            $table->string('start_date');
-            $table->string('end_date');
             $table->string('start_time');
             $table->string('end_time');
             $table->string('day');
@@ -132,6 +130,8 @@ class CreateTutoringSchoolTable extends Migration
             $table->foreign('teacher_id')->references('teacher_id')->on('teachers');
             $table->integer('time_table_id')->unsigned();
             $table->foreign('time_table_id')->references('time_table_id')->on('time_table');
+            $table->date('start_date');
+            $table->date('end_date');
             $table->integer('student_max');
             $table->string('status', 10);
             $table->timestamps();
@@ -196,7 +196,7 @@ class CreateTutoringSchoolTable extends Migration
      */
     public function down()
     {
-        /*Schema::drop('students');
+        Schema::drop('students');
         Schema::drop('teachers');
         Schema::drop('subjects');
         Schema::drop('time_table');
@@ -204,14 +204,8 @@ class CreateTutoringSchoolTable extends Migration
         Schema::drop('course_schedule');
         Schema::drop('course_enroll');
         Schema::drop('payroll');
-<<<<<<<
-        Schema::drop('provinces');
-        Schema::drop('districts');
-        Schema::drop('sub_districts');*/
-=======
         Schema::drop('provinces');
         Schema::drop('districts');
         Schema::drop('sub_districts');
->>>>>>>
     }
 }
