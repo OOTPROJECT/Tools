@@ -38,6 +38,7 @@ Route::get('/teacherReg', 'KingMathController@callTeacherRegPage');
 Route::get('/teacherInfo', 'KingMathController@callTeacherInfoPage');
 Route::get('/teachRec', 'KingMathController@callTeachRecPage');
 Route::get('/HireCal', 'KingMathController@callHireCalPage');
+Route::post('/createTeacher', 'KingMathController@createTeacher');
 
 // Classroom
 Route::get('/ClassMgt', 'KingMathController@callClassMgtPage');

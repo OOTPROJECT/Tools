@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Kamaln7\Toastr\Facades\Toastr;
 use App\Models\Students;
+use App\Models\Teachers;
 use App\Models\City;
 
 class KingMathController extends Controller
@@ -83,9 +84,11 @@ class KingMathController extends Controller
     public function callTeacherRegPage()
     {
         $prov = $this->city->getProvinces();
+        $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
 
         return view('teachers.teacher_reg')
-                ->with('prov', $prov);
+                ->with('prov', $prov)
+                ->with('degree_list', $degree);
     }
 
     /**
@@ -116,6 +119,67 @@ class KingMathController extends Controller
     public function callHireCalPage()
     {
         return view('teachers.hire_cal');
+    }
+
+    /**
+     * Create teacher info.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createTeacher(Request $request)
+    {
+        $this->validate($request,
+          [
+            "firstname" => "required",
+            "lastname" => "required",
+            "birthdate" => "required|date",
+            "personal_id" => "required",
+            "gender" => "required",
+            "email" => "required|email|between:3,100",
+            "mobile" => "required",
+            "tel" => "required",
+            "home_no" => "required",
+            "road_name" => "required",
+            "province_id" => "required",
+            "district_id" => "required",
+            "sub_district_id" => "required",
+            "postcode" => "required",
+            "degree" => "required",
+            "major" => "required",
+            "university_name" => "required"
+          ],
+          [
+            "firstname.required" => "โปรดระบุ ชื่อผู้สมัคร",
+            "lastname.required" => "โปรดระบุ นามสกุลผู้สมัคร",
+            "birthdate.required" => "โปรดระบุ วันเกิด",
+            "personal_id.required" => "โปรดระบุ รหัสบัตรประชาชน",
+            "gender.required" => "โปรดระบุ เพศ",
+            "email.required" => "โปรดระบุ อีเมล์",
+            "mobile.required" => "โปรดระบุ เบอร์โทรศัพท์มือถือ",
+            "tel.required" => "โปรดระบุ เบอร์โทรศัพทบ้าน",
+            "home_no.required" => "โปรดระบุ บ้านเลขที่",
+            "road_name.required" => "โปรดระบุ ถนน",
+            "province_id.required" => "โปรดระบุ จังหวัด",
+            "district_id.required" => "โปรดระบุ อำเภอ",
+            "sub_district_id.required" => "โปรดระบุ ตำบล",
+            "postcode.required" => "โปรดระบุ รหัสไปรษณีย์",
+            "degree.required" => "โปรดระบุ ระดับการศึกษา",
+            "major.required" => "โปรดระบุ สาขาวิชา",
+            "university_name.required" => "โปรดระบุ มหาวิทยาลัย",
+          ]
+        );
+
+        // concat home number & road name as input_addr
+        $input_addr = array(
+                        "addr" => $request->input('home_no') . ", " .
+                        $request->input('road_name')
+                      );
+        $input = $request->except('_token', 'home_no', 'road_name');
+        $input_teacher = array_merge($input, $input_addr);
+
+        Teachers::create($input_teacher);
+        Toastr::info("บันทึกข้อมูลการสอนพิเศษเรียบร้อยแล้ว");
+        return back();
     }
 
     /**
