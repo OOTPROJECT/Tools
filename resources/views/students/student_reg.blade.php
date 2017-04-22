@@ -128,7 +128,7 @@
 </div>
 		</div></div>
 		<div class="row"><span class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</span>
-		<div class="col-sm-10 col-md-4 text-left">     <div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
+		<div class="col-sm-4 col-md-4 text-left">     <div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
 				<div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
 					<input class="form-control" type="text" name="reg_date" readonly />
 					<span class="input-group-addon">
@@ -145,7 +145,7 @@
 		</div></div>
 
 		<div class="row"><span class="col-sm-2 col-md-2 text-right">บ้านเลขที่</span>
-		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+		<div class="col-sm-4 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<input type='text' class="form-control"  /></div>
 		</div>
 
@@ -154,7 +154,7 @@
 			<input type='text' class="form-control"   /></div>
 		</div></div>
 		<div class="row"><span class="col-sm-2 col-md-2 text-right">ถนน</span>
-		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+		<div class="col-sm-4 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<input type='text' class="form-control"  /></div>
 		</div>
 		<span class="col-sm-2 col-md-2 text-right">จังหวัด</span>
@@ -165,7 +165,7 @@
 
 		<div class="row">
 			<span class="col-sm-2 col-md-2 text-right">อำเภอ/เขต</span>
-		<div class="col-sm-10 col-md-4 text-left">
+		<div class="col-sm-4 col-md-4 text-left">
 		<div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<select class="form-control">
 			</select></div>
@@ -177,7 +177,7 @@
 		</div></div>
 
 		<div class="row"><span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์</span>
-		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+		<div class="col-sm-4 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<input type='text' class="form-control"  /></div>
 		</div>
 
@@ -186,7 +186,7 @@
 			<input type='text' class="form-control"   /></div>
 		</div></div>
 		<div class="row"><span class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์</span>
-		<div class="col-sm-10 col-md-4 text-left">
+		<div class="col-sm-4 col-md-4 text-left">
 			<input type='text' class="form-control"  />
 		</div>
 

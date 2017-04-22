@@ -12,8 +12,28 @@ class Students extends Model
     // table name
     protected $table = 'students';
     protected $fillable = [
-                          "std_code", "reg_date", "std_username", "std_password",
-                          "std_fname", "std_lname", "std_nname"
+        "firstname"  ,
+        "lastname"  ,
+        "nickname"  ,
+        "std_birthdate"  ,
+        "gender"  ,
+        "schoolname"  ,
+        "school_province_id"  ,
+        "school_level"  ,
+        "parent_fname"  ,
+        "parent_lname"  ,
+        "student_relationship"  ,
+        "parent_birthdate"  ,
+        "addr"  ,
+        "province_id"  ,
+        "district_id"  ,
+        "std_birthdate"  ,
+        "sub_district_id"  ,
+        "postcode"  ,
+        "email"  ,
+        "mobile"  ,
+        "tel"  ,
+        "parent_occupation"
                         ];
 
     /**
