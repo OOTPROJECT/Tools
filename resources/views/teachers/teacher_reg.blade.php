@@ -36,7 +36,7 @@
                     </div>
                     @endif
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">ชื่อ:</div>
+                        <span class="col-sm-2 col-md-2 text-right">ชื่อ:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                 <input type="text" name="firstname" class="form-control"
@@ -44,7 +44,7 @@
                                 <span class="text-danger">{{ $errors->first('firstname') }}</span>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-md-2 text-right">นามสกุล:</div>
+                        <span class="col-sm-2 col-md-2 text-right">นามสกุล:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
                                 <input type="text" name="lastname" class="form-control"
@@ -54,7 +54,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">วันเกิด:</div>
+                        <span class="col-sm-2 col-md-2 text-right">วันเกิด:</span>
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('birthdate') ? 'has-error' : '' }}">
                                 <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
@@ -66,7 +66,7 @@
                                 <span class="text-danger">{{ $errors->first('birthdate') }}</span>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-md-2 text-right">รหัสประจำตัวประชาชน:</div>
+                        <span class="col-sm-2 col-md-2 text-right">รหัสประจำตัวประชาชน:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('personal_id') ? 'has-error' : '' }}">
                                 <input type="text" name="personal_id" class="form-control"
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">เพศ:</div>
+                        <span class="col-sm-2 col-md-2 text-right">เพศ:</span>
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('gender') ? 'has-error' : '' }}">
                                 <label class="radio-inline">
@@ -88,7 +88,7 @@
                                 <span class="text-danger">{{ $errors->first('gender') }}</span>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-md-2 text-right">อีเมล์:</div>
+                        <span class="col-sm-2 col-md-2 text-right">อีเมล์:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <input type="text" name="email" class="form-control"
@@ -98,7 +98,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์:</div>
+                        <span class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์:</span>
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
                                 <input type="text" name="mobile" class="form-control"
@@ -106,7 +106,7 @@
                                 <span class="text-danger">{{ $errors->first('mobile') }}</span>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-md-2 text-right">เบอร์บ้าน:</div>
+                        <span class="col-sm-2 col-md-2 text-right">เบอร์บ้าน:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}">
                                 <input type="text" name="tel" class="form-control"
@@ -121,7 +121,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">บ้านเลขที่:</div>
+                        <span class="col-sm-2 col-md-2 text-right">บ้านเลขที่:</span>
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('home_no') ? 'has-error' : '' }}">
                                 <input type="text" name="home_no" class="form-control"
@@ -129,7 +129,7 @@
                                 <span class="text-danger">{{ $errors->first('home_no') }}</span>
                             </div>
                         </div>
-                        <div class="col-sm-2 col-md-2 text-right">ถนน:</div>
+                        <span class="col-sm-2 col-md-2 text-right">ถนน:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('road_name') ? 'has-error' : '' }}">
                                 <input type="text" name="road_name" class="form-control"
@@ -139,7 +139,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">จังหวัด:</div>
+                        <span class="col-sm-2 col-md-2 text-right">จังหวัด:</span>
                         <div class="col-sm-4 col-md-4">
                             <select class="form-control" id="province_id" name="province_id">
                                 @foreach($prov as $prov_list)
@@ -149,19 +149,19 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-2 col-md-2 text-right">เขต/อำเภอ:</div>
+                        <span class="col-sm-2 col-md-2 text-right">เขต/อำเภอ:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <select class="form-control" id="district_id" name="district_id">
                             </select>
                         </div>
                     </div></br>
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">แขวง/ตำบล:</div>
+                        <span class="col-sm-2 col-md-2 text-right">แขวง/ตำบล:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <select class="form-control" id="sub_district_id" name="sub_district_id">
                             </select>
                         </div>
-                        <div class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์:</div>
+                        <span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}">
                                 <input type="text" name="postcode" class="form-control"
@@ -176,7 +176,7 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">ระดับ:</div>
+                        <span class="col-sm-2 col-md-2 text-right">ระดับ:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <select class="form-control" id="degree" name="degree">
                                 @foreach($degree_list as $degree_key => $degree_val)
@@ -186,7 +186,7 @@
                                 @endforeach
                             </select>
                         </div>
-                        <div class="col-sm-2 col-md-2 text-right">สาขา:</div>
+                        <span class="col-sm-2 col-md-2 text-right">สาขา:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('major') ? 'has-error' : '' }}">
                                 <input type="text" name="major" class="form-control"
@@ -196,7 +196,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-sm-2 col-md-2 text-right">มหาวิทยาลัย:</div>
+                        <span class="col-sm-2 col-md-2 text-right">มหาวิทยาลัย:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('university_name') ? 'has-error' : '' }}">
                                 <input type="text" name="university_name" class="form-control"
