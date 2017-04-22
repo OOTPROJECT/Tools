@@ -1,4 +1,5 @@
 @extends('layouts.app')
+@extends('layouts.partials.scripts')
 
 @section('htmlheader_title')
 การสมัครเรียน
@@ -73,7 +74,7 @@
 									<i class="glyphicon glyphicon-calendar"></i>
 								</span>
 							</div>
-							<span class="text-danger">{{ $errors->first('std_birthdate') }}</span>
+
 						</div>
 					</div>
 
@@ -127,16 +128,23 @@
 						</div>
 					</div></div>
 					<div class="row"><span class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</span>
-						<div class="col-sm-4 col-md-4 text-left">     <div class="form-group {{ $errors->has('parent_birthdate') ? 'has-error' : '' }}">
-							<div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-								<input class="form-control" type="text" name="parent_birthdate" readonly />
-								<span class="input-group-addon">
-									<i class="glyphicon glyphicon-calendar"></i>
-								</span>
+						<div class="col-sm-4 col-md-4 text-left">
+							<div class="form-group {{ $errors->has('parent_birthdate') ? 'has-error' : '' }}">
+
+								<div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
+									<input class="form-control" type="text" name="std_birthdate" readonly />
+									<span class="input-group-addon">
+										<i class="glyphicon glyphicon-calendar"></i>
+									</span>
+								</div>
+
+
+
+
+
 							</div>
-							<span class="text-danger">{{ $errors->first('parent_birthdate') }}</span>
 						</div>
-					</div>
+
 
 					<span class="col-sm-2 col-md-2 text-right">อาชีพ</span>
 					<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('parent_occupation') ? 'has-error' : '' }}">

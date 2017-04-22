@@ -39,7 +39,12 @@ $(function () {
 	$("#datepicker").datepicker({
 		autoclose: true,
 		todayHighlight: true
-	}).datepicker('update', new Date());;
+	}).datepicker('update', new Date());
+
+    $("#datepicker1").datepicker({
+		autoclose: true,
+		todayHighlight: true
+	}).datepicker('update', new Date());
 });
 </script>
 <!-- Optionally, you can add Slimscroll and FastClick plugins.
