@@ -77,7 +77,7 @@ class KingMathController extends Controller
           ],
           [
 
-             "firstname.required" => "โปรดระบุ ชื่อนักเรียน",
+              "firstname.required" => "โปรดระบุ ชื่อนักเรียน",
               "lastname.required" => "โปรดระบุ นามสกุลนักเรียน",
               "nickname.required" => "โปรดระบุ ชื่อเล่นนักเรียน",
               "std_birthdate.required" => "โปรดระบุ วันเดือนปีเกิด",
