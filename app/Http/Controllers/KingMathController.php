@@ -159,6 +159,7 @@ class KingMathController extends Controller
             "personal_id.required" => "โปรดระบุ รหัสบัตรประชาชน",
             "gender.required" => "โปรดระบุ เพศ",
             "email.required" => "โปรดระบุ อีเมล์",
+            "email.email" => "โปรดระบุ อีเมล์ ให้ถูกต้อง",
             "mobile.required" => "โปรดระบุ เบอร์โทรศัพท์มือถือ",
             "tel.required" => "โปรดระบุ เบอร์โทรศัพทบ้าน",
             "home_no.required" => "โปรดระบุ บ้านเลขที่",
