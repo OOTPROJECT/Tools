@@ -37,7 +37,7 @@
 				</br>
 
 				<div class="row">
-					<div class="col-sm-2 col-md-2 text-right">ชื่อ </div>
+					<span class="col-sm-2 col-md-2 text-right">ชื่อ </span>
 					<div class="col-sm-4 col-md-4 text-right">
 						<div class="form-group {{ $errors->has('std_fname') ? 'has-error' : '' }}">
 							<input type="text" name="std_fname" class="form-control"
@@ -45,7 +45,7 @@
 							<span class="text-danger">{{ $errors->first('std_fname') }}</span>
 						</div>
 					</div>
-					<div class="col-sm-2 col-md-2 text-right">นามสกุล </div>
+					<span class="col-sm-2 col-md-2 text-right">นามสกุล </span>
 					<div class="col-sm-4 col-md-4 text-right">
 						<div class="form-group {{ $errors->has('std_lname') ? 'has-error' : '' }}">
 							<input type="text" name="std_lname" class="form-control"
@@ -55,7 +55,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-2 col-md-2 text-right">ชื่อเล่น</div>
+					<span class="col-sm-2 col-md-2 text-right">ชื่อเล่น</span>
 					<div class="col-sm-10 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('std_nname') ? 'has-error' : '' }}">
 							<input type="text" name="std_nname" class="form-control"
@@ -65,7 +65,7 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</div>
+					<span class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</span>
 					<div class="col-sm-10 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
 							<div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
@@ -80,9 +80,9 @@
 
 
 				</div><br>
-				<div class="row"><div class="col-sm-2 col-md-2 text-right">เพศ</div>
+				<div class="row"><span class="col-sm-2 col-md-2 text-right">เพศ</span>
 				<div class="col-sm-11 col-md-3 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-					<label class="radio-inline"> <input type="radio" name="optradio">	&nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
+					<label class="radio-inline"> <input type="radio" name="optradio">&nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
 					</label>
 					<label class="radio-inline">
 						<input type="radio" name="optradio">  หญิง&nbsp;&nbsp;&nbsp;
@@ -90,45 +90,44 @@
 				</div>
 			</div>
 			<br>
-			<div class="row"><div class="col-sm-2 col-md-2 text-right">ชื่อสถานศึกษา</div>
-			<div class="col-sm-10 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
+			<div class="row"><span class="col-sm-2 col-md-2 text-right">ชื่อสถานศึกษา</span>
+			<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 				<input type='text' class="form-control text-center" /></div></div>
 				<div class="col-sm-2 col-md-2 text-right">จังหวัด</div>
-				<div class="col-sm-10 col-md-4 text-left">
+				<div class="col-sm-4 col-md-4 text-center">
 					 <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 					<select class="form-control">
 					</select></div>
 				</div>
-
 			</div>
 
 			<div class="row">
-				<div class="col-sm-2 col-md-2 text-right">ชั้นประถมศึกษาปีที่ </div>
+				<span class="col-sm-2 col-md-2 text-right">ชั้นประถมศึกษาปีที่ </span>
 				<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 					<input type="text" class="form-control">
 				</div></div>
 			</div>
-			<div class="row"><div class="col-sm-2 col-md-2 text-right">ชื่อผู้ปกครอง  </div>
+			<div class="row"><span class="col-sm-2 col-md-2 text-right">ชื่อผู้ปกครอง  </span>
 			<div class="col-sm-4 col-md-4 text-center">
  <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 				<input type="text"  class="form-control">
 </div>
 			</div>
 
-			<div class="col-sm-2 col-md-2 text-right">นามสกุล </div>
+			<span class="col-sm-2 col-md-2 text-right">นามสกุล </span>
 
 			<div class="col-sm-4 col-md-4 text-center"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 				<input type="text"  class="form-control">
 	</div>
 			</div>
 		</div>
-		<div class="row"><div class="col-sm-2 col-md-2 text-right">ความสัมพันธ์กับนักเรียน</div>
+		<div class="row"><span class="col-sm-2 col-md-2 text-right">ความสัมพันธ์กับนักเรียน</span>
 		<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 
 			<input type="text"  class="form-control">
 </div>
 		</div></div>
-		<div class="row"><div class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</div>
+		<div class="row"><span class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</span>
 		<div class="col-sm-10 col-md-4 text-left">     <div class="form-group {{ $errors->has('reg_date') ? 'has-error' : '' }}">
 				<div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
 					<input class="form-control" type="text" name="reg_date" readonly />
@@ -140,58 +139,58 @@
 			</div>
 		</div>
 
-		<div class="col-sm-2 col-md-2 text-right">อาชีพ</div>
+		<span class="col-sm-2 col-md-2 text-right">อาชีพ</span>
 		<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<input type='text' class="form-control"   /></div>
 		</div></div>
 
-		<div class="row"><div class="col-sm-2 col-md-2 text-right">บ้านเลขที่</div>
+		<div class="row"><span class="col-sm-2 col-md-2 text-right">บ้านเลขที่</span>
 		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<input type='text' class="form-control text-center"  /></div>
 		</div>
 
-		<div class="col-sm-2 col-md-2 text-right">ซอย</div>
+		<span class="col-sm-2 col-md-2 text-right">ซอย</span>
 		<div class="col-sm-4 col-md-4 text-center"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<input type='text' class="form-control"   /></div>
 		</div></div>
-		<div class="row"><div class="col-sm-2 col-md-2 text-right">ถนน</div>
+		<div class="row"><span class="col-sm-2 col-md-2 text-right">ถนน</span>
 		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<input type='text' class="form-control text-center"  /></div>
 		</div>
-		<div class="col-sm-2 col-md-2 text-right">จังหวัด</div>
+		<span class="col-sm-2 col-md-2 text-right">จังหวัด</span>
 		<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<select class="form-control">
 			</select></div>
 		</div></div>
 
 		<div class="row">
-			<div class="col-sm-2 col-md-2 text-right">อำเภอ/เขต</div>
+			<span class="col-sm-2 col-md-2 text-right">อำเภอ/เขต</span>
 		<div class="col-sm-10 col-md-4 text-left">
 		<div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<select class="form-control">
 			</select></div>
 		</div>
-		<div class="col-sm-2 col-md-2 text-right">ตำบล/แขวง</div>
+		<span class="col-sm-2 col-md-2 text-right">ตำบล/แขวง</span>
 		<div class="col-sm-4 col-md-4 text-center"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<select class="form-control">
 			</select></div>
 		</div></div>
 
-		<div class="row"><div class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์</div>
+		<div class="row"><span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์</span>
 		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<input type='text' class="form-control text-center"  /></div>
 		</div>
 
-		<div class="col-sm-2 col-md-2 text-right">อีเมล</div>
+		<span class="col-sm-2 col-md-2 text-right">อีเมล</span>
 		<div class="col-sm-4 col-md-4 text-center"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
 			<input type='text' class="form-control"   /></div>
 		</div></div>
-		<div class="row"><div class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์</div>
+		<div class="row"><span class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์</span>
 		<div class="col-sm-10 col-md-4 text-left">
 			<input type='text' class="form-control text-center"  />
 		</div>
 
-		<div class="col-sm-2 col-md-2 text-right">เบอร์บ้าน</div>
+		<span class="col-sm-2 col-md-2 text-right">เบอร์บ้าน</span>
 		<div class="col-sm-4 col-md-4 text-center">
 			<input type='text' class="form-control"   />
 		</div></div>
