@@ -29,16 +29,18 @@
         </thead>
 
         <tbody>
-            @foreach($allTeacher as $value)
-                <tr>
-                    <td>{{$value->firstname}}</td>
-                    <td>{{$value->lastname}}</td>
-                    <td>{{$value->personal_id}}</td>
-                    <td>{{$value->gender}}</td>
-                    <td>{{$value->mobile}}</td>
-                    <td>{{$value->email}}</td>
-                </tr>
-            @endforeach
+            @if ($allTeacher != null && count($allTeacher) > 0 )
+                @foreach($allTeacher as $value)
+                    <tr>
+                        <td>{{$value->firstname}}</td>
+                        <td>{{$value->lastname}}</td>
+                        <td>{{$value->personal_id}}</td>
+                        <td>{{$value->gender}}</td>
+                        <td>{{$value->mobile}}</td>
+                        <td>{{$value->email}}</td>
+                    </tr>
+                @endforeach
+            @endif
         </tbody>
     </table>
     </div>
