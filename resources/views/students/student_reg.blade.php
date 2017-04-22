@@ -68,7 +68,7 @@
 					<span class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</span>
 					<div class="col-sm-10 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('std_birthdate') ? 'has-error' : '' }}">
-							<div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+							<div class="input-group date datepicker" data-date-format="yyyy-mm-dd">
 								<input class="form-control" type="text" name="std_birthdate" readonly />
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-calendar"></i>
@@ -131,7 +131,12 @@
 						<div class="col-sm-4 col-md-4 text-left">
 							<div class="form-group {{ $errors->has('parent_birthdate') ? 'has-error' : '' }}">
 
-								<div id="datepicker1" class="input-group date" data-date-format="yyyy-mm-dd">
+
+
+
+
+
+								<div  class="input-group date datepicker" data-date-format="yyyy-mm-dd">
 									<input class="form-control" type="text" name="std_birthdate" readonly />
 									<span class="input-group-addon">
 										<i class="glyphicon glyphicon-calendar"></i>
