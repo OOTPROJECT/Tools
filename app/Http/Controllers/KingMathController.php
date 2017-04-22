@@ -136,7 +136,9 @@ class KingMathController extends Controller
      */
     public function callTeacherInfoPage()
     {
-        return view('teachers.teacher_info');
+        $allTeacher = $this->teacher->getAllTeacherInfo();
+        return view('teachers.teacher_info')
+            ->with('allTeacher', $allTeacher);
     }
 
     /**
