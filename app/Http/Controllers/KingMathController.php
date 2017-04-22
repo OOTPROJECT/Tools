@@ -19,6 +19,7 @@ class KingMathController extends Controller
     {
         $this->middleware('auth');
         $this->city = new City();
+        $this->teacher = new Teachers();
     }
 
     /**
@@ -98,7 +99,10 @@ class KingMathController extends Controller
      */
     public function callTeacherInfoPage()
     {
-        return view('teachers.teacher_info');
+        $allTeacher = $this->teacher->getAllTeacherInfo();
+        return view('teachers.teacher_info')
+            ->with('allTeacher', $allTeacher);
+
     }
 
     /**
