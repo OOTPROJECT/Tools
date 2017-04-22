@@ -27,7 +27,6 @@ class Teachers extends Model
 
      public function getAllTeacherInfo() {
          $all_teacher = Teachers::orderBy('firstname')->get();
-
          return $all_teacher;
      }
 }
