@@ -24,4 +24,9 @@ class Teachers extends Model
      * @var array
      */
      protected $dates = ['deleted_at'];
+
+     public function getAllTeacherInfo() {
+         $all_teacher = Teachers::orderBy('firstname')->get();
+         return $all_teacher;
+     }
 }
