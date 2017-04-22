@@ -40,7 +40,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                 <input type="text" name="firstname" class="form-control"
-                                placeholder="">
+                                placeholder="" value="{{ old('firstname') }}">
                                 <span class="text-danger">{{ $errors->first('firstname') }}</span>
                             </div>
                         </div>
@@ -58,7 +58,7 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('birthdate') ? 'has-error' : '' }}">
                                 <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-                                    <input class="form-control" type="text" name="birthdate" readonly />
+                                    <input class="form-control" type="text" name="birthdate" value="{{ old('birthdate') }}" readonly />
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
@@ -217,6 +217,7 @@
 </div>
 
 <script type="text/javascript">
+
     $(document).ready(function(){
         $("#province_id").change(function (){
             var prov_dd = $(this).val();
