@@ -35,7 +35,8 @@ $(document).ready(function(){
         if(selectedOption.length) {
             alert(selectedOption.attr('id'));
         }
-        else { //test
+        else {
+             //test
             //$('input[name=chooseOption]').val("");
             //alert(0);
         }
