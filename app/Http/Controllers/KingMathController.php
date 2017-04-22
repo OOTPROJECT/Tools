@@ -19,6 +19,7 @@ class KingMathController extends Controller
     {
         $this->middleware('auth');
         $this->city = new City();
+        $this->teacher = new Teachers();
     }
 
     /**
