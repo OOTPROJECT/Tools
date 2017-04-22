@@ -36,6 +36,7 @@ $(document).ready(function(){
             alert(selectedOption.attr('id'));
         }
         else {
+             ///
              //test
             //$('input[name=chooseOption]').val("");
             //alert(0);
