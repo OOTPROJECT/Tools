@@ -92,7 +92,7 @@
 			<br>
 			<div class="row"><span class="col-sm-2 col-md-2 text-right">ชื่อสถานศึกษา</span>
 			<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-				<input type='text' class="form-control text-center" /></div></div>
+				<input type='text' class="form-control text-left" /></div></div>
 				<div class="col-sm-2 col-md-2 text-right">จังหวัด</div>
 				<div class="col-sm-4 col-md-4 text-center">
 					 <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
@@ -146,7 +146,7 @@
 
 		<div class="row"><span class="col-sm-2 col-md-2 text-right">บ้านเลขที่</span>
 		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-			<input type='text' class="form-control text-center"  /></div>
+			<input type='text' class="form-control"  /></div>
 		</div>
 
 		<span class="col-sm-2 col-md-2 text-right">ซอย</span>
@@ -155,7 +155,7 @@
 		</div></div>
 		<div class="row"><span class="col-sm-2 col-md-2 text-right">ถนน</span>
 		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-			<input type='text' class="form-control text-center"  /></div>
+			<input type='text' class="form-control"  /></div>
 		</div>
 		<span class="col-sm-2 col-md-2 text-right">จังหวัด</span>
 		<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
@@ -178,7 +178,7 @@
 
 		<div class="row"><span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์</span>
 		<div class="col-sm-10 col-md-4 text-left"><div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-			<input type='text' class="form-control text-center"  /></div>
+			<input type='text' class="form-control"  /></div>
 		</div>
 
 		<span class="col-sm-2 col-md-2 text-right">อีเมล</span>
@@ -187,7 +187,7 @@
 		</div></div>
 		<div class="row"><span class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์</span>
 		<div class="col-sm-10 col-md-4 text-left">
-			<input type='text' class="form-control text-center"  />
+			<input type='text' class="form-control"  />
 		</div>
 
 		<span class="col-sm-2 col-md-2 text-right">เบอร์บ้าน</span>
