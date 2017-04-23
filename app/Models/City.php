@@ -15,7 +15,7 @@ class City extends Model
         return $prov;
     }
 
-    public function getDistrictsByProvID($prov_id, $prov_name) {
+    public function getDistrictsByProvID($prov_id) {
         $this->table = 'districts';
         $dist = City::where('province_id' , '=', $prov_id)
                 ->orderBy('district_name')->get();
