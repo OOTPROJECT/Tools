@@ -167,6 +167,21 @@ class KingMathController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function callTeacherUpdatePage()
+     {
+         $prov = $this->city->getProvinces();
+         $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
+
+         return view('teachers.teacher_update')
+                 ->with('prov', $prov)
+                 ->with('degree_list', $degree);
+     }
+
+     /**
+      * Show the application teacher information.
+      *
+      * @return \Illuminate\Http\Response
+      */
     public function createTeacher(Request $request)
     {
         $this->validate($request,
@@ -230,6 +245,26 @@ class KingMathController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+     public function updateTeacher(Teacher $teacher ,Request $request)
+     {
+         $this->validate($request, [
+             "firstname" => "required",
+             "lastname" => "required",
+             "image" => "required"
+         ]);
+
+         $teacher->update($request->all());
+         Toastr::info("แก้ไขข้อมูลการสอนพิเศษเรียบร้อยแล้ว");
+         return back();
+     }
+
+     /**
+      * Show the application teacher information.
+      *
+      * @return \Illuminate\Http\Response
+      */
+
+
     public function callClassMgtPage()
     {
         return view('classroom.class_mgt');

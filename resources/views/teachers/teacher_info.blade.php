@@ -25,6 +25,7 @@
                 <th>เพศ</th>
                 <th>เบอร์โทรศัพท์</th>
                 <th>อีเมล์</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -38,6 +39,12 @@
                         <td>{{$value->gender}}</td>
                         <td>{{$value->mobile}}</td>
                         <td>{{$value->email}}</td>
+                        <td>
+                            <a href="{{ url('teacherUpdate') }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a href="{{ url('DeleteTeacher') }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+
+                        </td>
+
                     </tr>
                 @endforeach
             @endif
