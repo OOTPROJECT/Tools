@@ -158,7 +158,7 @@
                                     </option>
                                 @endforeach
                             </datalist>
-                            <input type="hidden" id="prov_id" name="prov_id">
+                            <input type="hidden" id="province_id" name="province_id">
                         </div>
                         <span class="col-sm-2 col-md-2 text-right">เขต/อำเภอ:</span>
                         <div class="col-sm-4 col-md-4 text-left">
@@ -170,7 +170,7 @@
                                 onclick="chkProvinceInput();">
                             <datalist id="opts_district">
                             </datalist>
-                            <input type="hidden" id="dist_id" name="dist_id">
+                            <input type="hidden" id="district_id" name="district_id">
                         </div>
                     </div></br>
                     <div class="row">
@@ -184,7 +184,7 @@
                                 onclick="chkDistrictInput();">
                             <datalist id="opts_sub_district">
                             </datalist>
-                            <input type="hidden" id="sub_dist_id" name="sub_dist_id">
+                            <input type="hidden" id="sub_district_id" name="sub_district_id">
                         </div>
                         <span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์:</span>
                         <div class="col-sm-4 col-md-4 text-left">
@@ -257,7 +257,7 @@
                 prov_list_id = selectedOption.attr('id');
                 prov_list_value = selectedOption.attr('value');
                 $('input[name=province_list]').val(prov_list_value);
-                $('input[name=prov_id]').val(prov_list_id);
+                $('input[name=province_id]').val(prov_list_id);
 
                 getDistrict(prov_list_id);
 
@@ -270,7 +270,7 @@
                 dist_list_id = selectedOption.attr('id');
                 dist_list_value = selectedOption.attr('value');
                 $('input[name=district_list]').val(dist_list_value);
-                $('input[name=dist_id]').val(dist_list_id);
+                $('input[name=district_id]').val(dist_list_id);
 
                 getSubDistrict(prov_list_id, dist_list_id);
 
@@ -283,7 +283,7 @@
                 sub_dist_list_id = selectedOption.attr('id');
                 sub_dist_list_value = selectedOption.attr('value');
                 $('input[name=sub_district_list]').val(sub_dist_list_value);
-                $('input[name=sub_dist_id]').val(sub_dist_list_id);
+                $('input[name=sub_district_id]').val(sub_dist_list_id);
             }
         });
 
@@ -311,7 +311,7 @@
 
     function chkProvinceInput() {
         var prov_id
-        prov_id = $('input[name=prov_id]').val();
+        prov_id = $('input[name=province_id]').val();
 
         if(prov_id.length == 0) {
             $('input[name=province_list]').val("");
@@ -320,7 +320,7 @@
 
     function chkDistrictInput() {
         var dist_id
-        dist_id = $('input[name=dist_id]').val();
+        dist_id = $('input[name=district_id]').val();
 
         if(dist_id.length == 0) {
             $('input[name=district_list]').val("");
@@ -329,7 +329,7 @@
 
     function chkSubDistrictInput() {
         var sub_dist_id
-        sub_dist_id = $('input[name=sub_dist_id]').val();
+        sub_dist_id = $('input[name=sub_district_id]').val();
         if(sub_dist_id.length == 0) {
             $('input[name=sub_district_list]').val("");
         }

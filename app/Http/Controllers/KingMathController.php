@@ -216,7 +216,8 @@ class KingMathController extends Controller
                         "addr" => $request->input('home_no') . ", " .
                         $request->input('road_name')
                       );
-        $input = $request->except('_token', 'home_no', 'road_name');
+        $input = $request->except('_token', 'home_no', 'road_name', 'province_list',
+                    'district_list', 'sub_district_list');
         $input_teacher = array_merge($input, $input_addr);
 
         Teachers::create($input_teacher);
