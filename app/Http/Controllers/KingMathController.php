@@ -7,6 +7,8 @@ use Kamaln7\Toastr\Facades\Toastr;
 use App\Models\Students;
 use App\Models\Teachers;
 use App\Models\City;
+use App\Models\Courses;
+use App\Models\TimeTable;
 
 class KingMathController extends Controller
 {
@@ -20,6 +22,8 @@ class KingMathController extends Controller
         $this->middleware('auth');
         $this->city = new City();
         $this->teacher = new Teachers();
+        $this->course = new Courses();
+        $this->time_table = new TimeTable();
     }
 
     /**
@@ -267,7 +271,12 @@ class KingMathController extends Controller
 
     public function callClassMgtPage()
     {
-        return view('classroom.class_mgt');
+        $all_course = $this->course->getCourse();
+        $all_time_table = $this->time_table->getTimeTable();
+
+        return view('classroom.class_mgt')
+                ->with('all_course', $all_course)
+                ->with('all_time_table', $all_time_table);
     }
 
     /**
