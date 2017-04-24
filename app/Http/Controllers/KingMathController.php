@@ -171,12 +171,13 @@ class KingMathController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function callTeacherUpdatePage()
+     public function callTeacherEditPage($teacher_id)
      {
          $prov = $this->city->getProvinces();
          $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
 
          return view('teachers.teacher_update')
+                ->with('teacher_id', $teacher_id)
                  ->with('prov', $prov)
                  ->with('degree_list', $degree);
      }

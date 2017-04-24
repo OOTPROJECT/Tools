@@ -37,10 +37,10 @@ Route::resource('student', 'KingMathController');
 Route::get('/teacherReg', 'KingMathController@callTeacherRegPage');
 Route::get('/teacherInfo', 'KingMathController@callTeacherInfoPage');
 Route::get('/teachRec', 'KingMathController@callTeachRecPage');
-Route::get('/teacherUpdate', 'KingMathController@callTeacherUpdatePage');
+Route::get('/teacherEdit/{teacher_id}', 'KingMathController@callTeacherEditPage');
 Route::get('/HireCal', 'KingMathController@callHireCalPage');
 Route::post('/createTeacher', 'KingMathController@createTeacher');
-Route::post('/updateTeacher', 'KingMathController@callTeacherUpdatePage');
+//Route::post('/updateTeacher/{teacher_id}', 'KingMathController@callTeacherUpdatePage');
 
 // Classroom
 Route::get('/ClassMgt', 'KingMathController@callClassMgtPage');

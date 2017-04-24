@@ -19,7 +19,7 @@
         <form action="{{ url('/updateTeacher') }}" method="post">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">ข้อมูลผู้สมัคร</h3>
+                    <h3 class="panel-title">ข้อมูลผู้สมัคร รหัสครู {{ $teacher_id }}</h3>
                 </div>
 
                 <div class="panel-body">
