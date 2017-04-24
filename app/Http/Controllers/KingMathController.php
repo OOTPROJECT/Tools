@@ -249,7 +249,7 @@ class KingMathController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function updateTeacher(Teacher $teacher ,Request $request)
+     public function updateTeacher(int $id ,Request $request)
      {
          $this->validate($request, [
              "firstname" => "required",

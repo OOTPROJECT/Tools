@@ -40,7 +40,7 @@
                         <td>{{$value->mobile}}</td>
                         <td>{{$value->email}}</td>
                         <td>
-                            <a href="{{ url('teacherUpdate') }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a href="{{ url('teacherUpdate/id') }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                             <a href="{{ url('DeleteTeacher') }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
 
                         </td>

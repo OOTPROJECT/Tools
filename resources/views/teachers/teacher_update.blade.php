@@ -41,7 +41,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                 <input type="text" name="firstname" class="form-control"
-                                placeholder="" value="{{ old('firstname') }}">
+                                placeholder="" value="{{ old('firstname') }}" model="">
                                 <span class="text-danger">{{ $errors->first('firstname') }}</span>
                             </div>
                         </div>
