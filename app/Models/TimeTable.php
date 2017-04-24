@@ -9,10 +9,15 @@ class TimeTable extends Model
     // Table name
     protected $table = 'time_table';
 
-    function getTimeTable() {
-        $all_time_table = TimeTable::select('day', 'start_time', 'end_time')
-                            ->distinct()->orderBy('day', 'start_time', 'end_time')->get();
+    function getTimeTable($start_date, $end_date) {
+        $arr_time_table = \DB::select(
+                            "SELECT room_name, day, start_time, end_time
+                            FROM time_table WHERE time_table_id NOT IN
+                            ( SELECT * FROM ( SELECT time_table_id FROM course_schedule
+                            WHERE '2017-04-24' <= end_date AND '2017-05-23' >= start_date
+                            ) AS subquery )"
+                          );
 
-        return $all_time_table;
+        return $arr_time_table;
     }
 }

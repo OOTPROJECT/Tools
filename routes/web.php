@@ -44,6 +44,7 @@ Route::post('/createTeacher', 'KingMathController@createTeacher');
 
 // Classroom
 Route::get('/ClassMgt', 'KingMathController@callClassMgtPage');
+Route::get('/getTimeTable', 'KingMathController@getTimeTable');
 
 // City
 Route::get('/districts', 'KingMathController@getDistricts');

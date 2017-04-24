@@ -268,17 +268,28 @@ class KingMathController extends Controller
       *
       * @return \Illuminate\Http\Response
       */
-
-
     public function callClassMgtPage()
     {
         $all_course = $this->course->getCourse();
-        $all_time_table = $this->time_table->getTimeTable();
 
         return view('classroom.class_mgt')
-                ->with('all_course', $all_course)
-                ->with('all_time_table', $all_time_table);
+                ->with('all_course', $all_course);
     }
+
+    /**
+     * Get time table & room information.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+   public function getTimeTable(Request $request)
+   {
+       $start_date = trim($request->input('start_date'));
+       $end_date = trim($request->input('end_date'));
+       $arr_time_table = $this->time_table->getTimeTable($start_date, $end_date);
+
+       return $arr_time_table;
+   }
 
     /**
      * Return districts data.
