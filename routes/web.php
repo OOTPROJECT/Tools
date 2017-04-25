@@ -40,7 +40,8 @@ Route::get('/teachRec', 'KingMathController@callTeachRecPage');
 Route::get('/teacherEdit/{teacher_id}', 'KingMathController@callTeacherEditPage');
 Route::get('/HireCal', 'KingMathController@callHireCalPage');
 Route::post('/createTeacher', 'KingMathController@createTeacher');
-//Route::post('/updateTeacher/{teacher_id}', 'KingMathController@callTeacherUpdatePage');
+Route::post('/updateTeacher/{teacher_id}', 'KingMathController@updateTeacher');
+Route::post('/deleteTeacher/{teacher_id}', 'KingMathController@deleteTeacher');
 
 // Classroom
 Route::get('/ClassMgt', 'KingMathController@callClassMgtPage');

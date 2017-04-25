@@ -29,4 +29,11 @@ class Teachers extends Model
          $all_teacher = Teachers::orderBy('firstname')->get();
          return $all_teacher;
      }
+
+     public function getTeacherByID($teacher_id) {
+         $teacher = new Teachers();
+         $teacher = Teachers::where('teacher_id' , '=', $teacher_id)->first();
+
+         return $teacher;
+     }
 }

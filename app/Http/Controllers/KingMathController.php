@@ -175,11 +175,13 @@ class KingMathController extends Controller
      {
          $prov = $this->city->getProvinces();
          $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
+         $teacher = $this->teacher->getTeacherByID($teacher_id);
 
          return view('teachers.teacher_update')
                 ->with('teacher_id', $teacher_id)
-                 ->with('prov', $prov)
-                 ->with('degree_list', $degree);
+                ->with('teacher', $teacher)
+                ->with('prov', $prov)
+                ->with('degree_list', $degree);
      }
 
      /**
@@ -250,15 +252,16 @@ class KingMathController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-     public function updateTeacher(int $id ,Request $request)
+     public function updateTeacher($teacher_id ,Request $request)
      {
+
          $this->validate($request, [
              "firstname" => "required",
              "lastname" => "required",
              "image" => "required"
          ]);
 
-         $teacher->update($request->all());
+         $teacher->update($teacher_id);
          Toastr::info("แก้ไขข้อมูลการสอนพิเศษเรียบร้อยแล้ว");
          return back();
      }
@@ -268,6 +271,20 @@ class KingMathController extends Controller
       *
       * @return \Illuminate\Http\Response
       */
+      public function deleteTeacher($teacher_id)
+      {
+          Teachers::delete($teacher_id);
+          Toastr::info("แก้ไขข้อมูลการสอนพิเศษเรียบร้อยแล้ว");
+          return back();
+      }
+
+      /**
+       * Show the application teacher information.
+       *
+       * @return \Illuminate\Http\Response
+       */
+
+
     public function callClassMgtPage()
     {
         $all_course = $this->course->getCourse();

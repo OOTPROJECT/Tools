@@ -16,10 +16,10 @@
         <h3 class="box-title"></h3>
     </div>
     <div class="box-body">
-        <form action="{{ url('/updateTeacher') }}" method="post">
+        <form action="{{ url('/updateTeacher')}}/{{ $teacher_id }}" method="post">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">ข้อมูลผู้สมัคร รหัสครู {{ $teacher_id }}</h3>
+                    <h3 class="panel-title">ข้อมูลผู้สมัคร {{ $teacher->firstname ." "}}  {{ $teacher->lastname }}</h3>
                 </div>
 
                 <div class="panel-body">
@@ -41,7 +41,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                 <input type="text" name="firstname" class="form-control"
-                                placeholder="" value="{{ old('firstname') }}" model="">
+                                placeholder="" value="{{ old('firstname')}} {{ $teacher->firstname}}">
                                 <span class="text-danger">{{ $errors->first('firstname') }}</span>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
                                 <input type="text" name="lastname" class="form-control"
-                                placeholder="" value="{{ old('lastname') }}">
+                                placeholder="" value="{{ old('lastname') }} {{ $teacher->lastname}}">
                                 <span class="text-danger">{{ $errors->first('lastname') }}</span>
                             </div>
                         </div>
@@ -59,7 +59,8 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('birthdate') ? 'has-error' : '' }}">
                                 <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-                                    <input class="form-control" type="text" name="birthdate" value="{{ old('personal_id') }}" readonly />
+                                    <input class="form-control" type="text" name="birthdate"
+                                    value="{{ old('personal_id') }} {{ $teacher->birthdate}}" readonly />
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
@@ -71,7 +72,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('personal_id') ? 'has-error' : '' }}">
                                 <input type="text" name="personal_id" class="form-control"
-                                placeholder="" value="{{ old('personal_id') }}">
+                                placeholder="" value="{{ old('personal_id') }} {{ $teacher->personal_id}}">
                                 <span class="text-danger">{{ $errors->first('personal_id') }}</span>
                             </div>
                         </div>
@@ -81,7 +82,7 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('gender') ? 'has-error' : '' }}">
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" value="M">&nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
+                                    <input type="radio" name="gender" value="M" >&nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
                                 </label>
                                 <label class="radio-inline">
                                     <input type="radio" name="gender" value="F">หญิง&nbsp;&nbsp;&nbsp;
@@ -93,7 +94,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <input type="text" name="email" class="form-control"
-                                placeholder="" value="{{ old('email') }}">
+                                placeholder="" value="{{ old('email') }} {{ $teacher->email }}">
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             </div>
                         </div>
@@ -103,7 +104,7 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
                                 <input type="text" name="mobile" class="form-control"
-                                placeholder="" value="{{ old('mobile') }}">
+                                placeholder="" value="{{ old('mobile') }} {{ $teacher->mobile }}">
                                 <span class="text-danger">{{ $errors->first('mobile') }}</span>
                             </div>
                         </div>
@@ -111,7 +112,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}">
                                 <input type="text" name="tel" class="form-control"
-                                placeholder="" value="{{ old('tel') }}">
+                                placeholder="" value="{{ old('tel') }} {{ $teacher->tel }}">
                                 <span class="text-danger">{{ $errors->first('tel') }}</span>
                             </div>
                         </div>
@@ -121,8 +122,119 @@
                 <div class="panel-heading">
                     <h3 class="panel-title">ข้อมูลที่อยู่อาศัย</h3>
                 </div>
-
-
+                <div class="panel-body">
+                    <div class="row">
+                        <span class="col-sm-2 col-md-2 text-right">บ้านเลขที่:</span>
+                        <div class="col-sm-4 col-md-4">
+                            <div class="form-group {{ $errors->has('home_no') ? 'has-error' : '' }}">
+                                <input type="text" name="home_no" class="form-control"
+                                placeholder="" value="{{ old('home_no') }} {{ $teacher->addr }}">
+                                <span class="text-danger">{{ $errors->first('home_no') }}</span>
+                            </div>
+                        </div>
+                        <span class="col-sm-2 col-md-2 text-right">ถนน:</span>
+                        <div class="col-sm-4 col-md-4 text-left">
+                            <div class="form-group {{ $errors->has('road_name') ? 'has-error' : '' }}">
+                                <input type="text" name="road_name" class="form-control"
+                                placeholder="" value="{{ old('road_name') }} {{ $teacher->road_name }}">
+                                <span class="text-danger">{{ $errors->first('road_name') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-sm-2 col-md-2 text-right">จังหวัด:</span>
+                        <div class="col-sm-4 col-md-4">
+                            <!--<select class="form-control" id="province_id" name="province_id">
+                                @foreach($prov as $prov_list)
+                                    <option value="{{ $prov_list->province_id }}">
+                                        {{ $prov_list->province_name }}
+                                    </option>
+                                @endforeach
+                            </select>-->
+                            <input list="opts_province" name="province_list"
+                                class="form-control"
+                                placeholder="กรุณาระบุจังหวัด">
+                            <datalist id="opts_province">
+                                @foreach($prov as $prov_list)
+                                    <option id="{{ $prov_list->province_id }}"
+                                        value="{{ $prov_list->province_name }}">
+                                    </option>
+                                @endforeach
+                            </datalist>
+                            <input type="hidden" id="province_id" name="province_id">
+                        </div>
+                        <span class="col-sm-2 col-md-2 text-right">เขต/อำเภอ:</span>
+                        <div class="col-sm-4 col-md-4 text-left">
+                            <!--<select class="form-control" id="district_id" name="district_id">
+                            </select>-->
+                            <input list="opts_district" name="district_list"
+                                class="form-control"
+                                placeholder="กรุณาระบุเขต/อำเภอ"
+                                onclick="chkProvinceInput();">
+                            <datalist id="opts_district">
+                            </datalist>
+                            <input type="hidden" id="district_id" name="district_id">
+                        </div>
+                    </div></br>
+                    <div class="row">
+                        <span class="col-sm-2 col-md-2 text-right">แขวง/ตำบล:</span>
+                        <div class="col-sm-4 col-md-4 text-left">
+                            <!--<select class="form-control" id="sub_district_id" name="sub_district_id">
+                            </select>-->
+                            <input list="opts_sub_district" name="sub_district_list"
+                                class="form-control"
+                                placeholder="กรุณาระบุแขวง/ตำบล"
+                                onclick="chkDistrictInput();">
+                            <datalist id="opts_sub_district">
+                            </datalist>
+                            <input type="hidden" id="sub_district_id" name="sub_district_id">
+                        </div>
+                        <span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์:</span>
+                        <div class="col-sm-4 col-md-4 text-left">
+                            <div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}">
+                                <input type="text" name="postcode" class="form-control"
+                                    placeholder="" value="{{ old('postcode') }} {{ $teacher->postcode }}"
+                                    onclick="chkSubDistrictInput();">
+                                <span class="text-danger">{{ $errors->first('postcode') }}</span>
+                            </div>
+                        </div>
+                    </div></br>
+                </div>
+                <div class="panel-heading">
+                    <h3 class="panel-title">ข้อมูลระดับการศึกษา</h3>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <span class="col-sm-2 col-md-2 text-right">ระดับ:</span>
+                        <div class="col-sm-4 col-md-4 text-left">
+                            <select class="form-control" id="degree" name="degree">
+                                @foreach($degree_list as $degree_key => $degree_val)
+                                <option value="{{ $degree_val }} {{ $teacher->degree }}">
+                                    {{ $degree_val }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <span class="col-sm-2 col-md-2 text-right">สาขา:</span>
+                        <div class="col-sm-4 col-md-4 text-left">
+                            <div class="form-group {{ $errors->has('major') ? 'has-error' : '' }}">
+                                <input type="text" name="major" class="form-control"
+                                placeholder="" value="{{ old('major') }} {{ $teacher->major }}">
+                                <span class="text-danger">{{ $errors->first('major') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="col-sm-2 col-md-2 text-right">มหาวิทยาลัย:</span>
+                        <div class="col-sm-4 col-md-4 text-left">
+                            <div class="form-group {{ $errors->has('university_name') ? 'has-error' : '' }}">
+                                <input type="text" name="university_name" class="form-control"
+                                placeholder="" value="{{ old('university_name') }} {{ $teacher->university_name }}">
+                                <span class="text-danger">{{ $errors->first('university_name') }}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
             </div>
 
@@ -200,7 +312,20 @@
                 chkSubDistrictInput();
             }
         } );
+
+        chkGender();
+
     });
+
+    function chkGender(){
+        var gender = '<?php echo  $teacher->gender; ?>'
+
+        if( gender == 'M'){
+            $('input:radio[name = gender][value = M]').attr('checked', true);
+        }else {
+            $('input:radio[name = gender][value = F]').attr('checked', true);
+        }
+    }
 
     function chkProvinceInput() {
         var prov_id
