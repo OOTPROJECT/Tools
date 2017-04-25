@@ -41,7 +41,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                 <input type="text" name="firstname" class="form-control"
-                                placeholder="" value="{{ old('firstname')}} {{ $teacher->firstname}}">
+                                placeholder="" value="{{ $teacher->firstname}}">
                                 <span class="text-danger">{{ $errors->first('firstname') }}</span>
                             </div>
                         </div>
@@ -49,7 +49,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
                                 <input type="text" name="lastname" class="form-control"
-                                placeholder="" value="{{ old('lastname') }} {{ $teacher->lastname}}">
+                                placeholder="" value="{{ $teacher->lastname}}">
                                 <span class="text-danger">{{ $errors->first('lastname') }}</span>
                             </div>
                         </div>
@@ -60,7 +60,7 @@
                             <div class="form-group {{ $errors->has('birthdate') ? 'has-error' : '' }}">
                                 <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
                                     <input class="form-control" type="text" name="birthdate"
-                                    value="{{ old('personal_id') }} {{ $teacher->birthdate}}" readonly />
+                                    value="{{ $teacher->birthdate}}" readonly />
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
@@ -72,7 +72,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('personal_id') ? 'has-error' : '' }}">
                                 <input type="text" name="personal_id" class="form-control"
-                                placeholder="" value="{{ old('personal_id') }} {{ $teacher->personal_id}}">
+                                placeholder="" value="{{ $teacher->personal_id}}">
                                 <span class="text-danger">{{ $errors->first('personal_id') }}</span>
                             </div>
                         </div>
@@ -94,7 +94,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <input type="text" name="email" class="form-control"
-                                placeholder="" value="{{ old('email') }} {{ $teacher->email }}">
+                                placeholder="" value="{{ $teacher->email }}">
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             </div>
                         </div>
@@ -104,7 +104,7 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
                                 <input type="text" name="mobile" class="form-control"
-                                placeholder="" value="{{ old('mobile') }} {{ $teacher->mobile }}">
+                                placeholder="" value="{{ $teacher->mobile }}">
                                 <span class="text-danger">{{ $errors->first('mobile') }}</span>
                             </div>
                         </div>
@@ -112,7 +112,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}">
                                 <input type="text" name="tel" class="form-control"
-                                placeholder="" value="{{ old('tel') }} {{ $teacher->tel }}">
+                                placeholder="" value="{{ $teacher->tel }}">
                                 <span class="text-danger">{{ $errors->first('tel') }}</span>
                             </div>
                         </div>
@@ -124,11 +124,12 @@
                 </div>
                 <div class="panel-body">
                     <div class="row">
+
                         <span class="col-sm-2 col-md-2 text-right">บ้านเลขที่:</span>
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('home_no') ? 'has-error' : '' }}">
                                 <input type="text" name="home_no" class="form-control"
-                                placeholder="" value="{{ old('home_no') }} {{ $teacher->addr }}">
+                                placeholder="" value=" @if(array_key_exists("0", $address) &&$address[0] != null){{ $address[0] }}@endif">
                                 <span class="text-danger">{{ $errors->first('home_no') }}</span>
                             </div>
                         </div>
@@ -136,7 +137,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('road_name') ? 'has-error' : '' }}">
                                 <input type="text" name="road_name" class="form-control"
-                                placeholder="" value="{{ old('road_name') }} {{ $teacher->road_name }}">
+                                placeholder="" value="@if(array_key_exists("1", $address) && $address[1] != null)){{ $address[1] }}@endif">
                                 <span class="text-danger">{{ $errors->first('road_name') }}</span>
                             </div>
                         </div>
@@ -193,7 +194,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}">
                                 <input type="text" name="postcode" class="form-control"
-                                    placeholder="" value="{{ old('postcode') }} {{ $teacher->postcode }}"
+                                    placeholder="" value="{{ $teacher->postcode }}"
                                     onclick="chkSubDistrictInput();">
                                 <span class="text-danger">{{ $errors->first('postcode') }}</span>
                             </div>
@@ -219,7 +220,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('major') ? 'has-error' : '' }}">
                                 <input type="text" name="major" class="form-control"
-                                placeholder="" value="{{ old('major') }} {{ $teacher->major }}">
+                                placeholder="" value="{{ $teacher->major }}">
                                 <span class="text-danger">{{ $errors->first('major') }}</span>
                             </div>
                         </div>
@@ -229,7 +230,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('university_name') ? 'has-error' : '' }}">
                                 <input type="text" name="university_name" class="form-control"
-                                placeholder="" value="{{ old('university_name') }} {{ $teacher->university_name }}">
+                                placeholder="" value="{{ $teacher->university_name }}">
                                 <span class="text-danger">{{ $errors->first('university_name') }}</span>
                             </div>
                         </div>

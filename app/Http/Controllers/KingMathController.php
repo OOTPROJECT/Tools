@@ -9,6 +9,7 @@ use App\Models\Teachers;
 use App\Models\City;
 use App\Models\Courses;
 use App\Models\TimeTable;
+use DB;
 
 class KingMathController extends Controller
 {
@@ -176,10 +177,12 @@ class KingMathController extends Controller
          $prov = $this->city->getProvinces();
          $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
          $teacher = $this->teacher->getTeacherByID($teacher_id);
+         $address = explode(",", $teacher->addr);
 
          return view('teachers.teacher_update')
                 ->with('teacher_id', $teacher_id)
                 ->with('teacher', $teacher)
+                ->with('address', $address)
                 ->with('prov', $prov)
                 ->with('degree_list', $degree);
      }
@@ -202,7 +205,6 @@ class KingMathController extends Controller
             "mobile" => "required",
             "tel" => "required",
             "home_no" => "required",
-            "road_name" => "required",
             "province_id" => "required",
             "district_id" => "required",
             "sub_district_id" => "required",
@@ -222,7 +224,6 @@ class KingMathController extends Controller
             "mobile.required" => "โปรดระบุ เบอร์โทรศัพท์มือถือ",
             "tel.required" => "โปรดระบุ เบอร์โทรศัพทบ้าน",
             "home_no.required" => "โปรดระบุ บ้านเลขที่",
-            "road_name.required" => "โปรดระบุ ถนน",
             "province_id.required" => "โปรดระบุ จังหวัด",
             "district_id.required" => "โปรดระบุ อำเภอ",
             "sub_district_id.required" => "โปรดระบุ ตำบล",
@@ -243,7 +244,7 @@ class KingMathController extends Controller
         $input_teacher = array_merge($input, $input_addr);
 
         Teachers::create($input_teacher);
-        Toastr::info("บันทึกข้อมูลการสอนพิเศษเรียบร้อยแล้ว");
+        Toastr::info("บันทึกข้อมูลครูผู้สอนเรียบร้อยแล้ว");
         return back();
     }
 
@@ -254,15 +255,59 @@ class KingMathController extends Controller
      */
      public function updateTeacher($teacher_id ,Request $request)
      {
-
-         $this->validate($request, [
+         $this->validate($request,
+           [
              "firstname" => "required",
              "lastname" => "required",
-             "image" => "required"
-         ]);
+             "birthdate" => "required|date",
+             "personal_id" => "required",
+             "gender" => "required",
+             "email" => "required|email|between:3,100",
+             "mobile" => "required",
+             "tel" => "required",
+             "home_no" => "required",
+             "province_id" => "required",
+             "district_id" => "required",
+             "sub_district_id" => "required",
+             "postcode" => "required",
+             "degree" => "required",
+             "major" => "required",
+             "university_name" => "required"
+           ],
+           [
+             "firstname.required" => "โปรดระบุ ชื่อผู้สมัคร",
+             "lastname.required" => "โปรดระบุ นามสกุลผู้สมัคร",
+             "birthdate.required" => "โปรดระบุ วันเกิด",
+             "personal_id.required" => "โปรดระบุ รหัสบัตรประชาชน",
+             "gender.required" => "โปรดระบุ เพศ",
+             "email.required" => "โปรดระบุ อีเมล์",
+             "email.email" => "โปรดระบุ อีเมล์ ให้ถูกต้อง",
+             "mobile.required" => "โปรดระบุ เบอร์โทรศัพท์มือถือ",
+             "tel.required" => "โปรดระบุ เบอร์โทรศัพทบ้าน",
+             "home_no.required" => "โปรดระบุ บ้านเลขที่",
+             "province_id.required" => "โปรดระบุ จังหวัด",
+             "district_id.required" => "โปรดระบุ อำเภอ",
+             "sub_district_id.required" => "โปรดระบุ ตำบล",
+             "postcode.required" => "โปรดระบุ รหัสไปรษณีย์",
+             "degree.required" => "โปรดระบุ ระดับการศึกษา",
+             "major.required" => "โปรดระบุ สาขาวิชา",
+             "university_name.required" => "โปรดระบุ มหาวิทยาลัย",
+           ]
+         );
 
-         $teacher->update($teacher_id);
-         Toastr::info("แก้ไขข้อมูลการสอนพิเศษเรียบร้อยแล้ว");
+         // concat home number & road name as input_addr
+         $input_addr = array(
+                         "addr" => $request->input('home_no') . ", " .
+                         $request->input('road_name')
+                       );
+         $input = $request->except('_token', 'home_no', 'road_name', 'province_list',
+                     'district_list', 'sub_district_list');
+         $input_teacher = array_merge($input, $input_addr);
+
+         DB::table('teachers')
+            ->where('teacher_id', $teacher_id)
+            ->update($input_teacher);
+         Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
          return back();
      }
 
@@ -273,8 +318,8 @@ class KingMathController extends Controller
       */
       public function deleteTeacher($teacher_id)
       {
-          Teachers::delete($teacher_id);
-          Toastr::info("แก้ไขข้อมูลการสอนพิเศษเรียบร้อยแล้ว");
+          DB::table('teachers')->where('teacher_id', $teacher_id)->delete();
+          Toastr::info("ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว");
           return back();
       }
 
