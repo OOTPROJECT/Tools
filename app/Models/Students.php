@@ -51,4 +51,21 @@ class Students extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    public function getAllStudentInfo() {
+        $all_Student = Students::orderBy('firstname')->get();
+        return $all_Student;
+    }
+
+    public function getStudentByID($student_id) {
+        $student = new student();
+        $student = Students::where('student_id' , '=', $student_id)->first();
+
+        return $student;
+    }
+
+
+
+
+
 }

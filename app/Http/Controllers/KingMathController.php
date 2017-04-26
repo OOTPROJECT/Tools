@@ -15,10 +15,10 @@ use DB;
 class KingMathController extends Controller
 {
     /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
+    * Create a new controller instance.
+    *
+    * @return void
+    */
     public function __construct()
     {
         $this->middleware('auth');
@@ -29,36 +29,43 @@ class KingMathController extends Controller
         $this->course_schedule = new CourseSchedule();
     }
 
+
+
     /**
-     * Show the application student register.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the application student register.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function callStudentRegPage()
     {
-        return view('students.student_reg');
+        //return view('students.student_reg');
+        $prov = $this->city->getProvinces();
+        return view('students.student_reg')
+        ->with('prov', $prov);
     }
 
     /**
-     * Show the application student information.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Show the application student information.
+    *
+    * @return \Illuminate\Http\Response
+    */
     public function callStudentInfoPage()
     {
-        return view('students.student_info');
+            return view('students.student_info');
+    /*    $allStudent = $this->student->getAllStudentInfo();
+        return view('students.student_info')
+        ->with('allStudent', $allStudent);*/
     }
 
     /**
-     * Add student information.
-     *
-     * @return
-     */
+    * Add student information.
+    *
+    * @return
+    */
     public function store(Request $request)
     {
-
         $this->validate($request,
-          [
+        [
             "firstname" => "required",
             "lastname" => "required",
             "nickname" => "required",
@@ -81,113 +88,113 @@ class KingMathController extends Controller
             "mobile" => "required",
             "tel" => "required",
             "parent_occupation" => "required",
-          ],
-          [
+        ],
+        [
 
-              "firstname.required" => "โปรดระบุ ชื่อนักเรียน",
-              "lastname.required" => "โปรดระบุ นามสกุลนักเรียน",
-              "nickname.required" => "โปรดระบุ ชื่อเล่นนักเรียน",
-              "std_birthdate.required" => "โปรดระบุ วันเดือนปีเกิด",
-              "gender.required" => "โปรดระบุ เพศนักเรียน",
-              "schoolname.required" => "โปรดระบุ ชื่อโรงเรียนของนักเรียน",
-              "school_province_id.required" => "โปรดระบุ จังหวัดของโรงเรียนนักเรียน",
-              "school_level.required" => "โปรดระบุ ระดับชั้นเรียน",
-              "parent_fname.required" => "โปรดระบุ ชื่อผู้ปกครอง",
-              "parent_lname.required" => "โปรดระบุ นามสกุลผู้ปกครอง",
-              "student_relationship.required" => "โปรดระบุ ความสัมพันธ์กับนักเรียน",
-              "parent_birthdate.required" => "โปรดระบุ วันเกิดของผู้ปกครอง",
-              "addr.required" => "โปรดระบุ บ้านเลขที่ของผู้ปกครอง",
-              "province_id.required" => "โปรดระบุ จังหวัด",
-              "district_id.required" => "โปรดระบุ เขต",
-              "std_birthdate.required" => "โปรดระบุ วันเดือนปีเกิด",
-              "sub_district_id.required" => "โปรดระบุ แขวง",
-              "postcode.required" => "โปรดระบุ รหัสไปรษณีย์",
-              "email.required" => "โปรดระบุ Email ",
-              "mobile.required" => "โปรดระบุ เบอร์โทรศัพท์",
-              "tel.required" => "โปรดระบุ เบอร์บ้าน",
-              "parent_occupation.required" => "โปรดระบุ ตำแหน่ง",
+            "firstname.required" => "โปรดระบุ ชื่อนักเรียน",
+            "lastname.required" => "โปรดระบุ นามสกุลนักเรียน",
+            "nickname.required" => "โปรดระบุ ชื่อเล่นนักเรียน",
+            "std_birthdate.required" => "โปรดระบุ วันเดือนปีเกิด",
+            "gender.required" => "โปรดระบุ เพศนักเรียน",
+            "schoolname.required" => "โปรดระบุ ชื่อโรงเรียนของนักเรียน",
+            "school_province_id.required" => "โปรดระบุ จังหวัดของโรงเรียนนักเรียน",
+            "school_level.required" => "โปรดระบุ ระดับชั้นเรียน",
+            "parent_fname.required" => "โปรดระบุ ชื่อผู้ปกครอง",
+            "parent_lname.required" => "โปรดระบุ นามสกุลผู้ปกครอง",
+            "student_relationship.required" => "โปรดระบุ ความสัมพันธ์กับนักเรียน",
+            "parent_birthdate.required" => "โปรดระบุ วันเกิดของผู้ปกครอง",
+            "addr.required" => "โปรดระบุ บ้านเลขที่ของผู้ปกครอง",
+            "province_id.required" => "โปรดระบุ จังหวัด",
+            "district_id.required" => "โปรดระบุ เขต",
+            "std_birthdate.required" => "โปรดระบุ วันเดือนปีเกิด",
+            "sub_district_id.required" => "โปรดระบุ แขวง",
+            "postcode.required" => "โปรดระบุ รหัสไปรษณีย์",
+            "email.required" => "โปรดระบุ Email ",
+            "mobile.required" => "โปรดระบุ เบอร์โทรศัพท์",
+            "tel.required" => "โปรดระบุ เบอร์บ้าน",
+            "parent_occupation.required" => "โปรดระบุ ตำแหน่ง",
 
-        /*    "reg_date.required" => "โปรดระบุ วันที่สมัครเรียน",
+            /*    "reg_date.required" => "โปรดระบุ วันที่สมัครเรียน",
             "std_username.required" => "โปรดระบุ ชื่อบัญชีผู้ใช้",
             "std_password.required" => "โปรดระบุ รหัสผ่าน 6 ตัวอักษร",
             "std_fname.required" => "โปรดระบุ ชื่อนักเรียน",
             "std_lname.required" => "โปรดระบุ นามสกุล",
             "std_nname.required" => "โปรดระบุ ชื่อเล่น",*/
-          ]
-        );
+        ]
+    );
 
 
-        Students::create($request->except('_token'));
-        Toastr::info("บันทึกข้อมูลการสมัครเรียนเรียบร้อยแล้ว");
-        return back();
-    }
+    Students::create($request->except('_token'));
+    Toastr::info("บันทึกข้อมูลการสมัครเรียนเรียบร้อยแล้ว");
+    return back();
+}
 
-    /**
-     * Show the application teacher register.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function callTeacherRegPage()
-    {
-        $prov = $this->city->getProvinces();
-        $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
+/**
+* Show the application teacher register.
+*
+* @return \Illuminate\Http\Response
+*/
+public function callTeacherRegPage()
+{
+    $prov = $this->city->getProvinces();
+    $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
 
-        return view('teachers.teacher_reg')
-                ->with('prov', $prov)
-                ->with('degree_list', $degree);
-    }
+    return view('teachers.teacher_reg')
+    ->with('prov', $prov)
+    ->with('degree_list', $degree);
+}
 
-    /**
-     * Show the application teacher information.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function callTeacherInfoPage()
-    {
-        $allTeacher = $this->teacher->getAllTeacherInfo();
-        return view('teachers.teacher_info')
-            ->with('allTeacher', $allTeacher);
-    }
+/**
+* Show the application teacher information.
+*
+* @return \Illuminate\Http\Response
+*/
+public function callTeacherInfoPage()
+{
+    $allTeacher = $this->teacher->getAllTeacherInfo();
+    return view('teachers.teacher_info')
+    ->with('allTeacher', $allTeacher);
+}
 
-    /**
-     * Show the application teach record.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function callTeachRecPage()
-    {
-        return view('teachers.teach_rec');
-    }
+/**
+* Show the application teach record.
+*
+* @return \Illuminate\Http\Response
+*/
+public function callTeachRecPage()
+{
+    return view('teachers.teach_rec');
+}
 
-    /**
-     * Show the application hire calculate.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function callHireCalPage()
-    {
-        return view('teachers.hire_cal');
-    }
+/**
+* Show the application hire calculate.
+*
+* @return \Illuminate\Http\Response
+*/
+public function callHireCalPage()
+{
+    return view('teachers.hire_cal');
+}
 
-    /**
-     * Create teacher info.
-     *
-     * @return \Illuminate\Http\Response
-     */
-     public function callTeacherEditPage($teacher_id)
-     {
-         $prov = $this->city->getProvinces();
-         $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
-         $teacher = $this->teacher->getTeacherByID($teacher_id);
-         $address = explode(",", $teacher->addr);
+/**
+* Create teacher info.
+*
+* @return \Illuminate\Http\Response
+*/
+public function callTeacherEditPage($teacher_id)
+{
+    $prov = $this->city->getProvinces();
+    $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
+    $teacher = $this->teacher->getTeacherByID($teacher_id);
+    $address = explode(",", $teacher->addr);
 
-         return view('teachers.teacher_update')
-                ->with('teacher_id', $teacher_id)
-                ->with('teacher', $teacher)
-                ->with('address', $address)
-                ->with('prov', $prov)
-                ->with('degree_list', $degree);
-     }
+    return view('teachers.teacher_update')
+    ->with('teacher_id', $teacher_id)
+    ->with('teacher', $teacher)
+    ->with('address', $address)
+    ->with('prov', $prov)
+    ->with('degree_list', $degree);
+}
 
      /**
       * Show the application teacher information.
@@ -237,19 +244,19 @@ class KingMathController extends Controller
           ]
         );
 
-        // concat home number & road name as input_addr
-        $input_addr = array(
-                        "addr" => $request->input('home_no') . ", " .
-                        $request->input('road_name')
-                      );
-        $input = $request->except('_token', 'home_no', 'road_name', 'province_list',
-                    'district_list', 'sub_district_list');
-        $input_teacher = array_merge($input, $input_addr);
+// concat home number & road name as input_addr
+$input_addr = array(
+    "addr" => $request->input('home_no') . ", " .
+    $request->input('road_name')
+);
+$input = $request->except('_token', 'home_no', 'road_name', 'province_list',
+'district_list', 'sub_district_list');
+$input_teacher = array_merge($input, $input_addr);
 
-        Teachers::create($input_teacher);
-        Toastr::info("บันทึกข้อมูลครูผู้สอนเรียบร้อยแล้ว");
-        return back();
-    }
+Teachers::create($input_teacher);
+Toastr::info("บันทึกข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+return back();
+}
 
     /**
      * Show the application classroom management.
@@ -308,12 +315,12 @@ class KingMathController extends Controller
                      'district_list', 'sub_district_list', 'provid', 'distid', 'subdistid');
          $input_teacher = array_merge($input, $input_addr);
 
-         DB::table('teachers')
-            ->where('teacher_id', $teacher_id)
-            ->update($input_teacher);
-         Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
-         return back();
-     }
+DB::table('teachers')
+->where('teacher_id', $teacher_id)
+->update($input_teacher);
+Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+return back();
+}
 
      /**
       * Show the application teacher information.
@@ -332,11 +339,11 @@ print_r($teacher);die();
           return back();
       }
 
-      /**
-       * Show the application teacher information.
-       *
-       * @return \Illuminate\Http\Response
-       */
+/**
+* Show the application teacher information.
+*
+* @return \Illuminate\Http\Response
+*/
 
 
     public function callClassMgtPage()
@@ -391,31 +398,29 @@ print_r($teacher);die();
        $room_name = trim(str_replace('%20', ' ', $request->input('room_name')));
        $arr_time_table = $this->time_table->getTimeTable($start_date, $end_date, $room_name);
 
-       return $arr_time_table;
-   }
+    return $arr_time_table;
+}
 
-    /**
-     * Return districts data.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getDistricts(Request $request)
-    {
-        $dist = $this->city->getDistrictsByProvID(trim($request->prov_id));
+/**
+* Return districts data.
+*
+* @return \Illuminate\Http\Response
+*/
+public function getDistricts(Request $request)
+{
+    $dist = $this->city->getDistrictsByProvID(trim($request->prov_id));
+    return $dist;
+}
 
-        return $dist;
-    }
-
-    /**
-     * Return sub districts data.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function getSubDistricts(Request $request)
-    {
-        $sub_dist = $this->city->getSubDistrictsByID(trim($request->prov_id),
-                    trim($request->dist_id));
-
-        return $sub_dist;
-    }
+/**
+* Return sub districts data.
+*
+* @return \Illuminate\Http\Response
+*/
+public function getSubDistricts(Request $request)
+{
+    $sub_dist = $this->city->getSubDistrictsByID(trim($request->prov_id),
+    trim($request->dist_id));
+    return $sub_dist;
+}
 }
