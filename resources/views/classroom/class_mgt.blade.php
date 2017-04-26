@@ -234,17 +234,24 @@
             url: "{{ url('/getTimeTable') }}",
             data: { start_date: start_date, end_date: end_date, room_name: room_name },
             dataType: 'json',
-            success: function (data) { //console.log(data);
-                $.each(data, function(index, time_table) {
+            success: function (data) { console.log(data.length);
+                if(data.length > 0) {
+                    $.each(data, function(index, time_table) {
+                        var $tr = $('<tr>').append(
+                            $('<td class="col-sm-4 col-md-4 text-center">').text(time_table.day + " (" + time_table.start_time
+                                + " - " + time_table.end_time + " น.)"),
+                            $('<td class="col-sm-3 col-md-3 text-left">').html(
+                                '<button type="button" class="btn btn-success"' +
+                                ' onclick="createCourseSchedule(' + time_table.time_table_id + ');" tootip="เลือกและบันทึก">' +
+                                ' จอง</button>')
+                        ).appendTo('#tb_time_table');
+                    });
+                }
+                else {
                     var $tr = $('<tr>').append(
-                        $('<td class="col-sm-4 col-md-4 text-center">').text(time_table.day + " (" + time_table.start_time
-                            + " - " + time_table.end_time + " น.)"),
-                        $('<td class="col-sm-3 col-md-3 text-left">').html(
-                            '<button type="button" class="btn btn-success"' +
-                            ' onclick="createCourseSchedule(' + time_table.time_table_id + ');" tootip="เลือกและบันทึก">' +
-                            ' จอง</button>')
+                        $('<td colspan="2" class="col-sm-4 col-md-4 text-center">').text("ไม่มีช่วงเวลาเรียนว่าง")
                     ).appendTo('#tb_time_table');
-                });
+                }
             }
         });
         $("#div_time_table").show();
@@ -255,12 +262,7 @@
         var teacher_id = $('#teacher option:selected').val();
         var start_date = $('input[name=start_date]').val();
         var end_date = $('input[name=end_date]').val();
-        /*console.log(course_id);
-        console.log(teacher_id);
-        console.log(start_date);
-        console.log(end_date);
-        console.log(time_table_id);*/
-         //$( "#testform" ).serialize();
+
         $.ajax({
             type: 'get',
             url: "{{ url('/createCourseSchedule') }}",
@@ -271,9 +273,11 @@
                 console.log(data.resp);
                 if(data.resp == 1) {
                     toastr.info("บันทึกเรียบร้อยแล้ว", "สร้างคลาสเรียน");
-                    //location.reload(10);
-                    //setTimeout(location.reload(), 600);
-                    setTimeout(location.reload(),3000);
+
+                    // Set delay time 3 sec before reload page.
+                    setTimeout(function(){
+                        location.reload();
+                    },2000);
                 }
                 else {
                     toastr.info("ไม่สามารถบันทึกคลาสเรียนได้", "สร้างคลาสเรียน");
