@@ -52,11 +52,15 @@
                             <span class="col-sm-2 col-md-2 text-right">ครูผู้สอน:</span>
                             <div class="col-sm-4 col-md-4 text-left">
                                 <select class="form-control" id="teacher" name="teacher">
-
-                                            <option value="1">
-                                                ครูสมชาย
+                                    @if(count($all_teacher) > 0)
+                                        @foreach($all_teacher as $teacher)
+                                            <option value="{{ $teacher->teacher_id }}">
+                                                {{ $teacher->firstname }} {{ $teacher->lastname }}
                                             </option>
-
+                                        @endforeach
+                                    @else
+                                        <option value="none">ไม่มีข้อมูล</option>
+                                    @endif
                                 </select>
                             </div>
                         </div></br>
@@ -68,8 +72,8 @@
                                         data-date-format="yyyy-mm-dd"
                                         data-date-start-date="+0d">
                                         <input class="form-control" type="text"
-                                            name="start_date"
-                                            value="{{ old('start_date') }}" readonly />
+                                            id="start_date" name="start_date"
+                                            value="" readonly />
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-calendar"></i>
                                         </span>
@@ -80,11 +84,11 @@
                             <span class="col-sm-2 col-md-2 text-right">ถึงวันที่:</span>
                             <div class="col-sm-4 col-md-4">
                                 <div class="form-group {{ $errors->has('end_date') ? 'has-error' : '' }}">
-                                    <div id="div_enddate" class="datepicker input-group date"
+                                    <div id="div_enddate" class="datepicker1 input-group date"
                                         data-date-format="yyyy-mm-dd"
-                                        data-date-start-date="+14d">
+                                        >
                                         <input class="form-control" type="text"
-                                            name="end_date" value="{{ old('end_date') }}" readonly />
+                                            id="end_date" name="end_date" value="" readonly />
                                         <span class="input-group-addon">
                                             <i class="glyphicon glyphicon-calendar"></i>
                                         </span>
@@ -97,27 +101,40 @@
                             <button type="submit" class="btn btn-primary">บันทึก</button>
                         </div>-->
                         <div class="row">
-                            <div class="col-sm-6 col-md-12 text-right">
-                                <button type="button" class="btn btn-success"
-                                    onclick="chkTimeTable();">
-                                    ตรวจสอบเวลาเรียน
+                            <span class="col-sm-2 col-md-2 text-right">ห้องเรียน:</span>
+                            <div class="col-sm-4 col-md-4 text-left">
+                                <select class="form-control" id="classroom" name="classroom">
+                                    @if(count($all_classroom) > 0)
+                                        @foreach($all_classroom as $classroom)
+                                            <option id="{{ trim($classroom->room_name) }}">
+                                                {{ trim($classroom->room_name) }}
+                                            </option>
+                                            @endforeach
+                                    @else
+                                        <option id="none">ไม่มีข้อมูล</option>
+                                    @endif
+                                </select>
+                            </div>
+                            <div class="col-sm-3 col-md-3 text-left">
+                                <button type="button" class="btn btn-primary"
+                                    onclick="chkTimeTable();" data-toggle="tooltip"
+                                    data-placement="right" title="ค้นหาวัน-เวลาเรียน">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
                                 </button>
                             </div>
                         </div></br>
+                        <div class="col-sm-1 col-md-1"></div>
                         <div id="div_time_table" name="div_time_table"
-                            class="panel panel-default col-sm-6 col-md-12"
+                            class="panel panel-default col-sm-6 col-md-10"
                             style="display:none">
                             <div class="panel-body">
                                 <table id="tb_time_table" class="table">
                                     <thead>
                                         <tr>
-                                            <th class="col-sm-3 col-md-3 text-center">
-                                                ชื่อห้องเรียน
-                                            </th>
-                                            <th class="col-sm-3 col-md-3 text-center">
+                                            <th class="col-sm-4 col-md-4 text-center">
                                                 วัน-เวลาเรียน
                                             </th>
-                                            <th class="col-sm-3 col-md-3 text-center">
+                                            <th class="col-sm-3 col-md-3 text-left">
                                                 จัดการ
                                             </th>
                                         </tr>
@@ -163,28 +180,57 @@
     </div>
 
 <script type="text/javascript">
+    $(document).ready(function (){
+        var date = new Date();
+        date.setDate(date.getDate() + 14);
+        var end_date = date.toISOString().slice(0,10).replace(/-/g,"-");
+
+        $("#div_enddate, .datepicker1").datepicker({
+            autoclose: true,
+            todayHighlight: true,
+            startDate: "+14d"
+        }).datepicker('update', end_date);
+
+        $("#div_stdate, .datepicker").datepicker({
+            autoclose: true,
+            todayHighlight: true
+        })
+        .on('changeDate', function(ev) {
+            var newDate = new Date(ev.date)
+            newDate.setDate(newDate.getDate() + 14);
+
+            $("#div_enddate, .datepicker1").datepicker('remove');
+            $("#div_enddate, .datepicker1").datepicker({
+                autoclose: true,
+                todayHighlight: true,
+                startDate: newDate
+            }).datepicker('update', newDate);
+        });
+    });
+
     function chkTimeTable() {
         var start_date = $('input[name=start_date]').val();
         var end_date = $('input[name=end_date]').val();
+        var room_name = $('#classroom option:selected').text();
+        //var set_room_name = set.replace(/ /g, '%20');
+        room_name=room_name.trim().replace(/ /g, '%20');
         console.log(start_date);
         console.log(end_date);
+        console.log(room_name);
         $.ajax({
             type: 'GET',
             url: "{{ url('/getTimeTable') }}",
-            data: { start_date: start_date, end_date: end_date },
+            data: { start_date: start_date, end_date: end_date, room_name: room_name },
             dataType: 'json',
             success: function (data) { //console.log(data);
                 $.each(data, function(index, time_table) {
                     var $tr = $('<tr>').append(
-                        $('<td class="col-sm-3 col-md-3 text-center">').text(time_table.room_name),
-                        $('<td class="col-sm-3 col-md-3 text-center">').text(time_table.day + " (" + time_table.start_time
+                        $('<td class="col-sm-4 col-md-4 text-center">').text(time_table.day + " (" + time_table.start_time
                             + " - " + time_table.end_time + " น.)"),
-                        $('<td class="col-sm-3 col-md-3 text-center">').html(
-                            '<button type="button" class="btn btn-primary"' +
-                            'data-toggle="tooltip" data-placement="right"' +
-                            'title="เลือกและบันทึก"' +
-                            ' onclick="createCourseSchedule();" tootip="เลือกและบันทึก">' +
-                            '<i class="fa fa-floppy-o" aria-hidden="true"></i></button>')
+                        $('<td class="col-sm-3 col-md-3 text-left">').html(
+                            '<button type="button" class="btn btn-success"' +
+                            ' onclick="createCourseSchedule(' + time_table.time_table_id + ');" tootip="เลือกและบันทึก">' +
+                            ' จอง</button>')
                     ).appendTo('#tb_time_table');
                 });
             }
@@ -192,8 +238,20 @@
         $("#div_time_table").show();
     }
 
-    function createCourseSchedule() {
-        alert("Coming Soon!");
+    function createCourseSchedule(time_table_id) {
+        var course_id = $('#course option:selected'). val();
+        var teacher_id = $('#teacher option:selected').val();
+        var start_date = $('input[name=start_date]').val();
+        var end_date = $('input[name=end_date]').val();
+        console.log(course_id);
+        console.log(teacher_id);
+        console.log(start_date);
+        console.log(end_date);
+        console.log(time_table_id);
+        /*$.ajax({
+            type: 'POST',
+
+        })*/
     }
 </script>
 @endsection

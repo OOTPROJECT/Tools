@@ -288,9 +288,13 @@ class KingMathController extends Controller
     public function callClassMgtPage()
     {
         $all_course = $this->course->getCourse();
+        $all_classroom = $this->time_table->getAllClassRoom();
+        $all_teacher = $this->teacher->getAllTeacher();
 
         return view('classroom.class_mgt')
-                ->with('all_course', $all_course);
+                ->with('all_course', $all_course)
+                ->with('all_classroom', $all_classroom)
+                ->with('all_teacher', $all_teacher);
     }
 
     /**
@@ -303,7 +307,8 @@ class KingMathController extends Controller
    {
        $start_date = trim($request->input('start_date'));
        $end_date = trim($request->input('end_date'));
-       $arr_time_table = $this->time_table->getTimeTable($start_date, $end_date);
+       $room_name = trim(str_replace('%20', ' ', $request->input('room_name')));
+       $arr_time_table = $this->time_table->getTimeTable($start_date, $end_date, $room_name);
 
        return $arr_time_table;
    }

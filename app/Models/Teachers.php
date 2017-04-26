@@ -36,4 +36,10 @@ class Teachers extends Model
 
          return $teacher;
      }
+
+     public function getAllTeacher() {
+         $all_teacher = Teachers::orderBy('firstname')->get();
+
+         return $all_teacher;
+     }
 }
