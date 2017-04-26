@@ -62,7 +62,7 @@ class KingMathController extends Controller
     *
     * @return
     */
-    public function store(Request $request)
+    public function createStudent(Request $request)
     {
         $this->validate($request,
         [
@@ -123,9 +123,17 @@ class KingMathController extends Controller
         ]
     );
 
+    $input_addr = array(
+        "addr" => $request->input('addr') . ", " . $request->input('soi') . ", " .
+        $request->input('road')
+    );
+    $input = $request->except('_token', 'addr','soi', 'road', 'province_list',
+    'district_list', 'sub_district_list');
+    $input_student = array_merge($input, $input_addr);
 
-    Students::create($request->except('_token'));
-    Toastr::info("บันทึกข้อมูลการสมัครเรียนเรียบร้อยแล้ว");
+
+    Students::create($input_student);
+    Toastr::info("บันทึกข้อมูลนักเรียนเรียบร้อยแล้ว");
     return back();
 }
 
