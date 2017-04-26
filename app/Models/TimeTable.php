@@ -23,7 +23,8 @@ class TimeTable extends Model
                             FROM time_table WHERE room_name = '". $room_name ."'
                             AND time_table_id NOT IN
                             ( SELECT * FROM ( SELECT time_table_id FROM course_schedule
-                            WHERE '2017-04-24' <= end_date AND '2017-05-23' >= start_date
+                            WHERE '" . $start_date . "' <= end_date AND '"
+                            . $end_date ."' >= start_date
                             ) AS subquery ) ORDER BY day"
                           );
 
