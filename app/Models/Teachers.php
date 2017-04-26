@@ -42,4 +42,7 @@ class Teachers extends Model
 
          return $all_teacher;
      }
+
+
+
 }
