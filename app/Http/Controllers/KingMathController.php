@@ -176,7 +176,7 @@ class KingMathController extends Controller
      {
          $prov = $this->city->getProvinces();
          $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
-         $teacher = $this->teacher->getTeacherByID($teacher_id);
+         $teacher = $this->teacher->getTeacherByID($teacher_id); 
          $address = explode(",", $teacher->addr);
 
          return view('teachers.teacher_update')
@@ -303,7 +303,7 @@ class KingMathController extends Controller
                          $request->input('road_name')
                        );
          $input = $request->except('_token', 'home_no', 'road_name', 'province_list',
-                     'district_list', 'sub_district_list');
+                     'district_list', 'sub_district_list', 'provid', 'distid', 'subdistid');
          $input_teacher = array_merge($input, $input_addr);
 
          DB::table('teachers')
