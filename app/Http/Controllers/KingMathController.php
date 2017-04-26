@@ -9,6 +9,7 @@ use App\Models\Teachers;
 use App\Models\City;
 use App\Models\Courses;
 use App\Models\TimeTable;
+use App\Models\CourseSchedule;
 use DB;
 
 class KingMathController extends Controller
@@ -25,6 +26,7 @@ class KingMathController extends Controller
         $this->teacher = new Teachers();
         $this->course = new Courses();
         $this->time_table = new TimeTable();
+        $this->course_schedule = new CourseSchedule();
     }
 
     /**
@@ -176,7 +178,7 @@ class KingMathController extends Controller
      {
          $prov = $this->city->getProvinces();
          $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
-         $teacher = $this->teacher->getTeacherByID($teacher_id); 
+         $teacher = $this->teacher->getTeacherByID($teacher_id);
          $address = explode(",", $teacher->addr);
 
          return view('teachers.teacher_update')
@@ -348,6 +350,33 @@ print_r($teacher);die();
                 ->with('all_classroom', $all_classroom)
                 ->with('all_teacher', $all_teacher);
     }
+
+    /**
+     * Create course Schedule.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+
+  public function createCourseSchedule(Request $request)
+  {
+//print_r($request->all()); exit();
+     $arr_data = array("student_max" => 10, "status" => "เปิด");
+     // concat home number & road name as input_addr
+     $input = $request->except('_token');
+     $arr_course_schedule = array_merge($input, $arr_data);
+
+     $resp = CourseSchedule::create($arr_course_schedule)->saveOrFail();
+
+     if($resp == 1) {
+         //Toastr::info("สร้างคลาสเรียนเรียบร้อยแล้ว");
+         return array("resp" => 1, "text" => "สร้างคลาสเรียนเรียบร้อยแล้ว");
+     }
+     else {
+         //Toastr::warning("ไม่สามารถสร้างคลาสเรียนได้");
+         return array("resp" => 0, "text" => "ไม่สามารถสร้างคลาสเรียนได้");
+     }
+  }
 
     /**
      * Get time table & room information.

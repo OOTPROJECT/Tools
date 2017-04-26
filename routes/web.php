@@ -46,6 +46,7 @@ Route::get('/deleteTeacher/{teacher_id}', 'KingMathController@deleteTeacher');
 // Classroom
 Route::get('/ClassMgt', 'KingMathController@callClassMgtPage');
 Route::get('/getTimeTable', 'KingMathController@getTimeTable');
+Route::get('/createCourseSchedule', 'KingMathController@createCourseSchedule');
 
 // City
 Route::get('/districts', 'KingMathController@getDistricts');

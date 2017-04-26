@@ -16,7 +16,7 @@
             <h3 class="box-title"></h3>
         </div>
         <div class="box-body">
-            <form action="{{ url('/createTeacher') }}" method="post">
+            <form action="#" method="post" id="mgtClass" name="mgtClass">
                 <div class="panel panel-default">
                     <div class="panel-heading">
                         <h3 class="panel-title">สร้างคลาสเรียน</h3>
@@ -205,18 +205,30 @@
                 todayHighlight: true,
                 startDate: newDate
             }).datepicker('update', newDate);
+
+            $("#div_time_table").hide();
+        });
+
+        $("#div_enddate, .datepicker").on('changeDate', function(ev) {
+            $("#div_time_table").hide();
         });
     });
+
+    $("#classroom").change(function () {
+        $("#div_time_table").hide();
+    })
 
     function chkTimeTable() {
         var start_date = $('input[name=start_date]').val();
         var end_date = $('input[name=end_date]').val();
         var room_name = $('#classroom option:selected').text();
-        //var set_room_name = set.replace(/ /g, '%20');
+
+        // Clear tb time table
+        $("#tb_time_table").empty();
+
+        // Replace space with %20
         room_name=room_name.trim().replace(/ /g, '%20');
-        console.log(start_date);
-        console.log(end_date);
-        console.log(room_name);
+
         $.ajax({
             type: 'GET',
             url: "{{ url('/getTimeTable') }}",
@@ -243,15 +255,33 @@
         var teacher_id = $('#teacher option:selected').val();
         var start_date = $('input[name=start_date]').val();
         var end_date = $('input[name=end_date]').val();
-        console.log(course_id);
+        /*console.log(course_id);
         console.log(teacher_id);
         console.log(start_date);
         console.log(end_date);
-        console.log(time_table_id);
-        /*$.ajax({
-            type: 'POST',
+        console.log(time_table_id);*/
+         //$( "#testform" ).serialize();
+        $.ajax({
+            type: 'get',
+            url: "{{ url('/createCourseSchedule') }}",
+            data: { course_id: course_id, teacher_id: teacher_id, time_table_id: time_table_id,
+                    start_date: start_date, end_date: end_date, _token: "{{ csrf_token() }}" },
+            dataType: 'json',
+            success: function(data) {
+                console.log(data.resp);
+                if(data.resp == 1) {
+                    toastr.info("บันทึกเรียบร้อยแล้ว", "สร้างคลาสเรียน");
+                    //location.reload(10);
+                    //setTimeout(location.reload(), 600);
+                    setTimeout(location.reload(),3000);
+                }
+                else {
+                    toastr.info("ไม่สามารถบันทึกคลาสเรียนได้", "สร้างคลาสเรียน");
+                }
+            }
 
-        })*/
+        });
+        return false;
     }
 </script>
 @endsection

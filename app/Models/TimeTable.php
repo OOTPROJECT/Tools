@@ -24,7 +24,7 @@ class TimeTable extends Model
                             AND time_table_id NOT IN
                             ( SELECT * FROM ( SELECT time_table_id FROM course_schedule
                             WHERE '2017-04-24' <= end_date AND '2017-05-23' >= start_date
-                            ) AS subquery )"
+                            ) AS subquery ) ORDER BY day"
                           );
 
         return $arr_time_table;
