@@ -137,7 +137,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('road_name') ? 'has-error' : '' }}">
                                 <input type="text" name="road_name" class="form-control"
-                                placeholder="" value="@if(array_key_exists("1", $address) && $address[1] != null)){{ $address[1] }}@endif">
+                                placeholder="" value="@if(array_key_exists("1", $address) && $address[1] != null){{ $address[1] }}@endif">
                                 <span class="text-danger">{{ $errors->first('road_name') }}</span>
                             </div>
                         </div>
@@ -192,10 +192,10 @@
                         </div>
                         <span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์:</span>
                         <div class="col-sm-4 col-md-4 text-left">
-                            <div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}">
+                            <div id="postcode" class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}">
                                 <input type="text" name="postcode" class="form-control"
                                     placeholder="" value="{{ $teacher->postcode }}"
-                                    onclick="chkSubDistrictInput();">
+                                    onclick="chkSubDistrictInput();" id="mytextbox" onKeyUp="inputDigits(this);">
                                 <span class="text-danger">{{ $errors->first('postcode') }}</span>
                             </div>
                         </div>
@@ -390,6 +390,14 @@
                 });
             }
         });
+    }
+
+    function inputDigits(sensor){
+        var regExp = /[0-9]$/;
+        if(!regExp.test(sensor.value)){
+            $( "#postcode span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+            sensor.value = sensor.value.substring(0, sensor.value.length -1);
+        }
     }
 
 </script>

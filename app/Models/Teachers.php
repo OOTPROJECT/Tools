@@ -36,4 +36,7 @@ class Teachers extends Model
 
          return $teacher;
      }
+
+
+
 }

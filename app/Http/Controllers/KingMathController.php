@@ -228,6 +228,7 @@ class KingMathController extends Controller
             "district_id.required" => "โปรดระบุ อำเภอ",
             "sub_district_id.required" => "โปรดระบุ ตำบล",
             "postcode.required" => "โปรดระบุ รหัสไปรษณีย์",
+            "postcode.postcode" => "โปรดระบุ รหัสไปรษณีย์เฉพาะตัวเลขเท่านั้น",
             "degree.required" => "โปรดระบุ ระดับการศึกษา",
             "major.required" => "โปรดระบุ สาขาวิชา",
             "university_name.required" => "โปรดระบุ มหาวิทยาลัย",
@@ -289,6 +290,7 @@ class KingMathController extends Controller
              "district_id.required" => "โปรดระบุ อำเภอ",
              "sub_district_id.required" => "โปรดระบุ ตำบล",
              "postcode.required" => "โปรดระบุ รหัสไปรษณีย์",
+             "postcode.postcode" => "โปรดระบุ รหัสไปรษณีย์เฉพาะตัวเลขเท่านั้น",
              "degree.required" => "โปรดระบุ ระดับการศึกษา",
              "major.required" => "โปรดระบุ สาขาวิชา",
              "university_name.required" => "โปรดระบุ มหาวิทยาลัย",
@@ -318,7 +320,12 @@ class KingMathController extends Controller
       */
       public function deleteTeacher($teacher_id)
       {
-          DB::table('teachers')->where('teacher_id', $teacher_id)->delete();
+          $teacher = Teachers::find($teacher_id);
+print_r($teacher);die();
+          DB::table('teachers', function ($teacher_id) {
+                $teacher_id->softDeletes();
+          });
+
           Toastr::info("ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว");
           return back();
       }
