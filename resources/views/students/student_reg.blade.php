@@ -95,17 +95,9 @@
 						<input type='text' name="schoolname" class="form-control text-left" placeholder="กรุณาระบุชื่อสถานศึกษา" value="{{ old('schoolname') }}" /></div></div>
 						<div class="col-sm-2 col-md-2 text-right">จังหวัด</div>
 						<div class="col-sm-4 col-md-4 text-center">
-							<input list="opts_province" name="province_list"
-                                class="form-control"
-                                placeholder="กรุณาระบุจังหวัด">
-                            <datalist id="opts_province">
-                                @foreach($prov as $prov_list)
-                                    <option id="{{ $prov_list->province_id }}"
-                                        value="{{ $prov_list->province_name }}">
-                                    </option>
-                                @endforeach
-                            </datalist>
-                            <input type="hidden" id="province_id" name="province_id">
+							<div class="form-group {{ $errors->has('schoolname') ? 'has-error' : '' }}">
+								<select class="form-control">
+								</select></div>
 							</div>
 						</div>
 
@@ -163,34 +155,44 @@
 							<div class="col-sm-4 col-md-4 text-center">
 								<input type='text' class="form-control"  /></div>
 							</div>
-							<div class="row"><span class="col-sm-2 col-md-2 text-right">ถนน</span>
+							<div class="row">
+								<span class="col-sm-2 col-md-2 text-right">ถนน</span>
 								<div class="col-sm-4 col-md-4 text-left">
 									<input type='text' class="form-control"  />
 								</div>
-
 								<span class="col-sm-2 col-md-2 text-right">จังหวัด</span>
 								<div class="col-sm-4 col-md-4 text-center">
-									<div class="form-group {{ $errors->has('province_id') ? 'has-error' : '' }}">
-										<select class="form-control" ></select>
-									</div>
-								</div>
+
+									<input list="opts_province" name="province_list"
+								class="form-control"
+								placeholder="กรุณาระบุจังหวัด">
+								<datalist id="opts_province">
+									@foreach($prov as $prov_list)
+									<option id="{{ $prov_list->province_id }}"
+										value="{{ $prov_list->province_name }}">
+									</option>
+									@endforeach
+								</datalist>
+								<input type="hidden" id="province_id" name="province_id">
+<br>
+							</div>
 
 							</div>
 
 							<div class="row">
 								<span class="col-sm-2 col-md-2 text-right">เขต/อำเภอ</span>
 								<div class="col-sm-4 col-md-4 text-left">
-									<div class="form-group {{ $errors->has('teacher_lname') ? 'has-error' : '' }}">
-									<select class="form-control">
-								</select></div>
-								<!--	<input list="opts_district" name="district_list"
+
+								<input list="opts_district" name="district_list"
 								class="form-control"
 								placeholder="กรุณาระบุเขต/อำเภอ"
 								onclick="chkProvinceInput();">
 								<datalist id="opts_district">
 								</datalist>
-								<input type="hidden" id="district_id" name="district_id">-->
+								<input type="hidden" id="district_id" name="district_id">
+
 							</div>
+							<br>
 							<span class="col-sm-2 col-md-2 text-right">ตำบล/แขวง</span>
 							<div class="col-sm-4 col-md-4 text-center">
 								<select class="form-control">
