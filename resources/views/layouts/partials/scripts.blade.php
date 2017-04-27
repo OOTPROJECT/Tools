@@ -26,12 +26,8 @@ src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.3.0/js/bootstr
 $(document).ready(function() {
     $('#example').DataTable();
 } );
-</script>
 
 
-
-
-<script type="text/javascript">
 $(function () {
 	$(".datepicker , #datepicker").datepicker({
 		autoclose: true,
