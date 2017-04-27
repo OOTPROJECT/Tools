@@ -6,7 +6,7 @@
 @endsection
 
 @section('contentheader_title')
-คำนวณค่าจ้างครู
+คำนวณค่าจ้างครูผู้สอน
 @endsection
 
 @section('main-content')
@@ -15,13 +15,51 @@
     <div class="box-header with-border">
         <h3 class="box-title"></h3>
     </div>
+
     <div class="box-body">
-        <input list="options" name="chooseOption">
-<datalist id="options">
-  <option id="1" value="Foo">
-  <option id="2" value="Bar">
-  <option id="3" value="Foo">
-</datalist>
+        <form action="{{ url('/createTeacher') }}" method="post">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title"></h3>
+                </div>
+                <div class="panel-body">
+                    {!! csrf_field() !!}
+                    @if(count($errors))
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.
+                        <br/>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+
+                    <div class="row">
+                        <span class="col-sm-2 col-md-2 text-right">เดือน:</span>
+                        <div class="col-sm-4 col-md-4 text-left">
+                            <select class="form-control" id="degree" name="degree">
+                                @foreach($month as $month_key => $month_val)
+                                <option value="{{ $month_val }}">
+                                    {{ $month_val }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <span class="col-sm-2 col-md-2 text-right">ปี:</span>
+                        <div class="col-sm-4 col-md-4 text-left">
+                            <div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
+                                <input type="text" name="lastname" class="form-control"
+                                placeholder="" value="{{ old('lastname') }}">
+                                <span class="text-danger">{{ $errors->first('lastname') }}</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </form>
 
     </div>
     <!-- /.box-body -->

@@ -173,7 +173,12 @@ public function callTeachRecPage()
 */
 public function callHireCalPage()
 {
-    return view('teachers.hire_cal');
+    $month = array("1" => "มกราคม", "2" => "กุมภาพันธ์", "3" => "มีนาคม", "4" => "เมษายน",
+                "5" => "พฤษภาคม", "6" => "มิถุนายน", "7" => "กรกฎาคม", "8" => "สิงหาคม",
+                "9" => "กันยายน", "10" => "ตุลาคม", "11" => "พฤศจิกายน", "12" => "ธันวาคม");
+
+    return view('teachers.hire_cal')
+    ->with('month', $month);
 }
 
 /**
@@ -315,12 +320,12 @@ return back();
                      'district_list', 'sub_district_list', 'provid', 'distid', 'subdistid');
          $input_teacher = array_merge($input, $input_addr);
 
-DB::table('teachers')
-->where('teacher_id', $teacher_id)
-->update($input_teacher);
-Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
-return back();
-}
+        DB::table('teachers')
+        ->where('teacher_id', $teacher_id)
+        ->update($input_teacher);
+        Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+        return back();
+    }
 
      /**
       * Show the application teacher information.
@@ -329,11 +334,7 @@ return back();
       */
       public function deleteTeacher($teacher_id)
       {
-          $teacher = Teachers::find($teacher_id);
-print_r($teacher);die();
-          DB::table('teachers', function ($teacher_id) {
-                $teacher_id->softDeletes();
-          });
+          $this->teacher->deleteByID($teacher_id);
 
           Toastr::info("ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว");
           return back();

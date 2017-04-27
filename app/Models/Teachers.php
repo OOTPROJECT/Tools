@@ -43,6 +43,11 @@ class Teachers extends Model
          return $all_teacher;
      }
 
+     public function deleteByID($teacher_id) {
+         $teacher = Teachers::onlyTrashed('teacher_id',$teacher_id)->get();
+         Teachers::delete($teacher);
 
+         return true;
+     }
 
 }
