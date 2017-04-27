@@ -154,23 +154,37 @@
                     <table id="example" >
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>ชื่อคอร์ส</th>
+                                <th>วัน</th>
+                                <th>เวลา</th>
+                                <th>ครูผู้สอน</th>
+                                <th>ห้องเรียน</th>
+                                <th>วันที่เริ่มเรียน-ถึงวันที่</th>
+                                <th>สถานะ</th>
+                                <th>วันที่สร้างข้อมูล</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
+                            @if(count($arr_course_schedule) > 0)
+                                @foreach($arr_course_schedule as $cs)
+                                    <tr>
+                                        <td>{{ $cs->course_name }}</td>
+                                        <td>{{ $cs->day }}</td>
+                                        <td>{{ $cs->start_time }} - {{ $cs->end_time }} น.</td>
+                                        <td>{{ $cs->firstname }} {{ $cs->lastname }}</td>
+                                        <td>{{ $cs->room_name }}</td>
+                                        <td>{{ $cs->start_date }} - {{ $cs->end_date }}</td>
+                                        <td>{{ $cs->status }}</td>
+                                        <td>{{ $cs->created_at }}</td>
+                                        <td><i class="fa fa-trash-o" aria-hidden="true"></i></td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="9">ไม่มีข้อมูล</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>

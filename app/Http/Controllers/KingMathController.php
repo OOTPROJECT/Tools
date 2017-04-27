@@ -344,11 +344,13 @@ print_r($teacher);die();
         $all_course = $this->course->getCourse();
         $all_classroom = $this->time_table->getAllClassRoom();
         $all_teacher = $this->teacher->getAllTeacher();
+        $arr_course_schedule = $this->course_schedule->getAllCourseSchedule();
 
         return view('classroom.class_mgt')
                 ->with('all_course', $all_course)
                 ->with('all_classroom', $all_classroom)
-                ->with('all_teacher', $all_teacher);
+                ->with('all_teacher', $all_teacher)
+                ->with('arr_course_schedule', $arr_course_schedule);
     }
 
     /**
