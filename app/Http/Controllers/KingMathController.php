@@ -339,12 +339,11 @@ print_r($teacher);die();
           return back();
       }
 
-/**
-* Show the application teacher information.
-*
-* @return \Illuminate\Http\Response
-*/
-
+    /**
+     * Show the application class management page.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
     public function callClassMgtPage()
     {
@@ -366,26 +365,52 @@ print_r($teacher);die();
      * @return \Illuminate\Http\Response
      */
 
-
-  public function createCourseSchedule(Request $request)
-  {
+    public function createCourseSchedule(Request $request)
+    {
 //print_r($request->all()); exit();
-     $arr_data = array("student_max" => 10, "status" => "เปิด");
-     // concat home number & road name as input_addr
-     $input = $request->except('_token');
-     $arr_course_schedule = array_merge($input, $arr_data);
+        $arr_data = array("student_max" => 10, "status" => "เปิด");
+        // concat home number & road name as input_addr
+        $input = $request->except('_token');
+        $arr_course_schedule = array_merge($input, $arr_data);
 
-     $resp = CourseSchedule::create($arr_course_schedule)->saveOrFail();
+        $resp = CourseSchedule::create($arr_course_schedule)->saveOrFail();
 
-     if($resp == 1) {
-         //Toastr::info("สร้างคลาสเรียนเรียบร้อยแล้ว");
-         return array("resp" => 1, "text" => "สร้างคลาสเรียนเรียบร้อยแล้ว");
+        if($resp == 1) {
+
+            return array("resp" => true, "text" => "สร้างคลาสเรียนเรียบร้อยแล้ว");
+        }
+        else {
+
+            return array("resp" => false, "text" => "ไม่สามารถสร้างคลาสเรียนได้");
+        }
+    }
+
+    /**
+     * Create course Schedule.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+     public function deleteCourseSchedule(Request $request) {
+         $course_schedule_id = trim($request->input('cs_id'));
+         $course_enroll = $this->course_schedule->courseEnrollByCSId($course_schedule_id);
+
+         if(count($course_enroll) > 0) {
+             return array("resp" => false, "text" => "ไม่สามารถลบคลาสเรียนได้ เนื่องจากมีนักเรียนลงทะเบียนเรียน");
+         }
+         else {
+             $resp = CourseSchedule::where('course_schedule_id', '=', $course_schedule_id)->delete();
+
+             if($resp == 1) {
+                 return array("resp" => true, "text" => "ลบข้อมูลคลาสเรียนเรียบร้อยแล้ว");
+             }
+             else {
+                 return array("resp" => false, "text" => "ไม่สามารถลบข้อมูลคลาสเรียนได้");
+             }
+         }
      }
-     else {
-         //Toastr::warning("ไม่สามารถสร้างคลาสเรียนได้");
-         return array("resp" => 0, "text" => "ไม่สามารถสร้างคลาสเรียนได้");
-     }
-  }
+
+
 
     /**
      * Get time table & room information.

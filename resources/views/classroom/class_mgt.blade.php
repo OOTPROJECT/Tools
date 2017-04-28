@@ -177,7 +177,7 @@
                                         <td>{{ $cs->start_date }} - {{ $cs->end_date }}</td>
                                         <td>{{ $cs->status }}</td>
                                         <td>{{ $cs->created_at }}</td>
-                                        <td><i class="fa fa-trash-o" aria-hidden="true"></i></td>
+                                        <td><a href="javaScript:;" onclick="deleteCourseSchedule({{ $cs->course_schedule_id }});"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
                                     </tr>
                                 @endforeach
                             @else
@@ -278,15 +278,15 @@
         var end_date = $('input[name=end_date]').val();
 
         $.ajax({
-            type: 'get',
+            type: 'POST',
             url: "{{ url('/createCourseSchedule') }}",
             data: { course_id: course_id, teacher_id: teacher_id, time_table_id: time_table_id,
                     start_date: start_date, end_date: end_date, _token: "{{ csrf_token() }}" },
             dataType: 'json',
             success: function(data) {
                 console.log(data.resp);
-                if(data.resp == 1) {
-                    toastr.info("บันทึกเรียบร้อยแล้ว", "สร้างคลาสเรียน");
+                if(data.resp == true) {
+                    toastr.info(data.text, "สร้างคลาสเรียน");
 
                     // Set delay time 3 sec before reload page.
                     setTimeout(function(){
@@ -294,11 +294,37 @@
                     },2000);
                 }
                 else {
-                    toastr.info("ไม่สามารถบันทึกคลาสเรียนได้", "สร้างคลาสเรียน");
+                    toastr.error(data.text, "สร้างคลาสเรียน");
                 }
             }
-
         });
+
+        return false;
+    }
+
+    function deleteCourseSchedule(cs_id) {
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ url('/deleteCourseSchedule') }}",
+            data: { cs_id: cs_id, _token: "{{ csrf_token() }}" },
+            dataType: 'json',
+            success: function(data) {
+                //console.log(data);
+                if(data.resp == true) {
+                    toastr.info(data.text, "จัดการคลาสเรียน");
+
+                    // Set delay time 3 sec before reload page.
+                    setTimeout(function(){
+                        location.reload();
+                    },2000);
+                }
+                else {
+                    toastr.error(data.text, "จัดการคลาสเรียน");
+                }
+            }
+        });
+
         return false;
     }
 </script>
