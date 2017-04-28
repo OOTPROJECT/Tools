@@ -194,7 +194,10 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <select class="form-control" id="degree" name="degree">
                                 @foreach($degree_list as $degree_key => $degree_val)
-                                <option value="{{ $degree_val }} {{ $teacher->degree }}">
+                                
+
+
+                                <option value="{{ $degree_val }}">
                                     {{ $degree_val }}
                                 </option>
                                 @endforeach
