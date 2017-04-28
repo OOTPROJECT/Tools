@@ -71,8 +71,8 @@
                         <span class="col-sm-2 col-md-2 text-right">รหัสประจำตัวประชาชน:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('personal_id') ? 'has-error' : '' }}">
-                                <input type="text" name="personal_id" class="form-control"
-                                placeholder="" value="{{ $teacher->personal_id}}">
+                                <input type="text" name="personal_id" class="form-control" placeholder=""
+                                value="{{ $teacher->personal_id}}" maxlength="10">
                                 <span class="text-danger">{{ $errors->first('personal_id') }}</span>
                             </div>
                         </div>
@@ -102,17 +102,17 @@
                     <div class="row">
                         <span class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์:</span>
                         <div class="col-sm-4 col-md-4">
-                            <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
-                                <input type="text" name="mobile" class="form-control"
-                                placeholder="" value="{{ $teacher->mobile }}">
+                            <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}" id="mobile">
+                                <input type="text" name="mobile" class="form-control" placeholder=""
+                                value="{{ $teacher->mobile }}" onKeyUp="inputDigitsMobile(this);" maxlength="10">
                                 <span class="text-danger">{{ $errors->first('mobile') }}</span>
                             </div>
                         </div>
                         <span class="col-sm-2 col-md-2 text-right">เบอร์บ้าน:</span>
                         <div class="col-sm-4 col-md-4 text-left">
-                            <div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}">
-                                <input type="text" name="tel" class="form-control"
-                                placeholder="" value="{{ $teacher->tel }}">
+                            <div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}" id="tel">
+                                <input type="text" name="tel" class="form-control" placeholder=""
+                                value="{{ $teacher->tel }}" onKeyUp="inputDigitsTel(this);" maxlength="10">
                                 <span class="text-danger">{{ $errors->first('tel') }}</span>
                             </div>
                         </div>
@@ -176,7 +176,7 @@
                         </div>
                         <span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์:</span>
                         <div class="col-sm-4 col-md-4 text-left">
-                            <div id="postcode" class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}">
+                            <div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}" id="postcode" >
                                 <input type="text" name="postcode" class="form-control"
                                     placeholder="" value="{{ $teacher->postcode }}"
                                     onclick="chkSubDistrictInput();" id="mytextbox" onKeyUp="inputDigits(this);">
@@ -194,7 +194,10 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <select class="form-control" id="degree" name="degree">
                                 @foreach($degree_list as $degree_key => $degree_val)
-                                <option value="{{ $degree_val }} {{ $teacher->degree }}">
+                                
+
+
+                                <option value="{{ $degree_val }}">
                                     {{ $degree_val }}
                                 </option>
                                 @endforeach
@@ -239,7 +242,7 @@
         var provid = $('#provid').val();
         var distid = $('#distid').val();
         var subdistid = $('#subdistid').val();
-        
+
         getDistrict(provid, distid);
         getSubDistrict(provid, distid, subdistid);
         chkGender();
@@ -344,11 +347,40 @@
         getSubDistrict(prov_id, dist_id, "");
     })
 
+    function inputDigitsMobile(sensor){
+        var regExp = /[0-9]$/;
+        if(!regExp.test(sensor.value)){
+            $( "#mobile span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+            $('#mobile span').css('display', 'block');
+            sensor.value = sensor.value.substring(0, sensor.value.length -1);
+        }
+        else {
+            $('#mobile span').css('display', 'none');
+        }
+
+    }
+
+    function inputDigitsTel(sensor){
+        var regExp = /[0-9]$/;
+        if(!regExp.test(sensor.value)){
+            $( "#tel span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+            $('#tel span').css('display', 'block');
+            sensor.value = sensor.value.substring(0, sensor.value.length -1);
+        }
+        else {
+            $( "#tel span" ).css('display', 'none');
+        }
+    }
+
     function inputDigits(sensor){
         var regExp = /[0-9]$/;
         if(!regExp.test(sensor.value)){
             $( "#postcode span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+            $('#postcode span').css('display', 'block');
             sensor.value = sensor.value.substring(0, sensor.value.length -1);
+        }
+        else {
+            $( "#postcode span" ).css('display', 'none');
         }
     }
 

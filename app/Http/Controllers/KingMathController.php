@@ -10,6 +10,7 @@ use App\Models\City;
 use App\Models\Courses;
 use App\Models\TimeTable;
 use App\Models\CourseSchedule;
+use App\Models\Subjects;
 use DB;
 
 class KingMathController extends Controller
@@ -27,6 +28,8 @@ class KingMathController extends Controller
         $this->course = new Courses();
         $this->time_table = new TimeTable();
         $this->course_schedule = new CourseSchedule();
+        $this->student = new Students();
+        $this->subject = new Subjects();
     }
 
 
@@ -313,7 +316,7 @@ return back();
              "university_name.required" => "โปรดระบุ มหาวิทยาลัย",
            ]
          );
-
+//print_r($request->all());die();
          // concat home number & road name as input_addr
          $input_addr = array(
                          "addr" => $request->input('home_no') . ", " .
@@ -323,12 +326,12 @@ return back();
                      'district_list', 'sub_district_list', 'provid', 'distid', 'subdistid');
          $input_teacher = array_merge($input, $input_addr);
 
-DB::table('teachers')
-->where('teacher_id', $teacher_id)
-->update($input_teacher);
-Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
-return back();
-}
+         Teachers::where('teacher_id', $teacher_id)
+                    ->update($input_teacher);
+
+        Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+        return back();
+    }
 
      /**
       * Show the application teacher information.
@@ -337,33 +340,91 @@ return back();
       */
       public function deleteTeacher($teacher_id)
       {
-          $teacher = Teachers::find($teacher_id);
-print_r($teacher);die();
-          DB::table('teachers', function ($teacher_id) {
-                $teacher_id->softDeletes();
-          });
+          if ($teacher_id != null){
+              $course_schedule = $this->teacher->courseScheduleByTeacherID($teacher_id);
 
-          Toastr::info("ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+              if(count($course_schedule) > 0) {
+                  Toastr::info("ไม่สามารถลบครูผู้สอนได้ ");
+                  //return array("resp" => false, "text" => "ไม่สามารถลบคลาสเรียนได้ เนื่องจากมีนักเรียนลงทะเบียนเรียน");
+              }
+              else {
+                  $result = Teachers::where('teacher_id', '=', $teacher_id)->delete();
+
+                  if($result == 1) {
+                      Toastr::info("ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว ");
+                      //return array("resp" => true, "text" => "ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+                  }
+                  else {
+                      Toastr::info("ไม่สามารถลบครูผู้สอนได้ ");
+                      //return array("resp" => false, "text" => "ไม่สามารถลบข้อมูลครูผู้สอนได้");
+                  }
+
+              }
+          }
           return back();
+
       }
 
-/**
-* Show the application teacher information.
-*
-* @return \Illuminate\Http\Response
-*/
-
+    /**
+     * Show the application class management page.
+     *
+     * @return \Illuminate\Http\Response
+     */
 
     public function callClassMgtPage()
     {
         $all_course = $this->course->getCourse();
         $all_classroom = $this->time_table->getAllClassRoom();
         $all_teacher = $this->teacher->getAllTeacher();
+        $arr_course_schedule = $this->course_schedule->getAllCourseSchedule();
 
         return view('classroom.class_mgt')
                 ->with('all_course', $all_course)
                 ->with('all_classroom', $all_classroom)
-                ->with('all_teacher', $all_teacher);
+                ->with('all_teacher', $all_teacher)
+                ->with('arr_course_schedule', $arr_course_schedule);
+    }
+
+    /**
+     * Get time table & room information.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+     public function getTimeTable(Request $request)
+     {
+         $start_date = trim($request->input('start_date'));
+         $end_date = trim($request->input('end_date'));
+         $room_name = trim(str_replace('%20', ' ', $request->input('room_name')));
+         $arr_time_table = $this->time_table->getTimeTable($start_date, $end_date, $room_name);
+
+         return $arr_time_table;
+     }
+
+    /**
+     * Create course Schedule.
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function createCourseSchedule(Request $request)
+    {
+//print_r($request->all()); exit();
+        $arr_data = array("student_max" => 10, "status" => "เปิด");
+        // concat home number & road name as input_addr
+        $input = $request->except('_token');
+        $arr_course_schedule = array_merge($input, $arr_data);
+
+        $resp = CourseSchedule::create($arr_course_schedule)->saveOrFail();
+
+        if($resp == 1) {
+
+            return array("resp" => true, "text" => "สร้างคลาสเรียนเรียบร้อยแล้ว");
+        }
+        else {
+
+            return array("resp" => false, "text" => "ไม่สามารถสร้างคลาสเรียนได้");
+        }
     }
 
     /**
@@ -372,63 +433,61 @@ print_r($teacher);die();
      * @return \Illuminate\Http\Response
      */
 
+     public function deleteCourseSchedule(Request $request) {
+         $course_schedule_id = trim($request->input('cs_id'));
+         $course_enroll = $this->course_schedule->courseEnrollByCSId($course_schedule_id);
 
-  public function createCourseSchedule(Request $request)
-  {
-//print_r($request->all()); exit();
-     $arr_data = array("student_max" => 10, "status" => "เปิด");
-     // concat home number & road name as input_addr
-     $input = $request->except('_token');
-     $arr_course_schedule = array_merge($input, $arr_data);
+         if(count($course_enroll) > 0) {
+             return array("resp" => false, "text" => "ไม่สามารถลบคลาสเรียนได้ เนื่องจากมีนักเรียนลงทะเบียนเรียน");
+         }
+         else {
+             $resp = CourseSchedule::where('course_schedule_id', '=', $course_schedule_id)->delete();
 
-     $resp = CourseSchedule::create($arr_course_schedule)->saveOrFail();
-
-     if($resp == 1) {
-         //Toastr::info("สร้างคลาสเรียนเรียบร้อยแล้ว");
-         return array("resp" => 1, "text" => "สร้างคลาสเรียนเรียบร้อยแล้ว");
+             if($resp == 1) {
+                 return array("resp" => true, "text" => "ลบข้อมูลคลาสเรียนเรียบร้อยแล้ว");
+             }
+             else {
+                 return array("resp" => false, "text" => "ไม่สามารถลบข้อมูลคลาสเรียนได้");
+             }
+         }
      }
-     else {
-         //Toastr::warning("ไม่สามารถสร้างคลาสเรียนได้");
-         return array("resp" => 0, "text" => "ไม่สามารถสร้างคลาสเรียนได้");
-     }
-  }
 
     /**
-     * Get time table & room information.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    * Return districts data.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function getDistricts(Request $request)
+    {
+        $dist = $this->city->getDistrictsByProvID(trim($request->prov_id));
+        return $dist;
+    }
 
-   public function getTimeTable(Request $request)
+   /**
+   * Return sub districts data.
+   *
+   * @return \Illuminate\Http\Response
+   */
+   public function getSubDistricts(Request $request)
    {
-       $start_date = trim($request->input('start_date'));
-       $end_date = trim($request->input('end_date'));
-       $room_name = trim(str_replace('%20', ' ', $request->input('room_name')));
-       $arr_time_table = $this->time_table->getTimeTable($start_date, $end_date, $room_name);
+       $sub_dist = $this->city->getSubDistrictsByID(trim($request->prov_id),
+                    trim($request->dist_id));
 
-    return $arr_time_table;
-}
+       return $sub_dist;
+   }
 
-/**
-* Return districts data.
-*
-* @return \Illuminate\Http\Response
-*/
-public function getDistricts(Request $request)
-{
-    $dist = $this->city->getDistrictsByProvID(trim($request->prov_id));
-    return $dist;
-}
+   /**
+   * Show the application student register.
+   *
+   * @return \Illuminate\Http\Response
+   */
+   public function callCourseEnrollPage()
+   {
+       $all_student = $this->student->getAllStudentInfo();
+       $all_subject = $this->subject->getSubject();
 
-/**
-* Return sub districts data.
-*
-* @return \Illuminate\Http\Response
-*/
-public function getSubDistricts(Request $request)
-{
-    $sub_dist = $this->city->getSubDistrictsByID(trim($request->prov_id),
-    trim($request->dist_id));
-    return $sub_dist;
-}
+       return view('course.course_enroll')
+                ->with('all_student', $all_student)
+                ->with('all_subject',$all_subject);
+    }
 }

@@ -58,7 +58,7 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('birthdate') ? 'has-error' : '' }}">
                                 <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-                                    <input class="form-control" type="text" name="birthdate" value="{{ old('personal_id') }}" readonly />
+                                    <input class="form-control" type="text" name="birthdate" value="{{ old('birthdate') }}" readonly />
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
@@ -70,7 +70,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('personal_id') ? 'has-error' : '' }}">
                                 <input type="text" name="personal_id" class="form-control"
-                                placeholder="" value="{{ old('personal_id') }}">
+                                placeholder="" value="{{ old('personal_id') }}" maxlength="13">
                                 <span class="text-danger">{{ $errors->first('personal_id') }}</span>
                             </div>
                         </div>
@@ -100,17 +100,17 @@
                     <div class="row">
                         <span class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์:</span>
                         <div class="col-sm-4 col-md-4">
-                            <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
-                                <input type="text" name="mobile" class="form-control"
-                                placeholder="" value="{{ old('mobile') }}">
+                            <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}" id="mobile">
+                                <input type="text" name="mobile" class="form-control" placeholder=""
+                                value="{{ old('mobile') }}" maxlength="10" onKeyUp="inputDigitsMobile(this);">
                                 <span class="text-danger">{{ $errors->first('mobile') }}</span>
                             </div>
                         </div>
                         <span class="col-sm-2 col-md-2 text-right">เบอร์บ้าน:</span>
                         <div class="col-sm-4 col-md-4 text-left">
-                            <div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}">
+                            <div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}" id="tel">
                                 <input type="text" name="tel" class="form-control"
-                                placeholder="" value="{{ old('tel') }}">
+                                placeholder="" value="{{ old('tel') }}" maxlength="10" onKeyUp="inputDigitsTel(this);">
                                 <span class="text-danger">{{ $errors->first('tel') }}</span>
                             </div>
                         </div>
@@ -188,10 +188,10 @@
                         </div>
                         <span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์:</span>
                         <div class="col-sm-4 col-md-4 text-left">
-                            <div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}">
+                            <div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}" id="postcode" >
                                 <input type="text" name="postcode" class="form-control"
                                     placeholder="" value="{{ old('postcode') }}"
-                                    onclick="chkSubDistrictInput();">
+                                    onclick="chkSubDistrictInput();" onKeyUp="inputDigits(this);">
                                 <span class="text-danger">{{ $errors->first('postcode') }}</span>
                             </div>
                         </div>
@@ -371,6 +371,43 @@
                 });
             }
         });
+    }
+
+    function inputDigitsMobile(sensor){
+        var regExp = /[0-9]$/;
+        if(!regExp.test(sensor.value)){
+            $( "#mobile span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+            $('#mobile span').css('display', 'block');
+            sensor.value = sensor.value.substring(0, sensor.value.length -1);
+        }
+        else {
+            $('#mobile span').css('display', 'none');
+        }
+
+    }
+
+    function inputDigitsTel(sensor){
+        var regExp = /[0-9]$/;
+        if(!regExp.test(sensor.value)){
+            $( "#tel span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+            $('#tel span').css('display', 'block');
+            sensor.value = sensor.value.substring(0, sensor.value.length -1);
+        }
+        else {
+            $( "#tel span" ).css('display', 'none');
+        }
+    }
+
+    function inputDigits(sensor){
+        var regExp = /[0-9]$/;
+        if(!regExp.test(sensor.value)){
+            $( "#postcode span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+            $('#postcode span').css('display', 'block');
+            sensor.value = sensor.value.substring(0, sensor.value.length -1);
+        }
+        else {
+            $( "#postcode span" ).css('display', 'none');
+        }
     }
 
 </script>

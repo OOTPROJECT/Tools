@@ -154,23 +154,37 @@
                     <table id="example" >
                         <thead>
                             <tr>
-                                <th>Name</th>
-                                <th>Position</th>
-                                <th>Office</th>
-                                <th>Age</th>
-                                <th>Start date</th>
-                                <th>Salary</th>
+                                <th>ชื่อคอร์ส</th>
+                                <th>วัน</th>
+                                <th>เวลา</th>
+                                <th>ครูผู้สอน</th>
+                                <th>ห้องเรียน</th>
+                                <th>วันที่เริ่มเรียน-ถึงวันที่</th>
+                                <th>สถานะ</th>
+                                <th>วันที่สร้างข้อมูล</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Tiger Nixon</td>
-                                <td>System Architect</td>
-                                <td>Edinburgh</td>
-                                <td>61</td>
-                                <td>2011/04/25</td>
-                                <td>$320,800</td>
-                            </tr>
+                            @if(count($arr_course_schedule) > 0)
+                                @foreach($arr_course_schedule as $cs)
+                                    <tr>
+                                        <td>{{ $cs->course_name }}</td>
+                                        <td>{{ $cs->day }}</td>
+                                        <td>{{ $cs->start_time }} - {{ $cs->end_time }} น.</td>
+                                        <td>{{ $cs->firstname }} {{ $cs->lastname }}</td>
+                                        <td>{{ $cs->room_name }}</td>
+                                        <td>{{ $cs->start_date }} - {{ $cs->end_date }}</td>
+                                        <td>{{ $cs->status }}</td>
+                                        <td>{{ $cs->created_at }}</td>
+                                        <td><a href="javaScript:;" onclick="deleteCourseSchedule({{ $cs->course_schedule_id }});"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
+                                    </tr>
+                                @endforeach
+                            @else
+                                <tr>
+                                    <td colspan="9">ไม่มีข้อมูล</td>
+                                </tr>
+                            @endif
                         </tbody>
                     </table>
                 </div>
@@ -264,15 +278,15 @@
         var end_date = $('input[name=end_date]').val();
 
         $.ajax({
-            type: 'get',
+            type: 'POST',
             url: "{{ url('/createCourseSchedule') }}",
             data: { course_id: course_id, teacher_id: teacher_id, time_table_id: time_table_id,
                     start_date: start_date, end_date: end_date, _token: "{{ csrf_token() }}" },
             dataType: 'json',
             success: function(data) {
                 console.log(data.resp);
-                if(data.resp == 1) {
-                    toastr.info("บันทึกเรียบร้อยแล้ว", "สร้างคลาสเรียน");
+                if(data.resp == true) {
+                    toastr.info(data.text, "สร้างคลาสเรียน");
 
                     // Set delay time 3 sec before reload page.
                     setTimeout(function(){
@@ -280,11 +294,37 @@
                     },2000);
                 }
                 else {
-                    toastr.info("ไม่สามารถบันทึกคลาสเรียนได้", "สร้างคลาสเรียน");
+                    toastr.error(data.text, "สร้างคลาสเรียน");
                 }
             }
-
         });
+
+        return false;
+    }
+
+    function deleteCourseSchedule(cs_id) {
+
+        $.ajax({
+            type: 'POST',
+            url: "{{ url('/deleteCourseSchedule') }}",
+            data: { cs_id: cs_id, _token: "{{ csrf_token() }}" },
+            dataType: 'json',
+            success: function(data) {
+                //console.log(data);
+                if(data.resp == true) {
+                    toastr.info(data.text, "จัดการคลาสเรียน");
+
+                    // Set delay time 3 sec before reload page.
+                    setTimeout(function(){
+                        location.reload();
+                    },2000);
+                }
+                else {
+                    toastr.error(data.text, "จัดการคลาสเรียน");
+                }
+            }
+        });
+
         return false;
     }
 </script>

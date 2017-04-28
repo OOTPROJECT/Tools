@@ -46,11 +46,16 @@ Route::get('/deleteTeacher/{teacher_id}', 'KingMathController@deleteTeacher');
 // Classroom
 Route::get('/ClassMgt', 'KingMathController@callClassMgtPage');
 Route::get('/getTimeTable', 'KingMathController@getTimeTable');
-Route::get('/createCourseSchedule', 'KingMathController@createCourseSchedule');
+Route::post('/createCourseSchedule', 'KingMathController@createCourseSchedule');
+Route::post('/deleteCourseSchedule', 'KingMathController@deleteCourseSchedule');
 
 // City
 Route::get('/districts', 'KingMathController@getDistricts');
 Route::get('/sub_districts', 'KingMathController@getSubDistricts');
+
+// Course Enroll
+Route::get('/course_enroll','KingMathController@callCourseEnrollPage');
+//Route::get('/course_enroll','KingMathController@getStudent');
 
 Route::resource('profile', 'ProfileController');
 Route::patch('profile/{profile}/password', 'ProfileController@update_password');
