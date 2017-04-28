@@ -10,6 +10,7 @@ use App\Models\City;
 use App\Models\Courses;
 use App\Models\TimeTable;
 use App\Models\CourseSchedule;
+use App\Models\Subjects;
 use DB;
 
 class KingMathController extends Controller
@@ -27,6 +28,8 @@ class KingMathController extends Controller
         $this->course = new Courses();
         $this->time_table = new TimeTable();
         $this->course_schedule = new CourseSchedule();
+        $this->student = new Students();
+        $this->subject = new Subjects();
     }
 
 
