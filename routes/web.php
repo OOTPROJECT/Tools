@@ -40,17 +40,17 @@ Route::get('/teachRec', 'KingMathController@callTeachRecPage');
 Route::get('/teacherEdit/{teacher_id}', 'KingMathController@callTeacherEditPage');
 Route::get('/HireCal', 'KingMathController@callHireCalPage');
 Route::post('/createTeacher', 'KingMathController@createTeacher');
-Route::post('/updateTeacher/{teacher_id}', 'KingMathController@updateTeacher');
-Route::get('/deleteTeacher/{teacher_id}', 'KingMathController@deleteTeacher');
+//Route::post('/updateTeacher/{teacher_id}', 'KingMathController@callTeacherUpdatePage');
 
 // Classroom
 Route::get('/ClassMgt', 'KingMathController@callClassMgtPage');
-Route::get('/getTimeTable', 'KingMathController@getTimeTable');
-Route::get('/createCourseSchedule', 'KingMathController@createCourseSchedule');
 
 // City
 Route::get('/districts', 'KingMathController@getDistricts');
 Route::get('/sub_districts', 'KingMathController@getSubDistricts');
+// Course Enroll
+Route::get('/course_enroll','KingMathController@callCourseEnrollPage');
+//Route::get('/course_enroll','KingMathController@getStudent');
 
 Route::resource('profile', 'ProfileController');
 Route::patch('profile/{profile}/password', 'ProfileController@update_password');

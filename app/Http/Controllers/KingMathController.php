@@ -314,7 +314,7 @@ class KingMathController extends Controller
      */
     public function callCourseEnrollPage()
     {
-      $all_student = $this->student->getStudent();
+      $all_student = $this->student->getAllStudentInfo();
       $all_subject = $this->subject->getSubject();
         return view('course.course_enroll')
          ->with('all_student', $all_student)
