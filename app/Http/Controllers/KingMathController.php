@@ -331,11 +331,6 @@ return back();
          $input_teacher = array_merge($input, $input_addr);
 
          Teachers::where('teacher_id', $teacher_id)
-         ->update($input_teacher);
-         Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
-         return back();
-}
-         Teachers::where('teacher_id', $teacher_id)
                     ->update($input_teacher);
 
         Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
