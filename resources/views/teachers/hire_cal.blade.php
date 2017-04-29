@@ -52,14 +52,14 @@
                                         {{ $course_enroll->end_time }} น.
                                     </td>
                                     <td class="text-center">
-                                        {{ $course_enroll->course_hours }}
+                                        {{ $course_enroll->number_of_time }}
                                     </td>
                                     <td class="text-center">
                                         {{ $course_enroll->start_date }} -
                                         {{ $course_enroll->end_date }}
                                     </td>
                                     <td class="text-center">
-                                        {{ $hire = $obj->calHire($course_enroll->course_hours, $hiring_rate) }}
+                                        {{ $hire = $obj->calHire($course_enroll->number_of_time, $hiring_rate) }}
                                     </td>
                                     <td class="text-center">
                                         <button type="button" class="btn btn-success"
