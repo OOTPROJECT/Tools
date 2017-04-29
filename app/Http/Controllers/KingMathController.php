@@ -176,7 +176,11 @@ public function callTeachRecPage()
 */
 public function callHireCalPage()
 {
-    return view('teachers.hire_cal');
+    $current_month_year = date("Y-m");
+    $arr_course_enroll = $this->teacher->getCourseEnrollByEnddate($current_month_year);
+
+    return view('teachers.hire_cal')
+            ->with('arr_course_enroll', $arr_course_enroll);
 }
 
 /**
@@ -318,11 +322,10 @@ return back();
                      'district_list', 'sub_district_list', 'provid', 'distid', 'subdistid');
          $input_teacher = array_merge($input, $input_addr);
 
-DB::table('teachers')
-->where('teacher_id', $teacher_id)
-->update($input_teacher);
-Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
-return back();
+         Teachers::where('teacher_id', $teacher_id)
+         ->update($input_teacher);
+         Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+         return back();
 }
 
      /**

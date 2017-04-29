@@ -17,71 +17,52 @@
     </div>
 
     <div class="box-body">
-        <form action="{{ url('/createTeacher') }}" method="post">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title"></h3>
-                </div>
-                <div class="panel-body">
-                    {!! csrf_field() !!}
-                    @if(count($errors))
-                    <div class="alert alert-danger">
-                        <strong>Whoops!</strong> There were some problems with your input.
-                        <br/>
-                        <ul>
-                            @foreach($errors->all() as $error)
-                            <li>{{ $error }}</li>
+        <!-- Class Schedule table -->
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table id="example" >
+                    <thead>
+                        <tr>
+                            <th>ชื่อผู้สอน</th>
+                            <th>คอร์สเรียน</th>
+                            <th>วัน</th>
+                            <th>เวลา</th>
+                            <th>จำนวนครั้ง</th>
+                            <th>วันที่เริ่มเรียน-ถึงวันที่</th>
+                            <th>จัดการ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if(count($arr_course_enroll) > 0)
+                            @foreach($arr_course_enroll as $course_enroll)
+                                <tr>
+                                    <td>{{ $course_enroll->firstname }}
+                                        {{ $course_enroll->lastname }}
+                                    </td>
+                                    <td>{{ $course_enroll->course_name }}</td>
+                                    <td>{{ $course_enroll->day }}</td>
+                                    <td>{{ $course_enroll->start_time }} -
+                                        {{ $course_enroll->end_time }} น.
+                                    </td>
+                                    <td>{{ $course_enroll->course_hours }}</td>
+                                    <td>{{ $course_enroll->start_date }} -
+                                        {{ $course_enroll->end_date }}
+                                    </td>
+                                    <td><button type="button" class="btn btn-success">จ่ายเงิน</button></td>
+                                </tr>
                             @endforeach
-                        </ul>
-                    </div>
-                    @endif
-
-                    <div class="row">
-                        <span class="col-sm-2 col-md-2 text-right">เดือน:</span>
-                        <div class="col-sm-4 col-md-4 text-left">
-                            <select class="form-control" id="degree" name="degree">
-                                @foreach($month as $month_key => $month_val)
-                                <option value="{{ $month_val }}">
-                                    {{ $month_val }}
-                                </option>
-                                @endforeach
-                            </select>
-                        </div>
-                        <span class="col-sm-2 col-md-2 text-right">ปี:</span>
-                        <div class="col-sm-4 col-md-4 text-left">
-                            <div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
-                                <input type="text" name="lastname" class="form-control"
-                                placeholder="" value="{{ old('lastname') }}">
-                                <span class="text-danger">{{ $errors->first('lastname') }}</span>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
+                        @else
+                            <tr>
+                                <td colspan="9">ไม่มีข้อมูล</td>
+                            </tr>
+                        @endif
+                    </tbody>
+                </table>
             </div>
-        </form>
-
+            <!-- /.box-body -->
+        </div>
     </div>
     <!-- /.box-body -->
 </div>
-
-<script type="text/javascript">
-$(document).ready(function(){
-    //alert("Hi!");
-    $('input[name=chooseOption]').on('input',function() {
-        var selectedOption = $('option[value="'+$(this).val()+'"]');
-        if(selectedOption.length) {
-            alert(selectedOption.attr('id'));
-        }
-        else {
-             ///
-             //test
-            //$('input[name=chooseOption]').val("");
-            //alert(0);
-        }
-        //alert(selectedOption.length ? selectedOption.attr('id') : 'This opiton is not in the list!');
-    });
-});
-</script>
 
 @endsection
