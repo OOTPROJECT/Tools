@@ -149,51 +149,47 @@
             </form>
 
             <!-- Class Schedule table -->
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <table id="tableClassMgt" >
-                        <thead>
+            <table id="tableClassMgt" class="table table-striped table-bordered" width="100%" cellspacing="0">
+                <thead>
+                    <tr>
+                        <th class="text-left">ชื่อคอร์ส</th>
+                        <th class="text-center">วัน</th>
+                        <th class="text-center">เวลา</th>
+                        <th class="text-left">ครูผู้สอน</th>
+                        <th class="text-left">ห้องเรียน</th>
+                        <th class="text-left">วันที่เริ่มเรียน-ถึงวันที่</th>
+                        <th class="text-center">สถานะ</th>
+                        <th class="text-left">วันที่สร้างข้อมูล</th>
+                        <th class="text-center">จัดการ</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if(count($arr_course_schedule) > 0)
+                        @foreach($arr_course_schedule as $cs)
                             <tr>
-                                <th class="text-left">ชื่อคอร์ส</th>
-                                <th class="text-center">วัน</th>
-                                <th class="text-center">เวลา</th>
-                                <th class="text-left">ครูผู้สอน</th>
-                                <th class="text-left">ห้องเรียน</th>
-                                <th class="text-left">วันที่เริ่มเรียน-ถึงวันที่</th>
-                                <th class="text-center">สถานะ</th>
-                                <th class="text-left">วันที่สร้างข้อมูล</th>
-                                <th class="text-center">จัดการ</th>
+                                <td class="text-left">{{ $cs->course_name }}</td>
+                                <td class="text-center">{{ $cs->day }}</td>
+                                <td class="text-center">{{ $cs->start_time }} - {{ $cs->end_time }} น.</td>
+                                <td class="text-left">{{ $cs->firstname }} {{ $cs->lastname }}</td>
+                                <td class="text-left">{{ $cs->room_name }}</td>
+                                <td class="text-left">{{ $cs->start_date }} - {{ $cs->end_date }}</td>
+                                <td class="text-center">{{ $cs->status }}</td>
+                                <td class="text-left">{{ $cs->created_at }}</td>
+                                <td class="text-center">
+                                    <a href="javaScript:;"
+                                        onclick="deleteCourseSchedule({{ $cs->course_schedule_id }});">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </a>
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            @if(count($arr_course_schedule) > 0)
-                                @foreach($arr_course_schedule as $cs)
-                                    <tr>
-                                        <td class="text-left">{{ $cs->course_name }}</td>
-                                        <td class="text-center">{{ $cs->day }}</td>
-                                        <td class="text-center">{{ $cs->start_time }} - {{ $cs->end_time }} น.</td>
-                                        <td class="text-left">{{ $cs->firstname }} {{ $cs->lastname }}</td>
-                                        <td class="text-left">{{ $cs->room_name }}</td>
-                                        <td class="text-left">{{ $cs->start_date }} - {{ $cs->end_date }}</td>
-                                        <td class="text-center">{{ $cs->status }}</td>
-                                        <td class="text-left">{{ $cs->created_at }}</td>
-                                        <td class="text-center">
-                                            <a href="javaScript:;"
-                                                onclick="deleteCourseSchedule({{ $cs->course_schedule_id }});">
-                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                            @else
-                                <tr>
-                                    <td colspan="9">ไม่มีข้อมูล</td>
-                                </tr>
-                            @endif
-                        </tbody>
-                    </table>
-                </div>
-                <!-- /.box-body -->
-            </div>
+                        @endforeach
+                    @else
+                        <tr>
+                            <td colspan="9">ไม่มีข้อมูล</td>
+                        </tr>
+                    @endif
+                </tbody>
+            </table>
         </div>
     </div>
 

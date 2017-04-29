@@ -18,9 +18,7 @@
 
     <div class="box-body">
         <!-- Class Schedule table -->
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <table id="tablePayroll" >
+                <table id="tablePayroll" class="table table-striped table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th class="text-left">ชื่อผู้สอน</th>
@@ -77,9 +75,6 @@
                         @endif
                     </tbody>
                 </table>
-            </div>
-            <!-- /.box-body -->
-        </div>
     </div>
     <!-- /.box-body -->
 </div>
