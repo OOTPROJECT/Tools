@@ -151,33 +151,37 @@
             <!-- Class Schedule table -->
             <div class="panel panel-default">
                 <div class="panel-body">
-                    <table id="example" >
+                    <table id="tableClassMgt" >
                         <thead>
                             <tr>
-                                <th>ชื่อคอร์ส</th>
-                                <th>วัน</th>
-                                <th>เวลา</th>
-                                <th>ครูผู้สอน</th>
-                                <th>ห้องเรียน</th>
-                                <th>วันที่เริ่มเรียน-ถึงวันที่</th>
-                                <th>สถานะ</th>
-                                <th>วันที่สร้างข้อมูล</th>
-                                <th></th>
+                                <th class="text-left">ชื่อคอร์ส</th>
+                                <th class="text-center">วัน</th>
+                                <th class="text-center">เวลา</th>
+                                <th class="text-left">ครูผู้สอน</th>
+                                <th class="text-left">ห้องเรียน</th>
+                                <th class="text-left">วันที่เริ่มเรียน-ถึงวันที่</th>
+                                <th class="text-center">สถานะ</th>
+                                <th class="text-left">วันที่สร้างข้อมูล</th>
+                                <th class="text-center">จัดการ</th>
                             </tr>
                         </thead>
                         <tbody>
                             @if(count($arr_course_schedule) > 0)
                                 @foreach($arr_course_schedule as $cs)
                                     <tr>
-                                        <td>{{ $cs->course_name }}</td>
-                                        <td>{{ $cs->day }}</td>
-                                        <td>{{ $cs->start_time }} - {{ $cs->end_time }} น.</td>
-                                        <td>{{ $cs->firstname }} {{ $cs->lastname }}</td>
-                                        <td>{{ $cs->room_name }}</td>
-                                        <td>{{ $cs->start_date }} - {{ $cs->end_date }}</td>
-                                        <td>{{ $cs->status }}</td>
-                                        <td>{{ $cs->created_at }}</td>
-                                        <td><a href="javaScript:;" onclick="deleteCourseSchedule({{ $cs->course_schedule_id }});"><i class="fa fa-trash-o" aria-hidden="true"></i></td>
+                                        <td class="text-left">{{ $cs->course_name }}</td>
+                                        <td class="text-center">{{ $cs->day }}</td>
+                                        <td class="text-center">{{ $cs->start_time }} - {{ $cs->end_time }} น.</td>
+                                        <td class="text-left">{{ $cs->firstname }} {{ $cs->lastname }}</td>
+                                        <td class="text-left">{{ $cs->room_name }}</td>
+                                        <td class="text-left">{{ $cs->start_date }} - {{ $cs->end_date }}</td>
+                                        <td class="text-center">{{ $cs->status }}</td>
+                                        <td class="text-left">{{ $cs->created_at }}</td>
+                                        <td class="text-center">
+                                            <a href="javaScript:;"
+                                                onclick="deleteCourseSchedule({{ $cs->course_schedule_id }});">
+                                                <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </td>
                                     </tr>
                                 @endforeach
                             @else
@@ -195,6 +199,9 @@
 
 <script type="text/javascript">
     $(document).ready(function (){
+
+        $('#tableClassMgt').dataTable();
+
         var date = new Date();
         date.setDate(date.getDate() + 14);
         var end_date = date.toISOString().slice(0,10).replace(/-/g,"-");
@@ -238,7 +245,7 @@
         var room_name = $('#classroom option:selected').text();
 
         // Clear tb time table
-        $("#tb_time_table").empty();
+        $("#tb_time_table > tbody").empty();
 
         // Replace space with %20
         room_name=room_name.trim().replace(/ /g, '%20');
@@ -248,7 +255,7 @@
             url: "{{ url('/getTimeTable') }}",
             data: { start_date: start_date, end_date: end_date, room_name: room_name },
             dataType: 'json',
-            success: function (data) { console.log(data.length);
+            success: function (data) {
                 if(data.length > 0) {
                     $.each(data, function(index, time_table) {
                         var $tr = $('<tr>').append(

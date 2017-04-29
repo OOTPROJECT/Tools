@@ -11,6 +11,7 @@ use App\Models\Courses;
 use App\Models\TimeTable;
 use App\Models\CourseSchedule;
 use App\Models\Subjects;
+use App\Models\Payroll;
 use DB;
 
 class KingMathController extends Controller
@@ -22,7 +23,7 @@ class KingMathController extends Controller
     */
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
         $this->city = new City();
         $this->teacher = new Teachers();
         $this->course = new Courses();
@@ -177,19 +178,48 @@ public function callTeachRecPage()
     return view('teachers.teach_rec');
 }
 
-/**
-* Show the application hire calculate.
-*
-* @return \Illuminate\Http\Response
-*/
-public function callHireCalPage()
-{
-    $current_month_year = date("Y-m");
-    $arr_course_enroll = $this->teacher->getCourseEnrollByEnddate($current_month_year);
+    /**
+    * Show the application hire calculate.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function callHireCalPage()
+    {
+        $current_month_year = date("Y-m");
+        $hiring_rate = 500;
+        $arr_course_enroll = $this->teacher->getCourseEnrollByEnddate($current_month_year);
 
-    return view('teachers.hire_cal')
-            ->with('arr_course_enroll', $arr_course_enroll);
-}
+        return view('teachers.hire_cal')
+                ->with('hiring_rate', $hiring_rate)
+                ->with('arr_course_enroll', $arr_course_enroll)
+                ->with('obj', new KingMathController);
+    }
+
+    public function calHire($number_of_times, $hiring_rate) {
+
+        $hire = $number_of_times * $hiring_rate;
+
+        return $hire;
+    }
+
+    public function createPayroll(Request $request) {
+
+        $arr_data = array("status" => "จ่ายแล้ว");
+        $input = $request->except('_token');
+        $arr_payroll = array_merge($input, $arr_data);
+
+        $resp = Payroll::create($arr_payroll)->saveOrFail();
+
+        if($resp == 1) {
+
+            return array("resp" => true, "text" => "บันทึการจ่ายเงินเรียบร้อยแล้ว");
+        }
+        else {
+
+            return array("resp" => false, "text" => "ไม่สามารถการจ่ายเงินได้");
+        }
+
+    }
 
 /**
 * Create teacher info.
@@ -413,7 +443,7 @@ return back();
 
     public function createCourseSchedule(Request $request)
     {
-//print_r($request->all()); exit();
+        
         $arr_data = array("student_max" => 10, "status" => "เปิด");
         // concat home number & road name as input_addr
         $input = $request->except('_token');

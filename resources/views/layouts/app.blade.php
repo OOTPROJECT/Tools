@@ -143,10 +143,10 @@
                             <i class="fa fa-user" aria-hidden="true"></i> <span>สมัครสอนพิเศษ</span></a></li>
                             <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('teacherInfo') }}">
                                 <i class="fa fa-file-text-o" aria-hidden="true"></i> <span>ข้อมูลครู</span></a></li>
-                                    <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('HireCal') }}">
-                                        <i class="fa fa-calculator" aria-hidden="true"></i> <span>คำนวณค่าจ้างครู</span></a></li>
+                                    <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('hireCal') }}">
+                                        <i class="fa fa-calculator" aria-hidden="true"></i> <span>ข้อมูลค่าจ้างสอน</span></a></li>
                                         <li class="header">คลาสเรียน</li>
-                                        <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('ClassMgt') }}">
+                                        <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('classMgt') }}">
                                             <i class="fa fa-calendar" aria-hidden="true"></i> <span>จัดคลาสเรียน</span></a></li>
 
                                         </ul><!-- /.sidebar-menu -->

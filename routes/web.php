@@ -41,13 +41,14 @@ Route::get('/teacherReg', 'KingMathController@callTeacherRegPage');
 Route::get('/teacherInfo', 'KingMathController@callTeacherInfoPage');
 Route::get('/teachRec', 'KingMathController@callTeachRecPage');
 Route::get('/teacherEdit/{teacher_id}', 'KingMathController@callTeacherEditPage');
-Route::get('/HireCal', 'KingMathController@callHireCalPage');
+Route::get('/hireCal', 'KingMathController@callHireCalPage');
+Route::post('/createPayroll', 'KingMathController@createPayroll');
 Route::post('/createTeacher', 'KingMathController@createTeacher');
 Route::post('/updateTeacher/{teacher_id}', 'KingMathController@updateTeacher');
 Route::get('/deleteTeacher/{teacher_id}', 'KingMathController@deleteTeacher');
 
 // Classroom
-Route::get('/ClassMgt', 'KingMathController@callClassMgtPage');
+Route::get('/classMgt', 'KingMathController@callClassMgtPage');
 Route::get('/getTimeTable', 'KingMathController@getTimeTable');
 Route::post('/createCourseSchedule', 'KingMathController@createCourseSchedule');
 Route::post('/deleteCourseSchedule', 'KingMathController@deleteCourseSchedule');
