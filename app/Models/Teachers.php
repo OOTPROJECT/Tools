@@ -17,6 +17,7 @@ class Teachers extends Model
                           "district_id", "sub_district_id","postcode",
                           "degree", "major", "university_name", "addr"
                         ];
+    public $timestamps = ['created_at', 'updated_at'];
 
     /**
      * The attributes that should be mutated to dates.
@@ -38,16 +39,31 @@ class Teachers extends Model
      }
 
      public function getAllTeacher() {
-         $all_teacher = Teachers::orderBy('firstname')->get();
+         $all_teacher = Teachers::where('deleted_at' , '=', null)->orderBy('firstname')->get();
 
          return $all_teacher;
      }
 
-     public function deleteByID($teacher_id) {
-         $teacher = Teachers::onlyTrashed('teacher_id',$teacher_id)->get();
-         Teachers::delete($teacher);
+     public function courseScheduleByTeacherID($teacher_id) {
 
-         return true;
+         $this->table = "course_schedule";
+         $course_schedule = CourseSchedule::where('teacher_id', '=', $teacher_id)->first();
+
+         return $course_schedule;
+     }
+
+     public function getCourseEnrollByEnddate($current_month_year) {
+
+         $course_enroll = \DB::select(
+                            "SELECT teacher_id, firstname, lastname, course_schedule_id,
+                            course_name, day, start_time, end_time, course_hours,
+                            start_date, end_date FROM v_course_schedule_payroll
+                            WHERE CONCAT(YEAR(end_date), '-',
+                            LPAD(MONTH(end_date), 2, '0')) = '" . $current_month_year .
+                            "' AND status IS NULL"
+                          );
+
+        return $course_enroll;
      }
 
 }

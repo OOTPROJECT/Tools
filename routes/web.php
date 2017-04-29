@@ -31,6 +31,9 @@ Route::auth();
 // Student
 Route::get('/studentReg', 'KingMathController@callStudentRegPage');
 Route::get('/studentInfo', 'KingMathController@callStudentInfoPage');
+
+Route::post('/createStudent', 'KingMathController@createStudent');
+Route::get('/studentReg', 'KingMathController@callStudentRegPage');
 Route::resource('student', 'KingMathController');
 
 // Teacher
