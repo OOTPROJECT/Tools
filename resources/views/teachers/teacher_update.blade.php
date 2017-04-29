@@ -194,12 +194,9 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <select class="form-control" id="degree" name="degree">
                                 @foreach($degree_list as $degree_key => $degree_val)
-                                
-
-
-                                <option value="{{ $degree_val }}">
-                                    {{ $degree_val }}
-                                </option>
+                                    <option value="{{ $degree_val }}" <?php if($teacher->degree == $degree_val){echo("selected");}?> >
+                                        {{ $degree_val }}
+                                    </option>
                                 @endforeach
                             </select>
                         </div>
@@ -227,7 +224,7 @@
             </div>
 
             <div class="col-sm-6 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">บันทึก</button>
+                <button type="submit" class="btn btn-success">บันทึก</button>
                 <a href="" class="btn btn-default">ยกเลิก</a>
             </div>
         </form>
