@@ -18,16 +18,18 @@
 
 
 <table id="example" >
+    <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
     <thead>
-           <tr>
-               <th>Name</th>
-               <th>Position</th>
-               <th>Office</th>
-               <th>Age</th>
-               <th>Start date</th>
-               <th>Salary</th>
-           </tr>
-       </thead>
+        <tr>
+            <th>ชื่อ</th>
+            <th>นามสกุล</th>
+            <th>รหัสประจำตัวประชาชน</th>
+            <th>เพศ</th>
+            <th>เบอร์โทรศัพท์</th>
+            <th>อีเมล์</th>
+            <th></th>
+        </tr>
+    </thead>
        <tbody>
            <tr>
                <td>Tiger Nixon</td>

@@ -65,7 +65,7 @@ class KingMathController extends Controller
     *
     * @return
     */
-    public function store(Request $request)
+    public function createStudent(Request $request)
     {
         $this->validate($request,
         [
@@ -126,9 +126,17 @@ class KingMathController extends Controller
         ]
     );
 
+    $input_addr = array(
+        "addr" => $request->input('addr') . ", " . $request->input('soi') . ", " .
+        $request->input('road')
+    );
+    $input = $request->except('_token', 'addr','soi', 'road', 'province_list',
+    'district_list', 'sub_district_list');
+    $input_student = array_merge($input, $input_addr);
 
-    Students::create($request->except('_token'));
-    Toastr::info("บันทึกข้อมูลการสมัครเรียนเรียบร้อยแล้ว");
+
+    Students::create($input_student);
+    Toastr::info("บันทึกข้อมูลนักเรียนเรียบร้อยแล้ว");
     return back();
 }
 
@@ -312,7 +320,7 @@ return back();
              "university_name.required" => "โปรดระบุ มหาวิทยาลัย",
            ]
          );
-
+//print_r($request->all());die();
          // concat home number & road name as input_addr
          $input_addr = array(
                          "addr" => $request->input('home_no') . ", " .
@@ -327,6 +335,12 @@ return back();
          Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
          return back();
 }
+         Teachers::where('teacher_id', $teacher_id)
+                    ->update($input_teacher);
+
+        Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+        return back();
+    }
 
      /**
       * Show the application teacher information.
@@ -335,14 +349,29 @@ return back();
       */
       public function deleteTeacher($teacher_id)
       {
-          $teacher = Teachers::find($teacher_id);
-print_r($teacher);die();
-          DB::table('teachers', function ($teacher_id) {
-                $teacher_id->softDeletes();
-          });
+          if ($teacher_id != null){
+              $course_schedule = $this->teacher->courseScheduleByTeacherID($teacher_id);
 
-          Toastr::info("ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+              if(count($course_schedule) > 0) {
+                  Toastr::info("ไม่สามารถลบครูผู้สอนได้ ");
+                  //return array("resp" => false, "text" => "ไม่สามารถลบคลาสเรียนได้ เนื่องจากมีนักเรียนลงทะเบียนเรียน");
+              }
+              else {
+                  $result = Teachers::where('teacher_id', '=', $teacher_id)->delete();
+
+                  if($result == 1) {
+                      Toastr::info("ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว ");
+                      //return array("resp" => true, "text" => "ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+                  }
+                  else {
+                      Toastr::info("ไม่สามารถลบครูผู้สอนได้ ");
+                      //return array("resp" => false, "text" => "ไม่สามารถลบข้อมูลครูผู้สอนได้");
+                  }
+
+              }
+          }
           return back();
+
       }
 
     /**
