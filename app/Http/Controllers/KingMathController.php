@@ -56,9 +56,11 @@ class KingMathController extends Controller
     public function callStudentInfoPage()
     {
             return view('students.student_info');
-    /*    $allStudent = $this->student->getAllStudentInfo();
+      $allStudent = $this->students->getAllStudentInfo();
         return view('students.student_info')
-        ->with('allStudent', $allStudent);*/
+        ->with('allStudent', $allStudent);
+
+
     }
 
     /**
@@ -166,6 +168,15 @@ public function callTeacherInfoPage()
     $allTeacher = $this->teacher->getAllTeacherInfo();
     return view('teachers.teacher_info')
     ->with('allTeacher', $allTeacher);
+}
+
+
+
+public function callStudentsinfoPage()
+{
+    $allStudents = $this->student->getAllStudentsInfo();
+    return view('students.student_info')
+    ->with('allStudents', $allStudents);
 }
 
 /**
@@ -443,7 +454,7 @@ return back();
 
     public function createCourseSchedule(Request $request)
     {
-        
+
         $arr_data = array("student_max" => 10, "status" => "เปิด");
         // concat home number & road name as input_addr
         $input = $request->except('_token');
