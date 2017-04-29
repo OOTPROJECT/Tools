@@ -52,9 +52,9 @@ class Students extends Model
      */
     protected $dates = ['deleted_at'];
 
-    public function getAllStudentInfo() {
-        $all_Student = Students::orderBy('firstname')->get();
-        return $all_Student;
+    public function getAllStudentsInfo() {
+        $all_Students = Students::orderBy('firstname')->get();
+        return $all_Students;
     }
 
     public function getStudentByID($student_id) {

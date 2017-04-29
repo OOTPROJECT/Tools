@@ -23,23 +23,49 @@
         <tr>
             <th>ชื่อ</th>
             <th>นามสกุล</th>
-            <th>รหัสประจำตัวประชาชน</th>
+            <th>ชื่อเล่น</th>
+            <th>วันเดือนปีเกิด</th>
             <th>เพศ</th>
-            <th>เบอร์โทรศัพท์</th>
+            <th>ชื่อโรงเรียน</th>
+            <th>ระดับชั้นประถมศึกษา</th>
+            <th>ชื่อผู้ปกครอง</th>
+            <th>นามสกุลผู้ปกครอง</th>
+            <th>ความสัมพันธ์กับนักเรียน</th>
             <th>อีเมล์</th>
-            <th></th>
+            <th>เบอร์โทรศัพท์</th>
         </tr>
     </thead>
-       <tbody>
-           <tr>
-               <td>Tiger Nixon</td>
-               <td>System Architect</td>
-               <td>Edinburgh</td>
-               <td>61</td>
-               <td>2011/04/25</td>
-               <td>$320,800</td>
-           </tr>
-       </tbody></table>
+    <tbody>
+        @if ($allStudents != null && count($allStudents) > 0 )
+            @foreach($allStudents as $value)
+                <tr>
+                    <td>{{$value->firstname}}</td>
+                    <td>{{$value->lastname}}</td>
+                    <td>{{$value->nickname}}</td>
+                    <td>{{$value->std_birthdate}}</td>
+                    <td>{{$value->gender}}</td>
+                    <td>{{$value->schoolname}}</td>
+                    <td>{{$value->school_level}}</td>
+                    <td>{{$value->parent_fname}}</td>
+                    <td>{{$value->parent_lname}}</td>
+                    <td>{{$value->student_relationship}}</td>
+                    <td>{{$value->email}}</td>
+                    <td>{{$value->mobile}}</td>
+                    <td>
+                        <a href="{{ url('/EditStudent') }}/{{ $value->Student_id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                        <a href="{{ url('/DeleteStudent') }}/{{ $value->Student_id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                        <!--<a href="{{ url('/teacherUpdate') }}/{{ $value->teacher_id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
+
+                    </td>
+
+                </tr>
+            @endforeach
+        @endif
+    </tbody>
+
+
+
+      </table>
                                 </div>
                                 <!-- /.box-body -->
                             </div>

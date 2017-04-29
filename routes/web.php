@@ -30,7 +30,7 @@ Route::auth();
 
 // Student
 Route::get('/studentReg', 'KingMathController@callStudentRegPage');
-Route::get('/studentInfo', 'KingMathController@callStudentInfoPage');
+Route::get('/studentInfo', 'KingMathController@callStudentsinfoPage');
 
 Route::post('/createStudent', 'KingMathController@createStudent');
 Route::get('/studentReg', 'KingMathController@callStudentRegPage');
