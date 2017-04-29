@@ -454,7 +454,7 @@ print_r($teacher);die();
    }
 
    /**
-   * Show the application student register.
+   * Show the application course enrollment.
    *
    * @return \Illuminate\Http\Response
    */
@@ -467,4 +467,17 @@ print_r($teacher);die();
                 ->with('all_student', $all_student)
                 ->with('all_subject',$all_subject);
     }
+    /**
+    * Show the get course schedule by subject.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function getCourseBySubject(Request $request)
+    {
+        $subject_id = trim($request->input('subject_id'));
+        $course_schedule_list = $this->course_schedule->getCourseBySubject($subject_id);
+        return $course_schedule_list;
+
+     }
+
 }

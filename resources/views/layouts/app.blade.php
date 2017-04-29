@@ -133,7 +133,7 @@
                     <i class="fa fa-child" aria-hidden="true"></i> <span>สมัครเรียน</span></a></li>
                     <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('studentInfo') }}">
                         <i class="fa fa-file-text-o" aria-hidden="true"></i> <span>ข้อมูลนักเรียน</span></a></li>
-                    <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('studentInfo') }}">
+                    <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('course_enroll') }}">
                         <i class="fa fa-credit-card" aria-hidden="true"></i> <span>ซื้อคอร์สเรียน</span></a></li>
                         <!--<li class="{{ Request::is('admin*') ? 'active' : '' }}"><a href="{{ url('admin') }}"><i
                         class='fa fa-cogs'></i> <span>Admin Panel</span></a></li>-->

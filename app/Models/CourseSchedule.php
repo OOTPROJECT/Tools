@@ -37,4 +37,19 @@ class CourseSchedule extends Model
 
         return $course_enroll;
     }
+
+    function getCourseBySubject($subject_id) {
+
+        $course_schedule = \DB::select(
+                            "SELECT cs.course_schedule_id, c.course_name, tt.day, tt.start_time, tt.end_time
+                            , t.firstname,tt.room_name,cs.start_date, cs.end_date, c.course_hours, cs.status
+                            FROM course_schedule AS cs
+                            INNER JOIN courses AS c ON cs.course_id = c.course_id
+                            INNER JOIN time_table AS tt ON cs.time_table_id = tt.time_table_id
+                            INNER JOIN teachers AS t ON cs.teacher_id = t.teacher_id
+                            WHERE c.subject_id = '". $subject_id ."'
+                            ORDER BY cs.course_schedule_id "
+                          );
+        return $course_schedule;
+    }
 }

@@ -14,5 +14,6 @@ class Courses extends Model
 
         return $all_course;
     }
+    
 
 }

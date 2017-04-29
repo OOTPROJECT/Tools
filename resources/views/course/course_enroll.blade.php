@@ -37,29 +37,53 @@ $(document).ready(function() {
     $('#std_id').keyup( function() {
         table.hover.draw();
     } );
-     //$("div.toolbar").html('<b>ใส่รหัสนักเรียน</b>');
+    //$("div.toolbar").html('<b>ใส่รหัสนักเรียน</b>');
     $('table.display').DataTable({
-
+        "info":     false,
         "paging":   false,
         "filter": false,
     });
 
 } );
 
-function showTable(str) {
-  var tableC;
-  if (str == "") {
-    document.getElementById("tableCourse").innerHTML = "";
-    return;
-  }
-  tableC = new XMLHttpRequest();
-  tableC.onreadystatechange = function() {
-    if (this.readyState == 4 && this.status == 200) {
-      document.getElementById("tableCourse").innerHTML = this.responseText;
-    }
-  };
-  tableC.open("GET", "getcustomer.asp?q="+str, true);
-  tableC.send();
+function selectSubject() {
+    var subject_id = $('#subject_list option:selected').val();
+    console.log(subject_id);
+    //clear table
+    $('#tableCourse').empty();
+
+    // Replace space with %20
+    //room_name=room_name.trim().replace(/ /g, '%20');
+
+    $.ajax({
+        type: 'GET',
+        url: "{{ url('/getCourseBySubject') }}",
+        data: { subject_id: subject_id},
+        dataType: 'json',
+        success: function (data) { console.log(data.length);
+            if(data.length > 0) {
+                $.each(data, function(index, course_schedule) {
+                    var $tr = $('<tr>').append(
+                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.course_schedule_id),
+                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.course_name),
+                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.day),
+                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.start_time),
+                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.end_time),
+                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.room_name),
+                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.start_date),
+                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.end_date),
+                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.hours),
+                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.status)
+                    ).appendTo('#tableCourse');
+                });
+            }
+            else {
+                var $tr = $('<tr>').append(
+                    $('<td colspan="2" class="col-sm-4 col-md-4 text-center">').text("ไม่มีช่วงเวลาเรียนว่าง")
+                ).appendTo('#tableCourse');
+            }
+        }
+    });
 }
 
 </script>
@@ -91,120 +115,120 @@ function showTable(str) {
                 @endif
                 <table border="0" cellspacing="5" cellpadding="5">
                     <tbody><tr>
-                     <td>ค้นหารหัสนักเรียน :</td>
-                     <td><input type="text" id="std_id" name="std_id"></td>
-                   </tr>
-                    </tbody></table>
+                        <td>ค้นหารหัสนักเรียน :</td>
+                        <td><input type="text" id="std_id" name="std_id"></td>
+                    </tr>
+                </tbody></table>
                 <table id="" class="hover" cellspacing="0" width="80%" >
                     <thead>
-                           <tr>
-                               <th>รหัสนักเรียน</th>
-                               <th>ชื่อ</th>
-                               <th>นามสกุล</th>
-                               <th>ชั้น</th>
-                           </tr>
-                       </thead>
+                        <tr>
+                            <th>รหัสนักเรียน</th>
+                            <th>ชื่อ</th>
+                            <th>นามสกุล</th>
+                            <th>ชั้น</th>
+                        </tr>
+                    </thead>
 
-                       <tbody>
-                            @foreach ($all_student as $studentlist)
-                           <tr>
-                               <td>{{ $studentlist->student_id }}</td>
-                               <td>{{ $studentlist->firstname }}</td>
-                               <td>{{ $studentlist->lastname }}</td>
-                               <td>{{ $studentlist->school_level }}</td>
+                    <tbody>
+                        @foreach ($all_student as $studentlist)
+                        <tr>
+                            <td>{{ $studentlist->student_id }}</td>
+                            <td>{{ $studentlist->firstname }}</td>
+                            <td>{{ $studentlist->lastname }}</td>
+                            <td>{{ $studentlist->school_level }}</td>
 
-                           </tr>
-                              @endforeach
-                              <tr>
-                                  <td>1234</td>
-                                  <td>ด.ญ.ดีใจ</td>
-                                  <td>ใจดี</td>
-                                  <td>G.2</td>
-                              </tr>
-                              <tr>
-                                  <td>1235</td>
-                                  <td>ด.ญ. ใจเย็น</td>
-                                  <td>เย็นใจ</td>
-                                  <td>G.3</td>
-                              </tr>
+                        </tr>
+                        @endforeach
+                        <tr>
+                            <td>1234</td>
+                            <td>ด.ญ.ดีใจ</td>
+                            <td>ใจดี</td>
+                            <td>G.2</td>
+                        </tr>
+                        <tr>
+                            <td>1235</td>
+                            <td>ด.ญ. ใจเย็น</td>
+                            <td>เย็นใจ</td>
+                            <td>G.3</td>
+                        </tr>
 
 
-                       </tbody>
+                    </tbody>
                 </table>
 
-        </div>
-        <!--form-->
-
-    </div>
-    <!--เลือกคอร์สเรียน-->
-    <div class="box-body">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">เลือกคอร์ส</h3>
             </div>
-            <!--check error-->
-            <div class="panel-body">
+            <!--form-->
 
-                {!! csrf_field() !!}
-                @if(count($errors))
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.
-                    <br/>
-                    <ul>
-                        @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+        </div>
+        <!--เลือกคอร์สเรียน-->
+        <div class="box-body">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h3 class="panel-title">เลือกคอร์ส</h3>
                 </div>
-                @endif
-                <div class="row">
-                    <span class="col-sm-2 col-md-2 text-right">วิชา:</span>
-                    <div class="col-sm-4 col-md-4">
-                        <!--<input list="opt_subject" name="subject_list" class="form-control" placeholder="เลือกวิชา">-->
-                        <select id="opt_subject" name="subject_list" class="form-control" onchange="showTable(this.value)">
+                <!--check error-->
+                <div class="panel-body">
+
+                    {!! csrf_field() !!}
+                    @if(count($errors))
+                    <div class="alert alert-danger">
+                        <strong>Whoops!</strong> There were some problems with your input.
+                        <br/>
+                        <ul>
+                            @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                    @endif
+                    <div class="row">
+                        <span class="col-sm-2 col-md-2 text-right">วิชา:</span>
+                        <div class="col-sm-4 col-md-4">
+                            <!--<input list="opt_subject" name="subject_list" class="form-control" placeholder="เลือกวิชา">-->
+                            <select id="subject_list" name="subject_list" class="form-control" onchange="selectSubject(this.value)">
                                 <option id="">--เลือกวิชา--</option>
-                            @foreach($all_subject as $subjectlist)
-                                <option id="{{ $subjectlist->subject_id }}">
+                                @foreach($all_subject as $subjectlist)
+                                <option id="{{ $subjectlist->subject_id }}" value="{{ $subjectlist->subject_id }}">
                                     {{ $subjectlist->subject_name }}
                                 </option>
-                            @endforeach
-                        </select>
-                        <input type="hidden" id="subject_id" name="subject_id">
+                                @endforeach
+                            </select>
+                            <input type="hidden" id="subject_id" name="subject_id">
+                        </div>
+                    </div>
+                    <div>
+                        <table id="tableCourse" class="display" cellspacing="0" width="100%" >
+                            <thead>
+                                <tr>
+                                    <th>วิชา</th>
+                                    <th >ชื่อคอร์ส</th>
+                                    <th>จำนวนชั่วโมง</th>
+                                    <th>ราคา</th>
+
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td>คณิตศาสตร์</td>
+                                    <td>คณิตป.3</td>
+                                    <td>20</td>
+                                    <td>3,500</td>
+                                </tr>
+                                <tr>
+                                    <td>คณิตศาสตร์</td>
+                                    <td>คณิตป.4</td>
+                                    <td>20</td>
+                                    <td>3,600</td>
+                                </tr>
+                            </tbody>
+
+                        </table>
                     </div>
                 </div>
-                <div id="tableCourse">
-                <!--<table id="" class="display" cellspacing="0" width="80%" >
-                    <thead>
-                           <tr>
-                               <th>วิชา</th>
-                               <th >ชื่อคอร์ส</th>
-                               <th>จำนวนชั่วโมง</th>
-                               <th>ราคา</th>
 
-                           </tr>
-                       </thead>
-
-                       <tbody>
-                           <tr>
-                               <td>คณิตศาสตร์</td>
-                               <td>คณิตป.3</td>
-                               <td>20</td>
-                               <td>3,500</td>
-                           </tr>
-                           <tr>
-                               <td>คณิตศาสตร์</td>
-                               <td>คณิตป.4</td>
-                               <td>20</td>
-                               <td>3,600</td>
-                           </tr>
-                       </tbody>
-
-                </table>-->
             </div>
-            </div>
-
         </div>
-    </div>
 <!--/.box-body-->
 </div>
 @endsection
