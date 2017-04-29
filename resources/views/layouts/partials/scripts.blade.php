@@ -1,10 +1,3 @@
-<!-- jQuery 2.1.4 -->
-<script src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
-<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" ></script>
-<script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js" ></script>
-<!-- Bootstrap 3.3.2 JS -->
-
-
 <!--<script type="text/javascript" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"> </script>-->
 
 
