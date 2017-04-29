@@ -197,7 +197,7 @@ public function callTeachRecPage()
 
     public function calHire($number_of_times, $hiring_rate) {
 
-        $hire = $number_of_times * $hiring_rate;
+        $hire = abs($number_of_times * $hiring_rate);
 
         return $hire;
     }
@@ -443,7 +443,7 @@ return back();
 
     public function createCourseSchedule(Request $request)
     {
-        
+
         $arr_data = array("student_max" => 10, "status" => "เปิด");
         // concat home number & road name as input_addr
         $input = $request->except('_token');

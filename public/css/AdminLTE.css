@@ -3200,7 +3200,7 @@ table.text-center th {
 }
 .login-page,
 .register-page {
-  background: #d2d6de;
+  background: #FFFFFF;
 }
 .login-box,
 .register-box {
@@ -3216,9 +3216,9 @@ table.text-center th {
 }
 .login-box-body,
 .register-box-body {
-  background: #fff;
+  background: #F5F5F5;
   padding: 20px;
-  border-top: 0;
+  border-top: 1;
   color: #666;
 }
 .login-box-body .form-control-feedback,
