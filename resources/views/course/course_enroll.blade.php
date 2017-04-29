@@ -42,6 +42,7 @@ $(document).ready(function() {
         "info":     false,
         "paging":   false,
         "filter": false,
+        "autoWidth" : false
     });
 
 } );
