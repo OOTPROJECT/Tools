@@ -59,8 +59,6 @@ class KingMathController extends Controller
       $allStudent = $this->students->getAllStudentInfo();
         return view('students.student_info')
         ->with('allStudent', $allStudent);
-
-
     }
 
     /**
@@ -257,6 +255,10 @@ public function callStudentEditPage($student_id)
     return view('students.student_update')
     ->with('student_id', $student_id)
     ->with('student', $students);
+
+
+
+
 }
 
      /**
