@@ -187,19 +187,19 @@
 				<div class="row"><span class="col-sm-2 col-md-2 text-right">บ้านเลขที่</span>
 					<div class="col-sm-4 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('addr') ? 'has-error' : '' }}">
-							<input type='text' class="form-control" name="addr" placeholder="กรุณาระบุบ้านเลขที่" value="{{ $student->addr }}" />
+							<input type='text' class="form-control" name="addr" placeholder="กรุณาระบุบ้านเลขที่" value="@if(array_key_exists("0", $address) &&$address[0] != null){{ $address[0] }}@endif" />
 						</div>
 						<span class="text-danger">{{ $errors->first('addr') }}</span>
 					</div>
 					<span class="col-sm-2 col-md-2 text-right">ซอย</span>
 					<div class="col-sm-4 col-md-4 text-center">
-						<input type='text' class="form-control" name="soi"  />
+						<input type='text' class="form-control" name="soi" value="@if(array_key_exists("1", $address) &&$address[1] != null){{ $address[1] }}@endif"  />
 					</div>
 				</div>
 				<div class="row">
 					<span class="col-sm-2 col-md-2 text-right">ถนน</span>
 					<div class="col-sm-4 col-md-4 text-left">
-						<input type='text' class="form-control" name="road"  />
+						<input type='text' class="form-control" name="road" value="@if(array_key_exists("2", $address) &&$address[2] != null){{ $address[2] }}@endif"  />
 					</div>
 					<span class="col-sm-2 col-md-2 text-right">จังหวัด</span>
 					<div class="col-sm-4 col-md-4 text-center">
@@ -284,7 +284,7 @@
 				<div class="row">
 
 					<div class="col-sm-12 col-md-12 text-center">
-						<button type="submit" class="btn btn-primary">บันทีก</button>
+						<button type="submit" class="btn btn-success">บันทีก</button>
 						<button type="submit" class="btn">รีเซ็ต</button>
 					</div>
 				</div>

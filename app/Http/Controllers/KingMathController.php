@@ -137,7 +137,7 @@ class KingMathController extends Controller
 }
 
 
-public function updateStudent($teacher_id ,Request $request)
+public function updateStudent($student_id ,Request $request)
 {
     $this->validate($request,
     [
@@ -198,12 +198,14 @@ public function updateStudent($teacher_id ,Request $request)
                     "addr" => $request->input('addr') . ", " . $request->input('soi') . ", " .
                     $request->input('road')
                   );
-    $input = $request->except('_token', 'home_no', 'road_name', 'province_list',
+    $input = $request->except('_token', 'addr', 'soi','road', 'province_list',
                 'district_list', 'sub_district_list', 'provid', 'distid', 'subdistid');
-    $input_teacher = array_merge($input, $input_addr);
 
-    Teachers::where('teacher_id', $teacher_id)
-               ->update($input_teacher);
+    $input_student = array_merge($input, $input_addr);
+
+
+
+   Students::where('student_id', $student_id)->update($input_student);
 
    Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
    return back();
@@ -323,13 +325,13 @@ public function callStudentEditPage($student_id)
 {
     $prov = $this->city->getProvinces();
     $students = $this->student->getstudentByID($student_id);
+    $address = explode(",", $students->addr);
 
     return view('students.student_update')
     ->with('student_id', $student_id)
     ->with('student', $students)
+    ->with('address', $address)
     ->with('prov', $prov);
-
-
 
 
 }

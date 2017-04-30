@@ -60,7 +60,6 @@ class Students extends Model
     public function getStudentByID($student_id) {
         $student = new students();
         $student = students::where('student_id' , '=', $student_id)->first();
-
         return $student;
     }
 
