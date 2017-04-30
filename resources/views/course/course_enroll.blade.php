@@ -51,7 +51,7 @@ function selectSubject() {
     var subject_id = $('#subject_list option:selected').val();
     console.log(subject_id);
     //clear table
-    $('#tableCourse').empty();
+    $('#tableCourseBody').empty();
 
     // Replace space with %20
     //room_name=room_name.trim().replace(/ /g, '%20');
@@ -65,22 +65,23 @@ function selectSubject() {
             if(data.length > 0) {
                 $.each(data, function(index, course_schedule) {
                     var $tr = $('<tr>').append(
-                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.course_schedule_id),
-                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.course_name),
-                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.day),
-                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.start_time),
-                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.end_time),
-                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.room_name),
-                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.start_date),
-                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.end_date),
-                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.hours),
-                        $('<td class="col-sm-4 col-md-4 text-center">').text(course_schedule.status)
+                        $('<td class="text-center">').text(course_schedule.course_schedule_id),
+                        $('<td class="text-center">').text(course_schedule.course_name),
+                        $('<td class="text-center">').text(course_schedule.day),
+                        $('<td class="text-center">').text(course_schedule.start_time+"-"+course_schedule.end_time),
+                        /*$('<td class="text-center">').text(course_schedule.end_time),*/
+                        $('<td class="text-center">').text(course_schedule.room_name),
+                        $('<td class="text-center">').text(course_schedule.start_date),
+                        $('<td class="text-center">').text(course_schedule.end_date),
+                        $('<td class="text-center">').text(course_schedule.price),
+                        $('<td class="text-center">').text(course_schedule.course_hours),
+                        $('<td class="text-center">').text(course_schedule.status)
                     ).appendTo('#tableCourse');
                 });
             }
             else {
                 var $tr = $('<tr>').append(
-                    $('<td colspan="2" class="col-sm-4 col-md-4 text-center">').text("ไม่มีช่วงเวลาเรียนว่าง")
+                    $('<td colspan="2" class="col-sm-4 col-md-5 text-center">').text("ไม่มีช่วงเวลาเรียนว่าง")
                 ).appendTo('#tableCourse');
             }
         }
@@ -114,10 +115,11 @@ function selectSubject() {
                     </ul>
                 </div>
                 @endif
+                <div id="showStudent">
                 <table border="0" cellspacing="5" cellpadding="5">
                     <tbody><tr>
-                        <td>ค้นหารหัสนักเรียน :</td>
-                        <td><input type="text" id="std_id" name="std_id"></td>
+                        <td>ค้นหาชื่อนักเรียน :</td>
+                        <td><input type="text" id="std_name" name="std_name"></td>
                     </tr>
                 </tbody></table>
                 <table id="" class="hover" cellspacing="0" width="80%" >
@@ -156,8 +158,8 @@ function selectSubject() {
 
                     </tbody>
                 </table>
-
             </div>
+        </div>
             <!--form-->
 
         </div>
@@ -185,6 +187,7 @@ function selectSubject() {
                     <div class="row">
                         <span class="col-sm-2 col-md-2 text-right">วิชา:</span>
                         <div class="col-sm-4 col-md-4">
+
                             <!--<input list="opt_subject" name="subject_list" class="form-control" placeholder="เลือกวิชา">-->
                             <select id="subject_list" name="subject_list" class="form-control" onchange="selectSubject(this.value)">
                                 <option id="">--เลือกวิชา--</option>
@@ -201,27 +204,29 @@ function selectSubject() {
                         <table id="tableCourse" class="display" cellspacing="0" width="100%" >
                             <thead>
                                 <tr>
-                                    <th>วิชา</th>
-                                    <th >ชื่อคอร์ส</th>
-                                    <th>จำนวนชั่วโมง</th>
-                                    <th>ราคา</th>
+                                    <th class="col-sm-4 col-md-1 text-center">รหัส</th>
+                                    <th class="col-sm-4 col-md-2 text-center">ชื่อคอร์ส</th>
+                                    <th class="col-sm-4 col-md-2 text-center">วันเรียน</th>
+                                    <th class="col-sm-4 col-md-2 text-center">เวลาเรียน</th>
+                                    <th class="col-sm-4 col-md-1 text-center">ห้องเรียน</th>
+                                    <th class="col-sm-4 col-md-2 text-center">วันเริ่มเรียน</th>
+                                    <th class="col-sm-4 col-md-2 text-center">วันสิ้นสุด</th>
+                                    <th class="col-sm-4 col-md-1 text-center">ราคา</th>
+                                    <th class="col-sm-4 col-md-1 text-center">ชั่วโมง</th>
+                                    <th class="col-sm-4 col-md-1 text-center">สถานะ</th>
 
                                 </tr>
                             </thead>
+                            <tbody id="tableCourseBody">
+                                @foreach ($arr_course_schedule as $courselist)
+                                <tr>
+                                    <td>{{ $courselist->student_id }}</td>
+                                    <td>{{ $studentlist->firstname }}</td>
+                                    <td>{{ $studentlist->lastname }}</td>
+                                    <td>{{ $studentlist->school_level }}</td>
 
-                            <tbody>
-                                <tr>
-                                    <td>คณิตศาสตร์</td>
-                                    <td>คณิตป.3</td>
-                                    <td>20</td>
-                                    <td>3,500</td>
                                 </tr>
-                                <tr>
-                                    <td>คณิตศาสตร์</td>
-                                    <td>คณิตป.4</td>
-                                    <td>20</td>
-                                    <td>3,600</td>
-                                </tr>
+                                @endforeach
                             </tbody>
 
                         </table>
