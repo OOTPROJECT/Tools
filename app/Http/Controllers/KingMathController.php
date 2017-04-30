@@ -12,6 +12,7 @@ use App\Models\TimeTable;
 use App\Models\CourseSchedule;
 use App\Models\Subjects;
 use App\Models\Payroll;
+use App\Models\CourseEnroll;
 use DB;
 
 class KingMathController extends Controller
@@ -31,6 +32,7 @@ class KingMathController extends Controller
         $this->course_schedule = new CourseSchedule();
         $this->student = new Students();
         $this->subject = new Subjects();
+        $this->course_enroll = new CourseEnroll();
     }
 
 
@@ -528,12 +530,13 @@ return back();
    */
    public function callCourseEnrollPage()
    {
-       $all_student = $this->student->getAllStudentInfo();
+
        $all_subject = $this->subject->getSubject();
+       $arr_course_schedule = $this->course_schedule->getAllCourseSchedule();
 
        return view('course.course_enroll')
-                ->with('all_student', $all_student)
-                ->with('all_subject',$all_subject);
+                ->with('all_subject',$all_subject)
+                ->with('arr_course_schedule',$arr_course_schedule);
     }
     /**
     * Show the get course schedule by subject.
@@ -546,6 +549,38 @@ return back();
         $course_schedule_list = $this->course_schedule->getCourseBySubject($subject_id);
         return $course_schedule_list;
 
+     }
+     /**
+     * Show the get student info by student name.
+     *
+     * @return \Illuminate\Http\Response
+     */
+     public function getStudentInfo(Request $request)
+     {
+         $firstname = trim($request->input('student_fname'));
+         $lastname = trim($request->input('student_lname'));
+         $studentinfo = $this->student->getStudentInfo($firstname, $lastname);
+         return $studentinfo;
+
+      }
+      /**
+       * Create Enrollment
+       *
+       * @return \Illuminate\Http\Response
+       */
+     public function createEnroll(Request $request)
+     {
+         $input = $request->except('_token');
+         $resp = CourseEnroll::create($input)->saveOrFail();
+
+         if($resp == 1) {
+
+             return array("resp" => true, "text" => "]'ลงทะเบียนเรียนเรียบร้อยแล้ว");
+         }
+         else {
+
+             return array("resp" => false, "text" => "ไม่สามารถลงทะเบียนเรียนได้");
+         }
      }
 
 }

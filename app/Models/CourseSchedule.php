@@ -21,7 +21,7 @@ class CourseSchedule extends Model
 
         $this->table = "v_course_schedule";
         $arr_course_schedule = CourseSchedule::select('course_schedule_id', 'course_name', 'day',
-                                'start_time','end_time', 'firstname', 'lastname', 'room_name',
+                                'start_time','end_time', 'firstname', 'lastname', 'room_name','price',
                                 'start_date', 'end_date', 'number_of_time', 'status',
                                 'created_at')
                                 ->orderBy('created_at', 'DESC')->get();
@@ -42,13 +42,12 @@ class CourseSchedule extends Model
 
         $course_schedule = \DB::select(
                             "SELECT cs.course_schedule_id, c.course_name, tt.day, tt.start_time, tt.end_time
-                            , t.firstname,tt.room_name,cs.start_date, cs.end_date, c.course_hours, cs.status,c.price
+                            , t.firstname,tt.room_name,cs.start_date, cs.end_date, c.number_of_time, cs.status,c.price
                             FROM course_schedule AS cs
                             INNER JOIN courses AS c ON cs.course_id = c.course_id
                             INNER JOIN time_table AS tt ON cs.time_table_id = tt.time_table_id
                             INNER JOIN teachers AS t ON cs.teacher_id = t.teacher_id
                             WHERE c.subject_id = '". $subject_id ."'
-                            AND (select count(cs.cousre_schedule_id) from c )
                             ORDER BY cs.course_schedule_id "
                           );
         return $course_schedule;

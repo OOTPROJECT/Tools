@@ -11,84 +11,6 @@
 
 @section('main-content')
 
-<script type="text/javascript">
-/* Custom filtering function which will search data in column four between two values */
-$.fn.dataTable.ext.search.push(
-    function(slects,data, dataIndex ) {
-        var std_id = parseInt( $('#std_id').val(), 10 );
-        var std_id = parseInt( $('#std_id').val(), 10 );
-        var id = parseFloat( data[0] )|| 0; // use data for the age column
-
-        if (std_id == id)
-        {
-            return true;
-        }
-        return false;
-    }
-);
-/*Create table*/
-$(document).ready(function() {
-    $('table.hover').DataTable({
-        "paging":   false,
-        "info":     false,
-        //"filter": false,
-        //"dom": '<"toolbar">frtip'
-    });
-    $('#std_id').keyup( function() {
-        table.hover.draw();
-    } );
-    //$("div.toolbar").html('<b>ใส่รหัสนักเรียน</b>');
-    $('table.display').DataTable({
-        "info":     false,
-        "paging":   false,
-        "filter": false,
-        "autoWidth" : false
-    });
-
-} );
-
-function selectSubject() {
-    var subject_id = $('#subject_list option:selected').val();
-    console.log(subject_id);
-    //clear table
-    $('#tableCourseBody').empty();
-
-    // Replace space with %20
-    //room_name=room_name.trim().replace(/ /g, '%20');
-
-    $.ajax({
-        type: 'GET',
-        url: "{{ url('/getCourseBySubject') }}",
-        data: { subject_id: subject_id},
-        dataType: 'json',
-        success: function (data) { console.log(data.length);
-            if(data.length > 0) {
-                $.each(data, function(index, course_schedule) {
-                    var $tr = $('<tr>').append(
-                        $('<td class="text-center">').text(course_schedule.course_schedule_id),
-                        $('<td class="text-center">').text(course_schedule.course_name),
-                        $('<td class="text-center">').text(course_schedule.day),
-                        $('<td class="text-center">').text(course_schedule.start_time+"-"+course_schedule.end_time),
-                        /*$('<td class="text-center">').text(course_schedule.end_time),*/
-                        $('<td class="text-center">').text(course_schedule.room_name),
-                        $('<td class="text-center">').text(course_schedule.start_date),
-                        $('<td class="text-center">').text(course_schedule.end_date),
-                        $('<td class="text-center">').text(course_schedule.price),
-                        $('<td class="text-center">').text(course_schedule.course_hours),
-                        $('<td class="text-center">').text(course_schedule.status)
-                    ).appendTo('#tableCourse');
-                });
-            }
-            else {
-                var $tr = $('<tr>').append(
-                    $('<td colspan="2" class="col-sm-4 col-md-5 text-center">').text("ไม่มีช่วงเวลาเรียนว่าง")
-                ).appendTo('#tableCourse');
-            }
-        }
-    });
-}
-
-</script>
 
 <div class="box">
     <div class="box-header with-border">
@@ -115,46 +37,41 @@ function selectSubject() {
                     </ul>
                 </div>
                 @endif
-                <div id="showStudent">
-                <table border="0" cellspacing="5" cellpadding="5">
-                    <tbody><tr>
-                        <td>ค้นหาชื่อนักเรียน :</td>
-                        <td><input type="text" id="std_name" name="std_name"></td>
-                    </tr>
+                <div id="student">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">ค้นหานักเรียน</h3>
+                    </div>
+                    <div class="row">
+                        <span class="col-sm-2 col-md-1 text-right">ชื่อ:</span>
+                            <div class="col-sm-4 col-md-2 text-left">
+                                <input type="text" id="std_fname" name="std_fname">
+                            </div>
+                        <span class="col-sm-2 col-md-1 text-right">นามสกุล:</span>
+                            <div class="col-sm-4 col-md-2 text-left">
+                                <input type="text" id="std_lname" name="std_lname">
+                            </div>
+                            <div class="col-sm-4 col-md-2 text-left">
+                                <button type="button" class="btn btn-primary"
+                                    onclick="showStudent(this.value);" data-toggle="tooltip"
+                                    data-placement="right" title="ค้นหานักเรียน">
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </button>
+                            </div>
+                    </div>
                 </tbody></table>
-                <table id="" class="hover" cellspacing="0" width="80%" >
+                </div>
+                <div id="showStudent">
+                <table id="tableStudent" class="hover" cellspacing="0" width="80%" >
                     <thead>
                         <tr>
-                            <th>รหัสนักเรียน</th>
-                            <th>ชื่อ</th>
-                            <th>นามสกุล</th>
-                            <th>ชั้น</th>
+                            <th class="col-sm-4 col-md-1 text-center">รหัสนักเรียน</th>
+                            <th class="col-sm-4 col-md-2 text-center">ชื่อ</th>
+                            <th class="col-sm-4 col-md-2 text-center">นามสกุล</th>
+                            <th class="col-sm-4 col-md-1 text-center">ชั้น</th>
                         </tr>
                     </thead>
 
-                    <tbody>
-                        @foreach ($all_student as $studentlist)
-                        <tr>
-                            <td>{{ $studentlist->student_id }}</td>
-                            <td>{{ $studentlist->firstname }}</td>
-                            <td>{{ $studentlist->lastname }}</td>
-                            <td>{{ $studentlist->school_level }}</td>
-
-                        </tr>
-                        @endforeach
-                        <tr>
-                            <td>1234</td>
-                            <td>ด.ญ.ดีใจ</td>
-                            <td>ใจดี</td>
-                            <td>G.2</td>
-                        </tr>
-                        <tr>
-                            <td>1235</td>
-                            <td>ด.ญ. ใจเย็น</td>
-                            <td>เย็นใจ</td>
-                            <td>G.3</td>
-                        </tr>
-
+                    <tbody id="tableStudentBody">
 
                     </tbody>
                 </table>
@@ -214,17 +131,29 @@ function selectSubject() {
                                     <th class="col-sm-4 col-md-1 text-center">ราคา</th>
                                     <th class="col-sm-4 col-md-1 text-center">ชั่วโมง</th>
                                     <th class="col-sm-4 col-md-1 text-center">สถานะ</th>
+                                    <th class="col-sm-4 col-md-1 text-center"></th>
 
                                 </tr>
                             </thead>
                             <tbody id="tableCourseBody">
-                                @foreach ($arr_course_schedule as $courselist)
+                                @foreach($arr_course_schedule as $course_schedule_list)
                                 <tr>
-                                    <td>{{ $courselist->student_id }}</td>
-                                    <td>{{ $studentlist->firstname }}</td>
-                                    <td>{{ $studentlist->lastname }}</td>
-                                    <td>{{ $studentlist->school_level }}</td>
-
+                                    <td class="text-center">{{$course_schedule_list->course_schedule_id}}</td>
+                                    <td class="text-center">{{$course_schedule_list->course_name}}</td>
+                                    <td class="text-center">{{$course_schedule_list->day}}</td>
+                                    <td class="text-center">{{$course_schedule_list->start_time}} - {{$course_schedule_list->end_time}} น.</td>
+                                    <td class="text-center">{{$course_schedule_list->room_name}}</td>
+                                    <td class="text-center">{{$course_schedule_list->start_date}}</td>
+                                    <td class="text-center">{{$course_schedule_list->end_date}}</td>
+                                    <td class="text-center">{{$course_schedule_list->price}}</td>
+                                    <td class="text-center">{{$course_schedule_list->number_of_time}}</td>
+                                    <td class="text-center">{{$course_schedule_list->status}}</td>
+                                    <td class="text-center">
+                                        <a href="{{ url('/createEnroll') }}"
+                                            onclick="enrollCourse(cs_id,std_id);">
+                                            <i class="fa fa-check-circle-o" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
                                 </tr>
                                 @endforeach
                             </tbody>
@@ -237,4 +166,5 @@ function selectSubject() {
         </div>
 <!--/.box-body-->
 </div>
+@include('layouts.partials.script_course_enroll')
 @endsection

@@ -63,7 +63,12 @@ class Students extends Model
 
         return $student;
     }
+    //get student info
+    function getStudentInfo($firstname, $lastname) {
+        $arr_student = Students::where('firstname','=', $firstname)->get();
 
+        return $arr_student;
+    }
 
 
 

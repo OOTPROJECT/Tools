@@ -60,7 +60,8 @@ Route::get('/sub_districts', 'KingMathController@getSubDistricts');
 // Course Enroll
 Route::get('/course_enroll','KingMathController@callCourseEnrollPage');
 Route::get('/getCourseBySubject','KingMathController@getCourseBySubject');
-
+Route::get('/getStudentInfo','KingMathController@getStudentInfo');
+Route::get('/createEnroll','KingMathController@createEnroll');
 
 Route::resource('profile', 'ProfileController');
 Route::patch('profile/{profile}/password', 'ProfileController@update_password');
