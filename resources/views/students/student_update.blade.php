@@ -204,17 +204,23 @@
 					<span class="col-sm-2 col-md-2 text-right">จังหวัด</span>
 					<div class="col-sm-4 col-md-4 text-center">
 
-						<input list="opts_province" name="province_list"
+						<select name="province_id"
 						class="form-control"
 						placeholder="กรุณาระบุจังหวัด">
 						<datalist id="opts_province">
 							@foreach($prov as $prov_list)
-							<option id="{{ $prov_list->province_id }}"
-								value="{{ $prov_list->province_name }}">
-							</option>
+								@if($student->province_id == $prov_list->province_id)
+									<option value="{{ $prov_list->province_id }}" selected="true">
+										{{ $prov_list->province_name }}
+									</option>
+								@else
+									<option value="{{ $prov_list->province_id }}">
+										{{ $prov_list->province_name }}
+									</option>
+								@endif
 							@endforeach
 						</datalist>
-						<input type="hidden" id="province_id" name="province_id">
+						<input type="hidden" id="provid" name="provid" value="{{ $student->province_id }}">
 					</div>
 
 				</div>
@@ -224,25 +230,17 @@
 					<span class="col-sm-2 col-md-2 text-right">เขต/อำเภอ</span>
 					<div class="col-sm-4 col-md-4 text-left">
 
-						<input list="opts_district" name="district_list"
-						class="form-control"
-						placeholder="กรุณาระบุเขต/อำเภอ"
-						onclick="chkProvinceInput();">
-						<datalist id="opts_district">
-						</datalist>
-						<input type="hidden" id="district_id" name="district_id">
+						<select class="form-control" id="district_id" name="district_id">
+						</select>
+						<input type="hidden" id="distid" name="distid" value="{{ $student->district_id }}">
 
 					</div>
 
 					<span class="col-sm-2 col-md-2 text-right">ตำบล/แขวง</span>
 					<div class="col-sm-4 col-md-4 text-center">
-						<input list="opts_sub_district" name="sub_district_list"
-						class="form-control"
-						placeholder="กรุณาระบุแขวง/ตำบล"
-						onclick="chkDistrictInput();">
-						<datalist id="opts_sub_district">
-						</datalist>
-						<input type="hidden" id="sub_district_id" name="sub_district_id">
+						<select class="form-control" id="sub_district_id" name="sub_district_id">
+						</select>
+						<input type="hidden" id="subdistid" name="subdistid" value="{{ $student->sub_district_id }}">
 
 					</div>
 				</div>
@@ -297,4 +295,155 @@
 </div>
 </div>
 </div>
+<script type="text/javascript">
+
+    $(document).ready(function(){
+
+        var provid = $('#provid').val();
+        var distid = $('#distid').val();
+        var subdistid = $('#subdistid').val();
+
+        getDistrict(provid, distid);
+        getSubDistrict(provid, distid, subdistid);
+        chkGender();
+
+    });
+
+    function chkGender(){
+        var gender = '<?php echo  $student->gender; ?>'
+
+        if( gender == 'M'){
+            $('input:radio[name = gender][value = M]').attr('checked', true);
+        }else {
+            $('input:radio[name = gender][value = F]').attr('checked', true);
+        }
+    }
+
+    function getDistrict(prov_id, distid) {
+        var select = $("#district_id");
+        select.empty();
+
+        if(distid == "") {
+            var select = $("#district_id");
+            select.empty();
+            select.append($('<option/>', {
+                value: 0,
+                text: "กรุณาเลือกเขต/อำเภอ"
+            }));
+        }
+
+        $.ajax({
+            type: 'GET',
+            url: "{{ url('/districts') }}",
+            data: { prov_id: prov_id },
+            dataType: 'json',
+            success: function (data) {
+
+                $.each(data, function (index, dist_data) {
+                    if(distid == dist_data.district_id) {
+                        select.append($('<option/>', {
+                            value: dist_data.district_id,
+                            text: dist_data.district_name,
+                            selected: true
+                        }));
+                    }
+                    else {
+                        select.append($('<option/>', {
+                            value: dist_data.district_id,
+                            text: dist_data.district_name,
+                        }));
+                    }
+                });
+            }
+        });
+    }
+
+    function getSubDistrict(prov_id, dist_id, sub_dist_id) {
+
+        $.ajax({
+            type: 'GET',
+            url: "{{ url('/sub_districts') }}",
+            data: { prov_id: prov_id, dist_id: dist_id },
+            dataType: 'json',
+            success: function (data) {
+                var select = $("#sub_district_id");
+                select.empty();
+                $.each(data, function (index, sub_dist_data) {
+                    if(sub_dist_id.trim() == sub_dist_data.sub_district_id) {
+                        select.append($('<option/>', {
+                            value: sub_dist_data.sub_district_id,
+                            text: sub_dist_data.sub_district_name,
+                            selected: true
+                        }));
+                    }
+                    else {
+                        select.append($('<option/>', {
+                            value: sub_dist_data.sub_district_id,
+                            text: sub_dist_data.sub_district_name
+                        }));
+                    }
+                });
+            }
+        });
+    }
+
+    $("#province_id").change(function () { //$("#elementId :selected").text();
+        var prov_id = $('#province_id :selected').val();
+
+        var select = $("#sub_district_id");
+        select.empty();
+        select.append($('<option/>', {
+            value: 0,
+            text: "กรุณาเลือกแขวง/ตำบล"
+        }));
+
+        getDistrict(prov_id, "");
+    });
+
+    $("#district_id").change(function () {
+        var prov_id = $('#province_id :selected').val();
+        var dist_id = $('#district_id :selected').val();
+
+        getSubDistrict(prov_id, dist_id, "");
+    })
+
+    function inputDigitsMobile(sensor){
+        var regExp = /[0-9]$/;
+        if(!regExp.test(sensor.value)){
+            $( "#mobile span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+            $('#mobile span').css('display', 'block');
+            sensor.value = sensor.value.substring(0, sensor.value.length -1);
+        }
+        else {
+            $('#mobile span').css('display', 'none');
+        }
+
+    }
+
+    function inputDigitsTel(sensor){
+        var regExp = /[0-9]$/;
+        if(!regExp.test(sensor.value)){
+            $( "#tel span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+            $('#tel span').css('display', 'block');
+            sensor.value = sensor.value.substring(0, sensor.value.length -1);
+        }
+        else {
+            $( "#tel span" ).css('display', 'none');
+        }
+    }
+
+    function inputDigits(sensor){
+        var regExp = /[0-9]$/;
+        if(!regExp.test(sensor.value)){
+            $( "#postcode span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+            $('#postcode span').css('display', 'block');
+            sensor.value = sensor.value.substring(0, sensor.value.length -1);
+        }
+        else {
+            $( "#postcode span" ).css('display', 'none');
+        }
+    }
+
+</script>
+
 @endsection

@@ -136,6 +136,78 @@ class KingMathController extends Controller
     return back();
 }
 
+
+public function updateStudent($teacher_id ,Request $request)
+{
+    $this->validate($request,
+    [
+        "firstname" => "required",
+        "lastname" => "required",
+        "nickname" => "required",
+        "std_birthdate" => "required",
+        "gender" => "required",
+        "schoolname" => "required",
+        "school_province_id" => "required",
+        "school_level" => "required",
+        "parent_fname" => "required",
+        "parent_lname" => "required",
+        "student_relationship" => "required",
+        "parent_birthdate" => "required",
+        "addr" => "required",
+        "province_id" => "required",
+        "district_id" => "required",
+        "std_birthdate" => "required",
+        "sub_district_id" => "required",
+        "postcode" => "required",
+        "email" => "required",
+        "mobile" => "required",
+        "tel" => "required",
+        "parent_occupation" => "required",
+    ],
+    [
+
+        "firstname.required" => "โปรดระบุ ชื่อนักเรียน",
+        "lastname.required" => "โปรดระบุ นามสกุลนักเรียน",
+        "nickname.required" => "โปรดระบุ ชื่อเล่นนักเรียน",
+        "std_birthdate.required" => "โปรดระบุ วันเดือนปีเกิด",
+        "gender.required" => "โปรดระบุ เพศนักเรียน",
+        "schoolname.required" => "โปรดระบุ ชื่อโรงเรียนของนักเรียน",
+        "school_province_id.required" => "โปรดระบุ จังหวัดของโรงเรียนนักเรียน",
+        "school_level.required" => "โปรดระบุ ระดับชั้นเรียน",
+        "parent_fname.required" => "โปรดระบุ ชื่อผู้ปกครอง",
+        "parent_lname.required" => "โปรดระบุ นามสกุลผู้ปกครอง",
+        "student_relationship.required" => "โปรดระบุ ความสัมพันธ์กับนักเรียน",
+        "parent_birthdate.required" => "โปรดระบุ วันเกิดของผู้ปกครอง",
+        "addr.required" => "โปรดระบุ บ้านเลขที่ของผู้ปกครอง",
+        "province_id.required" => "โปรดระบุ จังหวัด",
+        "district_id.required" => "โปรดระบุ เขต",
+        "std_birthdate.required" => "โปรดระบุ วันเดือนปีเกิด",
+        "sub_district_id.required" => "โปรดระบุ แขวง",
+        "postcode.required" => "โปรดระบุ รหัสไปรษณีย์",
+        "email.required" => "โปรดระบุ Email ",
+        "mobile.required" => "โปรดระบุ เบอร์โทรศัพท์",
+        "tel.required" => "โปรดระบุ เบอร์บ้าน",
+        "parent_occupation.required" => "โปรดระบุ ตำแหน่ง",
+
+
+    ]
+);
+
+    // concat home number & road name as input_addr
+    $input_addr = array(
+                    "addr" => $request->input('addr') . ", " . $request->input('soi') . ", " .
+                    $request->input('road')
+                  );
+    $input = $request->except('_token', 'home_no', 'road_name', 'province_list',
+                'district_list', 'sub_district_list', 'provid', 'distid', 'subdistid');
+    $input_teacher = array_merge($input, $input_addr);
+
+    Teachers::where('teacher_id', $teacher_id)
+               ->update($input_teacher);
+
+   Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+   return back();
+}
 /**
 * Show the application teacher register.
 *
