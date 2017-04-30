@@ -21,7 +21,7 @@
 			<form action="{{ url('/updateStudent')}}/{{ $student_id }}" method="post">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						<h3 class="panel-title">ข้อมูลผู้สมัคร {{ $students->firstname ." "}}  {{ $students->lastname }}</h3>
+						<h3 class="panel-title">ข้อมูลผู้สมัคร {{ $student->firstname}}  {{ $student->lastname }}</h3>
 					</div>
 
 					<div class="panel-body">
@@ -44,7 +44,7 @@
 							<span class="col-sm-2 col-md-2 text-right">ชื่อ </span>
 							<div class="col-sm-4 col-md-4 text-right">
 								<div class="form-group {{ $errors->has('firstname') ? 'has-error' : '' }}">
-									<input type="text" name="firstname" class="form-control"placeholder="กรุณาระบุชื่อ" value="{{ $students->firstname}}">
+									<input type="text" name="firstname" class="form-control"placeholder="กรุณาระบุชื่อ" value="{{ $student->firstname}}">
 									<span class="text-danger">{{ $errors->first('firstname') }}</span>
 								</div>
 							</div>
@@ -52,7 +52,7 @@
 							<div class="col-sm-4 col-md-4 text-right">
 								<div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
 									<input type="text" name="lastname" class="form-control"
-									placeholder="กรุณาระบุนามสกุล" value="{{ $students->lastname }}">
+									placeholder="กรุณาระบุนามสกุล" value="{{ $student->lastname }}">
 									<span class="text-danger">{{ $errors->first('lastname') }}</span>
 								</div>
 							</div>
@@ -62,7 +62,7 @@
 							<div class="col-sm-10 col-md-4 text-left">
 								<div class="form-group {{ $errors->has('nickname') ? 'has-error' : '' }}">
 									<input type="text" name="nickname" class="form-control"
-									placeholder="กรุณาระบุชื่อเล่น" value="{{ $students->nickname }}">
+									placeholder="กรุณาระบุชื่อเล่น" value="{{ $student->nickname }}">
 									<span class="text-danger">{{ $errors->first('nickname') }}</span>
 								</div>
 							</div>
@@ -74,7 +74,7 @@
 									<div class="input-group date datepicker"
 									data-date-format="yyyy-mm-dd">
 									<input class="form-control" type="text" name="std_birthdate"
-									value="{{ $students->std_birthdate}}" readonly />
+									value="{{ $student->std_birthdate}}" readonly />
 									<span class="input-group-addon">
 										<i class="glyphicon glyphicon-calendar"></i>
 									</span>
@@ -101,7 +101,7 @@
 					<br>
 					<div class="row"><span class="col-sm-2 col-md-2 text-right">ชื่อสถานศึกษา</span>
 						<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('schoolname') ? 'has-error' : '' }}">
-							<input type='text' name="schoolname" class="form-control text-left" placeholder="กรุณาระบุชื่อสถานศึกษา" value="{{ $students->schoolname }}" />
+							<input type='text' name="schoolname" class="form-control text-left" placeholder="กรุณาระบุชื่อสถานศึกษา" value="{{ $student->schoolname }}" />
 						</div>
 					</div>
 					<div class="col-sm-2 col-md-2 text-right">จังหวัด
@@ -120,7 +120,7 @@
 							@endif
 							@endforeach
 						</select>
-						<input type="hidden" id="school_province_id" name="school_province_id" value="{{ $students->school_province_id }}">
+						<input type="hidden" id="school_province_id" name="school_province_id" value="{{ $student->school_province_id }}">
 
 					</div>
 				</div>
@@ -129,7 +129,7 @@
 					<span class="col-sm-2 col-md-2 text-right">ชั้นประถมศึกษาปีที่ </span>
 					<div class="col-sm-4 col-md-4 text-center">
 						<div class="form-group {{ $errors->has('school_level') ? 'has-error' : '' }}">
-							<input type="text" name="school_level" class="form-control" placeholder="กรุณาระบุชั้นประถมศึกษาปีที่" value="{{ $students->school_level }}">
+							<input type="text" name="school_level" class="form-control" placeholder="กรุณาระบุชั้นประถมศึกษาปีที่" value="{{ $student->school_level }}">
 							<span class="text-danger">{{ $errors->first('school_level') }}</span>
 						</div>
 					</div>
@@ -138,7 +138,7 @@
 					<span class="col-sm-2 col-md-2 text-right">ชื่อผู้ปกครอง  </span>
 					<div class="col-sm-4 col-md-4 text-center">
 						<div class="form-group {{ $errors->has('parent_fname') ? 'has-error' : '' }}">
-							<input type="text" name="parent_fname"  class="form-control" placeholder="กรุณาระบุชื่อผู้ปกครอง" value="{{ $students->parent_fname }}">
+							<input type="text" name="parent_fname"  class="form-control" placeholder="กรุณาระบุชื่อผู้ปกครอง" value="{{ $student->parent_fname }}">
 							<span class="text-danger">{{ $errors->first('parent_fname') }}</span>
 						</div>
 					</div>
@@ -148,7 +148,7 @@
 					<div class="col-sm-4 col-md-4 text-center">
 						<div class="form-group {{ $errors->has('parent_lname') ? 'has-error' : '' }}">
 
-							<input type="text" name="parent_lname" class="form-control" placeholder="กรุณาระบุนามสกุลผู้ปกครอง" value="{{ $students->parent_lname }}">
+							<input type="text" name="parent_lname" class="form-control" placeholder="กรุณาระบุนามสกุลผู้ปกครอง" value="{{ $student->parent_lname }}">
 							<span class="text-danger">{{ $errors->first('parent_lname') }}</span>
 						</div>
 					</div>
@@ -157,7 +157,7 @@
 					<div class="col-sm-4 col-md-4 text-center">
 						<div class="form-group {{ $errors->has('student_relationship') ? 'has-error' : '' }}">
 
-							<input type="text" name="student_relationship"  class="form-control" placeholder="กรุณาระบุความสัมพันธ์กับนักเรียน" value="{{ $students->student_relationship }}">
+							<input type="text" name="student_relationship"  class="form-control" placeholder="กรุณาระบุความสัมพันธ์กับนักเรียน" value="{{ $student->student_relationship }}">
 							<span class="text-danger">{{ $errors->first('student_relationship') }}</span>
 						</div>
 					</div>
@@ -167,7 +167,7 @@
 					<div class="col-sm-4 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('parent_birthdate') ? 'has-error' : '' }}">
 							<div  class="input-group date datepicker" data-date-format="yyyy-mm-dd">
-								<input class="form-control" type="text" name="parent_birthdate" value="{{ $students->birthdate}}" readonly />
+								<input class="form-control" type="text" name="parent_birthdate" value="{{ $student->birthdate}}" readonly />
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-calendar"></i>
 								</span>
@@ -178,7 +178,7 @@
 					</span>
 					<div class="col-sm-4 col-md-4 text-center">
 						<div class="form-group {{ $errors->has('parent_occupation') ? 'has-error' : '' }}">
-							<input type='text' class="form-control" name="parent_occupation" placeholder="กรุณาระบุอาชีพ" value="{{ $students->parent_occupation') }}"  />
+							<input type='text' class="form-control" name="parent_occupation" placeholder="กรุณาระบุอาชีพ" value="{{ $student->parent_occupation }}"  />
 						</div>
 						<span class="text-danger">{{ $errors->first('parent_occupation') }}</span>
 					</div>
@@ -187,7 +187,7 @@
 				<div class="row"><span class="col-sm-2 col-md-2 text-right">บ้านเลขที่</span>
 					<div class="col-sm-4 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('addr') ? 'has-error' : '' }}">
-							<input type='text' class="form-control" name="addr" placeholder="กรุณาระบุบ้านเลขที่" value="{{ $students->addr }}" />
+							<input type='text' class="form-control" name="addr" placeholder="กรุณาระบุบ้านเลขที่" value="{{ $student->addr }}" />
 						</div>
 						<span class="text-danger">{{ $errors->first('addr') }}</span>
 					</div>
@@ -251,7 +251,7 @@
 				<div class="row"><span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์</span>
 					<div class="col-sm-4 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}">
-							<input type='text' class="form-control" name="postcode" placeholder="กรุณาระบุรหัสไปรษณีย์" value="{{ $students->postcode }}"  />
+							<input type='text' class="form-control" name="postcode" placeholder="กรุณาระบุรหัสไปรษณีย์" value="{{ $student->postcode }}"  />
 						</div>
 						<span class="text-danger">{{ $errors->first('postcode') }}</span>
 					</div>
@@ -259,7 +259,7 @@
 					<span class="col-sm-2 col-md-2 text-right">อีเมล</span>
 					<div class="col-sm-4 col-md-4 text-center">
 						<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-							<input type='text' class="form-control" name="email" placeholder="กรุณาระบุอีเมล์" value="{{ $students->email }}"  />
+							<input type='text' class="form-control" name="email" placeholder="กรุณาระบุอีเมล์" value="{{ $student->email }}"  />
 						</div>
 						<span class="text-danger">{{ $errors->first('email') }}</span>
 					</div>
@@ -268,7 +268,7 @@
 					<div class="col-sm-4 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
 
-							<input type='text' class="form-control" name="mobile" placeholder="กรุณาระบุเบอร์โทรศัพท์" value="{{ $students->mobile }}"  />
+							<input type='text' class="form-control" name="mobile" placeholder="กรุณาระบุเบอร์โทรศัพท์" value="{{ $student->mobile }}"  />
 						</div>
 						<span class="text-danger">{{ $errors->first('mobile') }}</span>
 					</div>
@@ -276,7 +276,7 @@
 					<span class="col-sm-2 col-md-2 text-right">เบอร์บ้าน</span>
 					<div class="col-sm-4 col-md-4 text-center">
 						<div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}">
-							<input type='text' class="form-control phone"  name="tel" placeholder="กรุณาระบุเบอร์บ้าน" value="{{ $students->tel }}"  />
+							<input type='text' class="form-control phone"  name="tel" placeholder="กรุณาระบุเบอร์บ้าน" value="{{ $student->tel }}"  />
 							<span class="text-danger">{{ $errors->first('tel') }}</span>
 						</div>
 					</div>
@@ -297,3 +297,4 @@
 </div>
 </div>
 </div>
+@endsection

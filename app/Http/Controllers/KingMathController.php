@@ -254,7 +254,8 @@ public function callStudentEditPage($student_id)
 
     return view('students.student_update')
     ->with('student_id', $student_id)
-    ->with('student', $students);
+    ->with('student', $students)
+    ->with('prov', $prov);
 
 
 
