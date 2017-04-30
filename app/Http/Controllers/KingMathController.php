@@ -227,37 +227,35 @@ public function callTeachRecPage()
 
     }
 
-/**
-* Create teacher info.
-*
-* @return \Illuminate\Http\Response
-*/
-public function callTeacherEditPage($teacher_id)
-{
-    $prov = $this->city->getProvinces();
-    $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
-    $teacher = $this->teacher->getTeacherByID($teacher_id);
-    $address = explode(",", $teacher->addr);
+    /**
+    * Create teacher info.
+    *
+    * @return \Illuminate\Http\Response
+    */
+    public function callTeacherEditPage($teacher_id)
+    {
+        $prov = $this->city->getProvinces();
+        $degree = array("1" => "ปริญญาตรี", "2" => "ปริญญาโท", "3" => "ปริญญาเอก");
+        $teacher = $this->teacher->getTeacherByID($teacher_id);
+        $address = explode(",", $teacher->addr);
 
-    return view('teachers.teacher_update')
-    ->with('teacher_id', $teacher_id)
-    ->with('teacher', $teacher)
-    ->with('address', $address)
-    ->with('prov', $prov)
-    ->with('degree_list', $degree);
-}
+        return view('teachers.teacher_update')
+        ->with('teacher_id', $teacher_id)
+        ->with('teacher', $teacher)
+        ->with('address', $address)
+        ->with('prov', $prov)
+        ->with('degree_list', $degree);
+    }
 
+    public function callStudentEditPage($student_id)
+    {
+        $prov = $this->city->getProvinces();
+        $students = $this->student->getstudentByID($student_id);
 
-
-public function callStudentEditPage($student_id)
-{
-    $prov = $this->city->getProvinces();
-    $students = $this->student->getstudentByID($student_id);
-
-    return view('students.student_update')
-    ->with('student_id', $student_id)
-    ->with('student', $students);
-}
+        return view('students.student_update')
+        ->with('student_id', $student_id)
+        ->with('student', $students);
+    }
 
      /**
       * Show the application teacher information.
@@ -268,22 +266,22 @@ public function callStudentEditPage($student_id)
     {
         $this->validate($request,
           [
-            "firstname" => "required",
-            "lastname" => "required",
+            "firstname" => "required|max:50",
+            "lastname" => "required|max:50",
             "birthdate" => "required|date",
-            "personal_id" => "required",
-            "gender" => "required",
+            "personal_id" => "required|max:13",
+            "gender" => "required|max:1",
             "email" => "required|email|between:3,100",
-            "mobile" => "required",
-            "tel" => "required",
-            "home_no" => "required",
-            "province_id" => "required",
-            "district_id" => "required",
-            "sub_district_id" => "required",
-            "postcode" => "required",
-            "degree" => "required",
-            "major" => "required",
-            "university_name" => "required"
+            "mobile" => "required|max:10",
+            "tel" => "required|max:10",
+            "home_no" => "required|max:25",
+            "province_id" => "required|max:10",
+            "district_id" => "required|max:10",
+            "sub_district_id" => "required|max:10",
+            "postcode" => "required|max:5",
+            "degree" => "required|max:255",
+            "major" => "required|max:255",
+            "university_name" => "required|max:255"
           ],
           [
             "firstname.required" => "โปรดระบุ ชื่อผู้สมัคร",
@@ -307,19 +305,19 @@ public function callStudentEditPage($student_id)
           ]
         );
 
-// concat home number & road name as input_addr
-$input_addr = array(
-    "addr" => $request->input('home_no') . ", " .
-    $request->input('road_name')
-);
-$input = $request->except('_token', 'home_no', 'road_name', 'province_list',
-'district_list', 'sub_district_list');
-$input_teacher = array_merge($input, $input_addr);
+        // concat home number & road name as input_addr
+        $input_addr = array(
+            "addr" => $request->input('home_no') . ", " .
+            $request->input('road_name')
+        );
+        $input = $request->except('_token', 'home_no', 'road_name', 'province_list',
+        'district_list', 'sub_district_list');
+        $input_teacher = array_merge($input, $input_addr);
 
-Teachers::create($input_teacher);
-Toastr::info("บันทึกข้อมูลครูผู้สอนเรียบร้อยแล้ว");
-return back();
-}
+        Teachers::create($input_teacher);
+        Toastr::info("บันทึกข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+        return back();
+    }
 
     /**
      * Show the application classroom management.
@@ -330,22 +328,22 @@ return back();
      {
          $this->validate($request,
            [
-             "firstname" => "required",
-             "lastname" => "required",
+             "firstname" => "required|max:50",
+             "lastname" => "required|max:50",
              "birthdate" => "required|date",
-             "personal_id" => "required",
-             "gender" => "required",
+             "personal_id" => "required|max:13",
+             "gender" => "required|max:1",
              "email" => "required|email|between:3,100",
-             "mobile" => "required",
-             "tel" => "required",
-             "home_no" => "required",
-             "province_id" => "required",
-             "district_id" => "required",
-             "sub_district_id" => "required",
-             "postcode" => "required",
-             "degree" => "required",
-             "major" => "required",
-             "university_name" => "required"
+             "mobile" => "required|max:10",
+             "tel" => "required|max:10",
+             "home_no" => "required|max:255",
+             "province_id" => "required|max:10",
+             "district_id" => "required|max:10",
+             "sub_district_id" => "required|max:10",
+             "postcode" => "required|max:5",
+             "degree" => "required|max:255",
+             "major" => "required|max:255",
+             "university_name" => "required|max:255"
            ],
            [
              "firstname.required" => "โปรดระบุ ชื่อผู้สมัคร",
@@ -367,8 +365,7 @@ return back();
              "major.required" => "โปรดระบุ สาขาวิชา",
              "university_name.required" => "โปรดระบุ มหาวิทยาลัย",
            ]
-         );
-//print_r($request->all());die();
+
          // concat home number & road name as input_addr
          $input_addr = array(
                          "addr" => $request->input('home_no') . ", " .
