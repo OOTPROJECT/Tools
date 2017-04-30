@@ -120,12 +120,7 @@ class KingMathController extends Controller
             "tel.required" => "โปรดระบุ เบอร์บ้าน",
             "parent_occupation.required" => "โปรดระบุ ตำแหน่ง",
 
-            /*    "reg_date.required" => "โปรดระบุ วันที่สมัครเรียน",
-            "std_username.required" => "โปรดระบุ ชื่อบัญชีผู้ใช้",
-            "std_password.required" => "โปรดระบุ รหัสผ่าน 6 ตัวอักษร",
-            "std_fname.required" => "โปรดระบุ ชื่อนักเรียน",
-            "std_lname.required" => "โปรดระบุ นามสกุล",
-            "std_nname.required" => "โปรดระบุ ชื่อเล่น",*/
+
         ]
     );
 
@@ -250,6 +245,18 @@ public function callTeacherEditPage($teacher_id)
     ->with('address', $address)
     ->with('prov', $prov)
     ->with('degree_list', $degree);
+}
+
+
+
+public function callStudentEditPage($student_id)
+{
+    $prov = $this->city->getProvinces();
+    $students = $this->student->getstudentByID($student_id);
+
+    return view('students.student_update')
+    ->with('student_id', $student_id)
+    ->with('student', $students);
 }
 
      /**

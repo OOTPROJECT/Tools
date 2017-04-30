@@ -16,32 +16,35 @@
 		<h3 class="box-title"></h3>
 	</div>
 	<div class="box-body">
-		<div class="panel panel-primary">
-			<div class="panel-heading">
-				<h3 class="panel-title">ข้อมูลผู้สมัคร</h3>
-			</div>
-			<div class="panel-body">
-				<form action="{{ url('/createStudent') }}" method="post">
-					{!! csrf_field() !!}
-					@if(count($errors))
-					<div class="alert alert-danger">
-						<strong>ไม่สามารถบันทึกข้อมูลได้ </strong> เนื่องจากกรอกข้อมูลไม่ครบถ้วน
-						<br/>
-						<ul>
-							@foreach($errors->all() as $error)
-							<li>{{ $error }}</li>
-							@endforeach
-						</ul>
-					</div>
-					@endif
 
-				</br>
+			<div class="panel-body">
+				<form action="{{ url('/updateStudent') }}" method="post">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h3 class="panel-title">ข้อมูลผู้สมัคร {{ $Student->firstname ." "}}  {{ Student->lastname }}</h3>
+						</div>
+
+						<div class="panel-body">
+							{!! csrf_field() !!}
+							@if(count($errors))
+							<div class="alert alert-danger">
+								<strong>Whoops!</strong> There were some problems with your input.
+								<br/>
+								<ul>
+									@foreach($errors->all() as $error)
+									<li>{{ $error }}</li>
+									@endforeach
+								</ul>
+							</div>
+							@endif
+
+
 
 				<div class="row">
 					<span class="col-sm-2 col-md-2 text-right">ชื่อ </span>
 					<div class="col-sm-4 col-md-4 text-right">
 						<div class="form-group {{ $errors->has('firstname') ? 'has-error' : '' }}">
-							<input type="text" name="firstname" class="form-control"placeholder="กรุณาระบุชื่อ" value="{{ old('firstname') }}">
+							<input type="text" name="firstname" class="form-control"placeholder="กรุณาระบุชื่อ" value="{{ $Student->firstname}}">
 							<span class="text-danger">{{ $errors->first('firstname') }}</span>
 						</div>
 					</div>
@@ -49,7 +52,7 @@
 					<div class="col-sm-4 col-md-4 text-right">
 						<div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
 							<input type="text" name="lastname" class="form-control"
-							placeholder="กรุณาระบุนามสกุล" value="{{ old('lastname') }}">
+							placeholder="กรุณาระบุนามสกุล" value="{{ $Student->lastname }}">
 							<span class="text-danger">{{ $errors->first('lastname') }}</span>
 						</div>
 					</div>
@@ -59,7 +62,7 @@
 					<div class="col-sm-10 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('nickname') ? 'has-error' : '' }}">
 							<input type="text" name="nickname" class="form-control"
-							placeholder="กรุณาระบุชื่อเล่น" value="{{ old('nickname') }}">
+							placeholder="กรุณาระบุชื่อเล่น" value="{{ $Student->nickname }}">
 							<span class="text-danger">{{ $errors->first('nickname') }}</span>
 						</div>
 					</div>
@@ -69,7 +72,7 @@
 					<div class="col-sm-10 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('std_birthdate') ? 'has-error' : '' }}">
 							<div class="input-group date datepicker" data-date-format="yyyy-mm-dd">
-								<input class="form-control" type="text" name="std_birthdate" readonly />
+								<input class="form-control" type="text" name="std_birthdate" value="{{ student->parent_birthdate}}" readonly />
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-calendar"></i>
 								</span>
@@ -96,23 +99,26 @@
 				<br>
 				<div class="row"><span class="col-sm-2 col-md-2 text-right">ชื่อสถานศึกษา</span>
 					<div class="col-sm-4 col-md-4 text-center"> <div class="form-group {{ $errors->has('schoolname') ? 'has-error' : '' }}">
-						<input type='text' name="schoolname" class="form-control text-left" placeholder="กรุณาระบุชื่อสถานศึกษา" value="{{ old('schoolname') }}" />
+						<input type='text' name="schoolname" class="form-control text-left" placeholder="กรุณาระบุชื่อสถานศึกษา" value="{{ $Student->schoolname }}" />
 					</div>
 				</div>
 				<div class="col-sm-2 col-md-2 text-right">จังหวัด
 				</div>
 				<div class="col-sm-4 col-md-4 text-center">
-					<input list="opts_province" name="school_province_list"
-					class="form-control"
-					placeholder="กรุณาระบุจังหวัด">
-					<datalist id="opts_province">
+					<select class="form-control" id="province_id" name="province_id">
 						@foreach($prov as $prov_list)
-						<option id="{{ $prov_list->province_id }}"
-							value="{{ $prov_list->province_name }}">
-						</option>
+							@if(student->school_province_id == $prov_list->province_id)
+								<option value="{{ $prov_list->province_id }}" selected="true">
+									{{ $prov_list->province_name }}
+								</option>
+							@else
+								<option value="{{ $prov_list->province_id }}">
+									{{ $prov_list->province_name }}
+								</option>
+							@endif
 						@endforeach
-					</datalist>
-					<input type="hidden" id="school_province_id" name="school_province_id">
+					</select>
+					<input type="hidden" id="school_province_id" name="school_province_id" value="{{ $Student->school_province_id }}">
 
 				</div>
 			</div>
@@ -120,13 +126,8 @@
 			<div class="row">
 				<span class="col-sm-2 col-md-2 text-right">ชั้นประถมศึกษาปีที่ </span>
 				<div class="col-sm-4 col-md-4 text-center">
-
-
-
-
-
 					<div class="form-group {{ $errors->has('school_level') ? 'has-error' : '' }}">
-						<input type="text" name="school_level" class="form-control" placeholder="กรุณาระบุชั้นประถมศึกษาปีที่" value="{{ old('school_level') }}">
+						<input type="text" name="school_level" class="form-control" placeholder="กรุณาระบุชั้นประถมศึกษาปีที่" value="{{ $Student->school_level }}">
 						<span class="text-danger">{{ $errors->first('school_level') }}</span>
 					</div>
 				</div>
@@ -135,7 +136,7 @@
 				<span class="col-sm-2 col-md-2 text-right">ชื่อผู้ปกครอง  </span>
 				<div class="col-sm-4 col-md-4 text-center">
 					<div class="form-group {{ $errors->has('parent_fname') ? 'has-error' : '' }}">
-						<input type="text" name="parent_fname"  class="form-control" placeholder="กรุณาระบุชื่อผู้ปกครอง" value="{{ old('parent_fname') }}">
+						<input type="text" name="parent_fname"  class="form-control" placeholder="กรุณาระบุชื่อผู้ปกครอง" value="{{ $Student->parent_fname }}">
 						<span class="text-danger">{{ $errors->first('parent_fname') }}</span>
 					</div>
 				</div>
@@ -145,7 +146,7 @@
 				<div class="col-sm-4 col-md-4 text-center">
 					<div class="form-group {{ $errors->has('parent_lname') ? 'has-error' : '' }}">
 
-						<input type="text" name="parent_lname" class="form-control" placeholder="กรุณาระบุนามสกุลผู้ปกครอง" value="{{ old('parent_lname') }}">
+						<input type="text" name="parent_lname" class="form-control" placeholder="กรุณาระบุนามสกุลผู้ปกครอง" value="{{ $Student->parent_lname }}">
 						<span class="text-danger">{{ $errors->first('parent_lname') }}</span>
 					</div>
 				</div>
@@ -154,7 +155,7 @@
 				<div class="col-sm-4 col-md-4 text-center">
 					<div class="form-group {{ $errors->has('student_relationship') ? 'has-error' : '' }}">
 
-						<input type="text" name="student_relationship"  class="form-control" placeholder="กรุณาระบุความสัมพันธ์กับนักเรียน" value="{{ old('student_relationship') }}">
+						<input type="text" name="student_relationship"  class="form-control" placeholder="กรุณาระบุความสัมพันธ์กับนักเรียน" value="{{ $Student->student_relationship }}">
 						<span class="text-danger">{{ $errors->first('student_relationship') }}</span>
 					</div>
 				</div>
@@ -165,7 +166,7 @@
 					<div class="form-group {{ $errors->has('parent_birthdate') ? 'has-error' : '' }}">
 
 						<div  class="input-group date datepicker" data-date-format="yyyy-mm-dd">
-							<input class="form-control" type="text" name="parent_birthdate" readonly />
+							<input class="form-control" type="text" name="parent_birthdate" value="{{ $student->birthdate}}" readonly />
 							<span class="input-group-addon">
 								<i class="glyphicon glyphicon-calendar"></i>
 							</span>
@@ -178,7 +179,7 @@
 				</span>
 				<div class="col-sm-4 col-md-4 text-center">
 					<div class="form-group {{ $errors->has('parent_occupation') ? 'has-error' : '' }}">
-						<input type='text' class="form-control" name="parent_occupation" placeholder="กรุณาระบุอาชีพ" value="{{ old('parent_occupation') }}"  />
+						<input type='text' class="form-control" name="parent_occupation" placeholder="กรุณาระบุอาชีพ" value="{{ $Student->parent_occupation') }}"  />
 					</div>
 					<span class="text-danger">{{ $errors->first('parent_occupation') }}</span>
 				</div>
@@ -187,7 +188,7 @@
 			<div class="row"><span class="col-sm-2 col-md-2 text-right">บ้านเลขที่</span>
 				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('addr') ? 'has-error' : '' }}">
-						<input type='text' class="form-control" name="addr" placeholder="กรุณาระบุบ้านเลขที่" value="{{ old('addr') }}" />
+						<input type='text' class="form-control" name="addr" placeholder="กรุณาระบุบ้านเลขที่" value="{{ $Student->addr }}" />
 					</div>
 					<span class="text-danger">{{ $errors->first('addr') }}</span>
 				</div>
@@ -252,7 +253,7 @@
 			<div class="row"><span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์</span>
 				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}">
-						<input type='text' class="form-control" name="postcode" placeholder="กรุณาระบุรหัสไปรษณีย์" value="{{ old('postcode') }}"  />
+						<input type='text' class="form-control" name="postcode" placeholder="กรุณาระบุรหัสไปรษณีย์" value="{{ $Student->postcode }}"  />
 					</div>
 					<span class="text-danger">{{ $errors->first('postcode') }}</span>
 				</div>
@@ -260,7 +261,7 @@
 				<span class="col-sm-2 col-md-2 text-right">อีเมล</span>
 				<div class="col-sm-4 col-md-4 text-center">
 					<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-						<input type='text' class="form-control" name="email" placeholder="กรุณาระบุอีเมล์" value="{{ old('email') }}"  />
+						<input type='text' class="form-control" name="email" placeholder="กรุณาระบุอีเมล์" value="{{ $Student->email }}"  />
 					</div>
 					<span class="text-danger">{{ $errors->first('email') }}</span>
 				</div>
@@ -269,7 +270,7 @@
 				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
 
-						<input type='text' class="form-control" name="mobile" placeholder="กรุณาระบุเบอร์โทรศัพท์" value="{{ old('mobile') }}"  />
+						<input type='text' class="form-control" name="mobile" placeholder="กรุณาระบุเบอร์โทรศัพท์" value="{{ $Student->mobile }}"  />
 					</div>
 					<span class="text-danger">{{ $errors->first('mobile') }}</span>
 				</div>
@@ -277,7 +278,7 @@
 				<span class="col-sm-2 col-md-2 text-right">เบอร์บ้าน</span>
 				<div class="col-sm-4 col-md-4 text-center">
 					<div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}">
-						<input type='text' class="form-control phone"  name="tel" placeholder="กรุณาระบุเบอร์บ้าน" value="{{ old('tel') }}"  />
+						<input type='text' class="form-control phone"  name="tel" placeholder="กรุณาระบุเบอร์บ้าน" value="{{ $Student->tel }}"  />
 						<span class="text-danger">{{ $errors->first('tel') }}</span>
 					</div>
 				</div>
@@ -297,155 +298,3 @@
 </div>
 </div>
 </div>
-
-
-<script type="text/javascript">
-
-
-var prov_list_id;
-var prov_list_value;
-$('input[name=school_province_list]').on('input',function() {
-	var selectedOption = $('option[value="'+$(this).val()+'"]');
-	if(selectedOption.length) {
-		prov_list_id = selectedOption.attr('id');
-		prov_list_value = selectedOption.attr('value');
-		$('input[name=school_province_list]').val(prov_list_value);
-		$('input[name=school_province_id]').val(prov_list_id);
-	}
-});
-
-
-
-
-
-$(document).ready(function(){
-	var prov_list_id;
-	var prov_list_value;
-	var dist_list_id;
-	var dist_list_value;
-	var sub_dist_list_id;
-	var sub_dist_list_value;
-	$('input[name=province_list]').on('input',function() {
-		var selectedOption = $('option[value="'+$(this).val()+'"]');
-		if(selectedOption.length) {
-			prov_list_id = selectedOption.attr('id');
-			prov_list_value = selectedOption.attr('value');
-			$('input[name=province_list]').val(prov_list_value);
-			$('input[name=province_id]').val(prov_list_id);
-
-			getDistrict(prov_list_id);
-
-		}
-	});
-
-	$('input[name=district_list]').on('input',function() {
-		var selectedOption = $('option[value="'+$(this).val()+'"]');
-		if(selectedOption.length) {
-			dist_list_id = selectedOption.attr('id');
-			dist_list_value = selectedOption.attr('value');
-			$('input[name=district_list]').val(dist_list_value);
-			$('input[name=district_id]').val(dist_list_id);
-
-			getSubDistrict(prov_list_id, dist_list_id);
-
-		}
-	});
-
-	$('input[name=sub_district_list]').on('input',function() {
-		var selectedOption = $('option[value="'+$(this).val()+'"]');
-		if(selectedOption.length) {
-			sub_dist_list_id = selectedOption.attr('id');
-			sub_dist_list_value = selectedOption.attr('value');
-			$('input[name=sub_district_list]').val(sub_dist_list_value);
-			$('input[name=sub_district_id]').val(sub_dist_list_id);
-		}
-	});
-
-	$('input[name=district_list]').on( 'keyup', function( e ) {
-		if( e.which == 9 ) {
-			//console.log( e.target.href );
-			chkProvinceInput();
-		}
-	} );
-
-	$('input[name=sub_district_list]').on( 'keyup', function( e ) {
-		if( e.which == 9 ) {
-			//console.log( e.target.href );
-			chkDistrictInput();
-		}
-	} );
-
-	$('input[name=postcode]').on( 'keyup', function( e ) {
-		if( e.which == 9 ) {
-			//console.log( e.target.href );
-			chkSubDistrictInput();
-		}
-	} );
-});
-
-function chkProvinceInput() {
-	var prov_id
-	prov_id = $('input[name=province_id]').val();
-
-	if(prov_id.length == 0) {
-		$('input[name=province_list]').val("");
-	}
-}
-
-function chkDistrictInput() {
-	var dist_id
-	dist_id = $('input[name=district_id]').val();
-
-	if(dist_id.length == 0) {
-		$('input[name=district_list]').val("");
-	}
-}
-
-function chkSubDistrictInput() {
-	var sub_dist_id
-	sub_dist_id = $('input[name=sub_district_id]').val();
-	if(sub_dist_id.length == 0) {
-		$('input[name=sub_district_list]').val("");
-	}
-}
-
-function getDistrict(prov_id) {
-	$.ajax({
-		type: 'GET',
-		url: "{{ url('/districts') }}",
-		data: { prov_id: prov_id },
-		dataType: 'json',
-		success: function (data) {
-			var select = $("#opts_district");
-			select.empty();
-			$.each(data, function (index, dist_data) {
-				select.append($('<option/>', {
-					id: dist_data.district_id,
-					value: dist_data.district_name
-				}));
-			});
-		}
-	});
-}
-
-function getSubDistrict(prov_id, dist_id) {
-	$.ajax({
-		type: 'GET',
-		url: "{{ url('/sub_districts') }}",
-		data: { prov_id: prov_id, dist_id: dist_id },
-		dataType: 'json',
-		success: function (data) {
-			var select = $("#opts_sub_district");
-			select.empty();
-			$.each(data, function (index, sub_dist_data) {
-				select.append($('<option/>', {
-					id: sub_dist_data.sub_district_id,
-					value: sub_dist_data.sub_district_name
-				}));
-			});
-		}
-	});
-};
-
-</script>
-@endsection
