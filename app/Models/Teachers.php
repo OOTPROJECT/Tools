@@ -56,7 +56,7 @@ class Teachers extends Model
 
          $course_enroll = \DB::select(
                             "SELECT teacher_id, firstname, lastname, course_schedule_id,
-                            course_name, day, start_time, end_time, course_hours,
+                            course_name, day, start_time, end_time, number_of_time,
                             start_date, end_date FROM v_course_schedule_payroll
                             WHERE CONCAT(YEAR(end_date), '-',
                             LPAD(MONTH(end_date), 2, '0')) = '" . $current_month_year .

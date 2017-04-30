@@ -40,7 +40,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('firstname') ? 'has-error' : '' }}">
                                 <input type="text" name="firstname" class="form-control"
-                                placeholder="" value="{{ old('firstname') }}">
+                                placeholder="กรุณาระบุ ชื่อ" value="{{ old('firstname') }}">
                                 <span class="text-danger">{{ $errors->first('firstname') }}</span>
                             </div>
                         </div>
@@ -48,7 +48,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
                                 <input type="text" name="lastname" class="form-control"
-                                placeholder="" value="{{ old('lastname') }}">
+                                placeholder="กรุณาระบุ นามสกุล" value="{{ old('lastname') }}">
                                 <span class="text-danger">{{ $errors->first('lastname') }}</span>
                             </div>
                         </div>
@@ -58,7 +58,8 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('birthdate') ? 'has-error' : '' }}">
                                 <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-                                    <input class="form-control" type="text" name="birthdate" value="{{ old('birthdate') }}" readonly />
+                                    <input class="form-control" type="text" name="birthdate" value="{{ old('birthdate') }}"
+                                    placeholder="กรุณาระบุ วันเกิด" readonly />
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
@@ -70,7 +71,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('personal_id') ? 'has-error' : '' }}">
                                 <input type="text" name="personal_id" class="form-control"
-                                placeholder="" value="{{ old('personal_id') }}" maxlength="13">
+                                placeholder="กรุณาระบุ รหัสประจำตัวประชาชน" value="{{ old('personal_id') }}" maxlength="13">
                                 <span class="text-danger">{{ $errors->first('personal_id') }}</span>
                             </div>
                         </div>
@@ -80,10 +81,12 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('gender') ? 'has-error' : '' }}">
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" value="M">&nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
+                                    <input type="radio" name="gender" value="M">
+                                    &nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" value="F">หญิง&nbsp;&nbsp;&nbsp;
+                                    <input type="radio" name="gender" value="F">
+                                    หญิง&nbsp;&nbsp;&nbsp;
                                 </label>
                                 <span class="text-danger">{{ $errors->first('gender') }}</span>
                             </div>
@@ -92,7 +95,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
                                 <input type="text" name="email" class="form-control"
-                                placeholder="" value="{{ old('email') }}">
+                                placeholder="กรุณาระบุ อีเมล์" value="{{ old('email') }}">
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                             </div>
                         </div>
@@ -101,7 +104,7 @@
                         <span class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์:</span>
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}" id="mobile">
-                                <input type="text" name="mobile" class="form-control" placeholder=""
+                                <input type="text" name="mobile" class="form-control" placeholder="กรุณาระบุ เบอร์โทรศัพท์"
                                 value="{{ old('mobile') }}" maxlength="10" onKeyUp="inputDigitsMobile(this);">
                                 <span class="text-danger">{{ $errors->first('mobile') }}</span>
                             </div>
@@ -110,7 +113,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}" id="tel">
                                 <input type="text" name="tel" class="form-control"
-                                placeholder="" value="{{ old('tel') }}" maxlength="10" onKeyUp="inputDigitsTel(this);">
+                                placeholder="กรุณาระบุ เบอร์บ้าน" value="{{ old('tel') }}" maxlength="10" onKeyUp="inputDigitsTel(this);">
                                 <span class="text-danger">{{ $errors->first('tel') }}</span>
                             </div>
                         </div>
@@ -125,7 +128,7 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('home_no') ? 'has-error' : '' }}">
                                 <input type="text" name="home_no" class="form-control"
-                                placeholder="" value="{{ old('home_no') }}">
+                                placeholder="กรุณาระบุ บ้านเลขที่" value="{{ old('home_no') }}">
                                 <span class="text-danger">{{ $errors->first('home_no') }}</span>
                             </div>
                         </div>
@@ -133,7 +136,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('road_name') ? 'has-error' : '' }}">
                                 <input type="text" name="road_name" class="form-control"
-                                placeholder="" value="{{ old('road_name') }}">
+                                placeholder="กรุณาระบุ ถนน" value="{{ old('road_name') }}">
                                 <span class="text-danger">{{ $errors->first('road_name') }}</span>
                             </div>
                         </div>
@@ -141,16 +144,9 @@
                     <div class="row">
                         <span class="col-sm-2 col-md-2 text-right">จังหวัด:</span>
                         <div class="col-sm-4 col-md-4">
-                            <!--<select class="form-control" id="province_id" name="province_id">
-                                @foreach($prov as $prov_list)
-                                    <option value="{{ $prov_list->province_id }}">
-                                        {{ $prov_list->province_name }}
-                                    </option>
-                                @endforeach
-                            </select>-->
                             <input list="opts_province" name="province_list"
                                 class="form-control"
-                                placeholder="กรุณาระบุจังหวัด">
+                                placeholder="กรุณาระบุ จังหวัด">
                             <datalist id="opts_province">
                                 @foreach($prov as $prov_list)
                                     <option id="{{ $prov_list->province_id }}"
@@ -162,11 +158,9 @@
                         </div>
                         <span class="col-sm-2 col-md-2 text-right">เขต/อำเภอ:</span>
                         <div class="col-sm-4 col-md-4 text-left">
-                            <!--<select class="form-control" id="district_id" name="district_id">
-                            </select>-->
                             <input list="opts_district" name="district_list"
                                 class="form-control"
-                                placeholder="กรุณาระบุเขต/อำเภอ"
+                                placeholder="กรุณาระบุ เขต/อำเภอ"
                                 onclick="chkProvinceInput();">
                             <datalist id="opts_district">
                             </datalist>
@@ -176,11 +170,9 @@
                     <div class="row">
                         <span class="col-sm-2 col-md-2 text-right">แขวง/ตำบล:</span>
                         <div class="col-sm-4 col-md-4 text-left">
-                            <!--<select class="form-control" id="sub_district_id" name="sub_district_id">
-                            </select>-->
                             <input list="opts_sub_district" name="sub_district_list"
                                 class="form-control"
-                                placeholder="กรุณาระบุแขวง/ตำบล"
+                                placeholder="กรุณาระบุ แขวง/ตำบล"
                                 onclick="chkDistrictInput();">
                             <datalist id="opts_sub_district">
                             </datalist>
@@ -190,7 +182,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}" id="postcode" >
                                 <input type="text" name="postcode" class="form-control"
-                                    placeholder="" value="{{ old('postcode') }}"
+                                    placeholder="กรุณาระบุ รหัสไปรษณีย์" value="{{ old('postcode') }}"
                                     onclick="chkSubDistrictInput();" onKeyUp="inputDigits(this);">
                                 <span class="text-danger">{{ $errors->first('postcode') }}</span>
                             </div>
@@ -205,6 +197,7 @@
                         <span class="col-sm-2 col-md-2 text-right">ระดับ:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <select class="form-control" id="degree" name="degree">
+                                <option value="">กรุณาเลือกระดับ</option>
                                 @foreach($degree_list as $degree_key => $degree_val)
                                 <option value="{{ $degree_val }}">
                                     {{ $degree_val }}
@@ -216,7 +209,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('major') ? 'has-error' : '' }}">
                                 <input type="text" name="major" class="form-control"
-                                placeholder="" value="{{ old('major') }}">
+                                placeholder="กรุณาระบุ สาขา" value="{{ old('major') }}">
                                 <span class="text-danger">{{ $errors->first('major') }}</span>
                             </div>
                         </div>
@@ -226,7 +219,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('university_name') ? 'has-error' : '' }}">
                                 <input type="text" name="university_name" class="form-control"
-                                placeholder="" value="{{ old('university_name') }}">
+                                placeholder="กรุณาระบุ มหาวิทยาลัย" value="{{ old('university_name') }}">
                                 <span class="text-danger">{{ $errors->first('university_name') }}</span>
                             </div>
                         </div>
@@ -234,7 +227,7 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-12 text-center">
-                <button type="submit" class="btn btn-primary">บันทึก</button>
+                <button type="submit" class="btn btn-success">บันทึก</button>
                 <a href="" class="btn btn-default">ยกเลิก</a>
             </div>
         </form>

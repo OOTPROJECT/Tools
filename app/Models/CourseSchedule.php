@@ -22,7 +22,7 @@ class CourseSchedule extends Model
         $this->table = "v_course_schedule";
         $arr_course_schedule = CourseSchedule::select('course_schedule_id', 'course_name', 'day',
                                 'start_time','end_time', 'firstname', 'lastname', 'room_name',
-                                'start_date', 'end_date', 'course_hours', 'status',
+                                'start_date', 'end_date', 'number_of_time', 'status',
                                 'created_at')
                                 ->orderBy('created_at', 'DESC')->get();
 

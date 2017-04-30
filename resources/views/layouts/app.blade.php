@@ -29,7 +29,11 @@
     <link href="{{asset('/css/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css"/>
     <!-- datatable Bootstrap4 cdn -->
     <link href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.0/js/select2.full.min.js"></script>
+
+    <!-- jQuery 2.1.4 -->
+    <script src="{{ asset('/plugins/jQuery/jQuery-2.1.4.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js" ></script>
+    <script src="https://cdn.datatables.net/1.10.13/js/dataTables.bootstrap4.min.js" ></script>
     @yield('header-extra')
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -69,10 +73,10 @@
                         <!-- User Account Menu -->
                         <li class="dropdown user user-menu">
                             <!-- Menu Toggle Button -->
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="testProfile">
                                 <p>Profile</p>
                             </a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu" aria-labelledby="testProfile">
                                 <!-- The user image in the menu -->
                                 <li class="user-header">
                                     <img src="{{ url(Auth::user()->image) }}" class="img-circle" alt="User Image"/>
@@ -143,10 +147,10 @@
                             <i class="fa fa-user" aria-hidden="true"></i> <span>สมัครสอนพิเศษ</span></a></li>
                             <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('teacherInfo') }}">
                                 <i class="fa fa-file-text-o" aria-hidden="true"></i> <span>ข้อมูลครู</span></a></li>
-                                    <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('HireCal') }}">
-                                        <i class="fa fa-calculator" aria-hidden="true"></i> <span>คำนวณค่าจ้างครู</span></a></li>
+                                    <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('hireCal') }}">
+                                        <i class="fa fa-calculator" aria-hidden="true"></i> <span>ข้อมูลค่าจ้างสอน</span></a></li>
                                         <li class="header">คลาสเรียน</li>
-                                        <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('ClassMgt') }}">
+                                        <li class="{{ Request::is('profile*') ? 'active' : '' }}"><a href="{{ url('classMgt') }}">
                                             <i class="fa fa-calendar" aria-hidden="true"></i> <span>จัดคลาสเรียน</span></a></li>
 
                                         </ul><!-- /.sidebar-menu -->

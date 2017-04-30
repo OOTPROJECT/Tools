@@ -8,7 +8,7 @@ Log in
 <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
-            <a href="{{ url('/') }}"><b>Admin</b>LTE</a>
+            <a href="{{ url('/') }}"><b>Tutoring</b> School</a>
         </div><!-- /.login-logo -->
 
         @if (count($errors) > 0)
@@ -45,7 +45,7 @@ Log in
                         </div>
                     </div><!-- /.col -->
                     <div class="col-xs-4">
-                        <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+                        <button type="submit" class="btn btn-success btn-block btn-flat">Sign In</button>
                     </div><!-- /.col -->
                 </div>
             </form>
