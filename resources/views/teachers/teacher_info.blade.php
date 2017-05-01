@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@extends('layouts.partials.scripts')
 
 @section('htmlheader_title')
 รายชื่อครู
@@ -36,7 +35,7 @@
                         <td>{{$value->firstname}}</td>
                         <td>{{$value->lastname}}</td>
                         <td>{{$value->personal_id}}</td>
-                        <td>{{$value->gender}}</td>
+                        <td>{{$value->getGender()}}</td>
                         <td>{{$value->mobile}}</td>
                         <td>{{$value->email}}</td>
                         <td>
@@ -54,10 +53,7 @@
     </div>
     <!-- /.box-body -->
 </div>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
-</script>
+
+
 
 @endsection

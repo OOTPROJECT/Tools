@@ -233,7 +233,6 @@
 </div>
 
 <script type="text/javascript">
-
     $(document).ready(function(){
 
         var provid = $('#provid').val();
@@ -324,7 +323,7 @@
         });
     }
 
-    $("#province_id").change(function () { //$("#elementId :selected").text();
+    $("#province_id").change(function () {
         var prov_id = $('#province_id :selected').val();
 
         var select = $("#sub_district_id");
@@ -342,7 +341,7 @@
         var dist_id = $('#district_id :selected').val();
 
         getSubDistrict(prov_id, dist_id, "");
-    })
+    });
 
     function inputDigitsMobile(sensor){
         var regExp = /[0-9]$/;
