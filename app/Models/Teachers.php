@@ -66,8 +66,9 @@ class Teachers extends Model
         return $course_enroll;
      }
 
-     public function getGender(){
-         if ("F") {
+     public function getGender($gender){
+         
+         if ($gender == "F") {
              return "หญิง";
          }
          else {
