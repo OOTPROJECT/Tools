@@ -181,7 +181,7 @@
           </div>
           <div role="tabpanel" class="tab-pane" id="courseInfo">
               <!-- Class Schedule table -->
-              <table id="tableClassMgt" class="table table-striped table-bordered" width="100%" cellspacing="0">
+              <table id="tableClassMgt11" class="table table-striped table-bordered" width="100%" cellspacing="0">
                   <thead>
                       <tr>
                           <th class="text-left">ชื่อคอร์ส</th>
@@ -197,33 +197,7 @@
                       </tr>
                   </thead>
                   <tbody>
-                      <!--@if(count($arr_course_schedule) > 0)
-                          @foreach($arr_course_schedule as $cs)
-                              <tr>
-                                  <td class="text-left">{{ $cs->course_name }}</td>
-                                  <td class="text-center">{{ $cs->day }}</td>
-                                  <td class="text-center">{{ $cs->start_time }} - {{ $cs->end_time }} น.</td>
-                                  <td class="text-left">{{ $cs->firstname }} {{ $cs->lastname }}</td>
-                                  <td class="text-left">{{ $cs->room_name }}</td>
-                                  <td class="text-left">{{ $cs->start_date }} - {{ $cs->end_date }}</td>
-                                  <td class="text-center">{{ $cs->status }}</td>
-                                  <td class="text-left">{{ $cs->created_at }}</td>
-                                  <td class="text-center">
-                                      <a href="javaScript:;"
-                                          onclick="deleteCourseSchedule({{ $cs->course_schedule_id }});">
-                                          <i class="fa fa-trash-o" aria-hidden="true"></i>
-                                      </a>
-                                  </td>
-                              </tr>
-                          @endforeach
-                      @else
-                          <tr>
-                              <td colspan="9" class="text-center">ไม่มีข้อมูล</td>
-                              @for($i=0; $i<8; $i++)
-                                  <td style="display: none;"></td>
-                              @endfor
-                          </tr>
-                      @endif-->
+
                   </tbody>
               </table>
           </div>
