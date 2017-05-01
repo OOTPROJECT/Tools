@@ -584,10 +584,13 @@ return back();
 
              return array("resp" => false, "text" => "ไม่สามารถลงทะเบียนเรียนได้");
          }
-         if(count($course_enroll)=$std_max){
+
+        /* if(count($course_enroll)=$std_max){
              CourseSchedule::where('course_schedule_id', $cs_id)
                         ->update('status',"full");
-         }
+         }else{
+
+         }*/
      }
 
 }
