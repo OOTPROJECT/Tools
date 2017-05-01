@@ -19,13 +19,22 @@ class CourseEnroll extends Model
 
             return $course_enroll;
         }
-        
+
         public function courseenrollByStudentID($student_id) {
 
             $this->table = "course_enroll";
             $course_enroll = CourseEnroll::where('student_id', '=', $student_id)->first();
 
             return $course_enroll;
+        }
+
+        function getAllCourseEnroll() {
+
+            $this->table = "v_course_enroll";
+            $arr_courseEnroll_list = CourseEnroll::orderBy('course_name','DESC')->get();
+                                //    ->orderBy('created_at', 'DESC')->get();
+
+            return $arr_courseEnroll_list;
         }
 
 }

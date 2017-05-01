@@ -181,23 +181,36 @@
           </div>
           <div role="tabpanel" class="tab-pane" id="courseInfo">
               <!-- Class Schedule table -->
-              <table id="tableClassMgt11" class="table table-striped table-bordered" width="100%" cellspacing="0">
+              <table id="tableClassMgt" class="table table-striped table-bordered" width="100%" cellspacing="0">
                   <thead>
                       <tr>
                           <th class="text-left">ชื่อคอร์ส</th>
                           <th class="text-center">วัน</th>
                           <th class="text-center">เวลา</th>
-                          <th class="text-left">ครูผู้สอน</th>
                           <th class="text-left">ห้องเรียน</th>
                           <th class="text-left">วันที่เริ่มเรียน-ถึงวันที่</th>
                           <th class="text-center">จำนวนครั้งที่เรียน</th>
                           <th class="text-left">ราคา</th>
                           <th class="text-left">วันที่สร้างข้อมูล</th>
-                          <th class="text-center">จัดการ</th>
+                          <th class="text-center">ชื่อ</th>
+                          <th class="text-center">นามสกุล</th>
                       </tr>
                   </thead>
                   <tbody>
-
+                      @foreach($arr_courseEnroll_list as $ce_list)
+                      <tr>
+                          <td class="text-center">{{$ce_list->course_name}}</td>
+                          <td class="text-center">{{$ce_list->day}}</td>
+                          <td class="text-center">{{$ce_list->start_time}} - {{$ce_list->end_time}} น.</td>
+                          <td class="text-center">{{$ce_list->room_name}}</td>
+                          <td class="text-center">{{$ce_list->start_date}}</td>
+                          <td class="text-center">{{$ce_list->end_date}}</td>
+                          <td class="text-center">{{$ce_list->number_of_time}}</td>
+                          <td class="text-center">{{$ce_list->price}}</td>
+                          <td class="text-center">{{$ce_list->firstname}}</td>
+                          <td class="text-center">{{$ce_list->lastname}}</td>
+                      </tr>
+                      @endforeach
                   </tbody>
               </table>
           </div>

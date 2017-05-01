@@ -652,13 +652,12 @@ public function callStudentEditPage($student_id)
        $all_subject = $this->subject->getSubject();
        $arr_course_schedule = $this->course_schedule->getAllCourseSchedule()->where('status','=','เปิด')
                                 ->orderBy('course_schedule_id','DESC')->get();
-        //$arr_courseEnroll_list=$this->course_enroll->getAllCourseEnroll();
-
+        $arr_courseEnroll_list=$this->course_enroll->getAllCourseEnroll();
 
        return view('course.course_enroll')
                 ->with('all_subject',$all_subject)
-                ->with('arr_course_schedule',$arr_course_schedule);
-                //->with('arr_courseEnroll_list',$arr_courseEnroll_list);
+                ->with('arr_course_schedule',$arr_course_schedule)
+                ->with('arr_courseEnroll_list',$arr_courseEnroll_list);
     }
     /**
     * Show the get course schedule by subject.
@@ -707,12 +706,10 @@ public function callStudentEditPage($student_id)
                   $chgStatus=CourseSchedule::where('course_schedule_id','=', $cs_id)
                              ->update(["status"=>"ปิด"]);
              }
-//echo "success";
              return array("resp" => true, "text" => "ลงทะเบียนเรียนเรียบร้อยแล้ว");
 
          }
          else {
-//echo "fail";
              return array("resp" => false, "text" => "ไม่สามารถลงทะเบียนเรียนได้");
          }
 
