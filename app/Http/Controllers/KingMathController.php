@@ -707,12 +707,12 @@ public function callStudentEditPage($student_id)
                   $chgStatus=CourseSchedule::where('course_schedule_id','=', $cs_id)
                              ->update(["status"=>"ปิด"]);
              }
-echo "success";
+//echo "success";
              return array("resp" => true, "text" => "ลงทะเบียนเรียนเรียบร้อยแล้ว");
 
          }
          else {
-echo "fail";
+//echo "fail";
              return array("resp" => false, "text" => "ไม่สามารถลงทะเบียนเรียนได้");
          }
 
