@@ -159,7 +159,7 @@ public function callStudentsInfoPage()
 {
     $allStudents = $this->student->getAllStudentsInfo();
     return view('students.student_info')
-    ->with('allStudents', $allStudents);
+    ->with('allStudents', $allStudents); 
 }
 
 /**
