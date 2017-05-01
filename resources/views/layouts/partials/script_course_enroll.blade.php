@@ -20,14 +20,26 @@ $(document).ready(function() {
 
 } );
 
-$("#showStudent").hide();
+
 //Show Searched Student
 function showStudent(){
     var student_fname = $('#std_fname').val();
     var student_lname = $('#std_lname').val();
     console.log(student_fname);
     console.log(student_lname);
+    if((student_fname.length == 0) && (student_lname.length == 0)){
+            $("#span-name").show();
+                $("#span-lname").show();
+        }else if(student_lname.length == 0){
+            $("#span-lname").show();
+        }else if(student_fname.length == 0){
+            $("#span-name").show();
+    }else{
     //clear table
+    $("#span-name").hide();
+    $("#span-lname").hide();
+    $("#showCourse").hide();
+    $("#showStudent").hide();
     $('#tableStudentBody').empty();
 
     //get data
@@ -44,9 +56,10 @@ function showStudent(){
                         $('<td class="text-center">').text(arr_student.firstname),
                         $('<td class="text-center">').text(arr_student.lastname),
                         $('<td class="text-center">').text(arr_student.school_level),
-                        $('<input type="hidden" id="std_id">').text(arr_student.student_id)
+                        $('<input type="hidden" id="std_id">').val(arr_student.student_id)
                     ).appendTo('#tableStudent');
                 });
+                $("#showCourse").show();
             }
             else {
                 var $tr = $('<tr>').append(
@@ -56,6 +69,8 @@ function showStudent(){
         }
     });
     $("#showStudent").show();
+
+}
 }
 //Show list course
 function selectSubject() {
@@ -87,9 +102,10 @@ function selectSubject() {
                         $('<td class="text-center">').text(course_schedule.price),
                         $('<td class="text-center">').text(course_schedule.number_of_time),
                         $('<td class="text-center">').text(course_schedule.status),
-                        //$('<td><a href="javaScript:; onclick="enrollCourse({{'course_schedule.course_schedule_id'}},{{'std_id'}});" "><i class="fa fa-check-circle-o" aria-hidden="true">'),
-                        $('<td class="text-center"><input type="radio">'),
-                        $('<input type="hidden" id="cs_id">').text(course_schedule.course_schedule_id)
+                        $('<td><button type="submit" class="btn btn-success" onclick="enrollCourse();">ซื้อ</button>'),
+
+                        //$('<td class="text-center"><input type="radio">'),
+                        $('<input type="hidden" id="cs_id">').val(course_schedule.course_schedule_id)
                     ).appendTo('#tableCourse');
                 });
             }
@@ -101,7 +117,12 @@ function selectSubject() {
         }
     });
 }
-function enrollCourse(cs_id,std_id){
+function enrollCourse(){
+    //alert($('#std_id').val());
+    //alert($('#cs_id').val());
+    //var cs_id = tableCourse.$('input, select').serialize();
+    var std_id = $('#std_id').val();
+    var cs_id = $('#cs_id').val();
     console.log(std_id);
     console.log(cs_id);
 
@@ -109,7 +130,7 @@ function enrollCourse(cs_id,std_id){
     $.ajax({
         type: 'GET',
         url: "{{ url('/createEnroll') }}",
-        data: {cs_id: cs_id, std_id: std_id,  _token: "{{ csrf_token() }}"},
+        data: {course_schedule_id: cs_id, student_id: std_id,  _token: "{{ csrf_token() }}"},
         dataType: 'json',
         success: function (data) { console.log(data.length);
             //console.log(data);

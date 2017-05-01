@@ -654,14 +654,18 @@ public function callStudentEditPage($student_id)
        */
      public function createEnroll(Request $request)
      {
-         $cs_id = trim($request->input('cs_id'));
+         //$cs_id = trim($request->input('course_schedule_id'));
+        // $std_id = trim($request->input('student_id'));
+
          $input = $request->except('_token');
+         //print_r($input); exit();
          $resp = CourseEnroll::create($input)->saveOrFail();
-         $course_enroll = $this->course_enroll->getcourseEnrollByCSId($cs_id);
-         $std_max = $this->course_schedule->getMaxByCSId($cs_id);
+
+         //$course_enroll = $this->course_enroll->getcourseEnrollByCSId($cs_id);
+         //$std_max = $this->course_schedule->getMaxByCSId($cs_id);
          if($resp == 1) {
 
-             return array("resp" => true, "text" => "]'ลงทะเบียนเรียนเรียบร้อยแล้ว");
+             return array("resp" => true, "text" => "ลงทะเบียนเรียนเรียบร้อยแล้ว");
 
          }
          else {

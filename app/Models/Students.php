@@ -53,26 +53,24 @@ class Students extends Model
     protected $dates = ['deleted_at'];
 
     public function getAllStudentsInfo() {
-        $all_Students = students::orderBy('firstname')->get();
+        $all_Students = Students::orderBy('firstname')->get();
         return $all_Students;
     }
 
     public function getStudentByID($student_id) {
-        $student = new students();
-        $student = students::where('student_id' , '=', $student_id)->first();
+        $student = new student();
+        $student = Students::where('student_id' , '=', $student_id)->first();
+
         return $student;
     }
     //get student info
     function getStudentInfo($firstname, $lastname) {
-        $arr_student = Students::where('firstname','=', $firstname)->get();
+        $arr_student = Students::where('firstname','=', $firstname)
+                        ->where('lastname','=', $lastname)->get();
 
         return $arr_student;
     }
-    public function getAllStude() {
-        $all_students = students::where('deleted_at' , '=', null)->orderBy('firstname')->get();
 
-        return $all_students;
-    }
 
 
 

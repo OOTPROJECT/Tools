@@ -18,7 +18,6 @@
     </div>
     <!---ข้อมูลนักเรียน-->
     <div class="box-body">
-        <form action="{{ url('/createEnroll') }}" method="get">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">เลือกนักเรียน</h3>
@@ -46,10 +45,12 @@
                         <span class="col-sm-2 col-md-1 text-right">ชื่อ:</span>
                             <div class="col-sm-4 col-md-2 text-left">
                                 <input type="text" id="std_fname" name="std_fname">
+                                <span id="span-name"class="text-right" style="display:none; color:red">กรุณาระบุชื่อ</span>
                             </div>
                         <span class="col-sm-2 col-md-1 text-right">นามสกุล:</span>
                             <div class="col-sm-4 col-md-2 text-left">
                                 <input type="text" id="std_lname" name="std_lname">
+                                <span id="span-lname"class="text-right" style="display:none; color:red">กรุณาระบุนามสกุล</span>
                             </div>
                             <div class="col-sm-4 col-md-2 text-left">
                                 <button type="button" class="btn btn-primary"
@@ -61,8 +62,8 @@
                     </div>
                 </tbody></table>
                 </div>
-                <div id="showStudent">
-                <table id="tableStudent" class="hover" cellspacing="0" width="80%" >
+                <div id="showStudent" style="display:none">
+                <table id="tableStudent" class="hover" cellspacing="0" width="80%">
                     <thead>
                         <tr>
                             <th class="col-sm-4 col-md-1 text-center">รหัสนักเรียน</th>
@@ -83,7 +84,7 @@
         </div>
         <!--เลือกคอร์สเรียน-->
         <div class="box-body">
-            <div class="panel panel-default">
+            <div class="panel panel-default" id="showCourse" style="display:none">
                 <div class="panel-heading">
                     <h3 class="panel-title">เลือกคอร์ส</h3>
                 </div>
@@ -149,7 +150,9 @@
                                     <td class="text-center">{{$course_schedule_list->price}}</td>
                                     <td class="text-center">{{$course_schedule_list->number_of_time}}</td>
                                     <td class="text-center">{{$course_schedule_list->status}}</td>
-                                    <td class="text-center"><input type="radio"></td>
+                                    <td><button type="submit" class="btn btn-success" onclick="enrollCourse();">ซื้อ</button></td>
+                                    <input type="hidden" id="cs_id" value="{{$course_schedule_list->course_schedule_id}}">
+                                    <!--   <td class="text-center"><input type="radio"></td>-->
                                     <!--<td class="text-center">
                                         <a href="javaScript:;"
                                             onclick="enrollCourse({{$course_schedule_list->course_schedule_id}});">
@@ -161,11 +164,6 @@
                             </tbody>
 
                         </table>
-                        <div class="row">
-                            <div class="col-sm-15 col-md-12 row-sm-6 text-left">
-                                <button type="submit" class="btn btn-success" value=" ลงทะเบียน" style="margin-left:1000;" >ลงทะเบียน</button>
-                            </div>
-                        </div>
                     </div>
                 </div>
 
