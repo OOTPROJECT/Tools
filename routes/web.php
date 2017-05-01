@@ -31,10 +31,11 @@ Route::auth();
 // Student
 Route::get('/studentReg', 'KingMathController@callStudentRegPage');
 Route::get('/studentInfo', 'KingMathController@callStudentsinfoPage');
-
 Route::post('/createStudent', 'KingMathController@createStudent');
 Route::get('/studentReg', 'KingMathController@callStudentRegPage');
 Route::resource('student', 'KingMathController');
+Route::post('/updateStudent/{student_id}', 'KingMathController@updateStudent');
+Route::get('/EditStudent/{student_id}', 'KingMathController@callStudentEditPage');
 
 // Teacher
 Route::get('/teacherReg', 'KingMathController@callTeacherRegPage');
