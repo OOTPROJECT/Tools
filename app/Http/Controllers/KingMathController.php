@@ -52,21 +52,6 @@ class KingMathController extends Controller
     }
 
     /**
-    * Show the application student information.
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function callStudentInfoPage()
-    {
-            return view('students.student_info');
-      $allStudent = $this->students->getAllStudentInfo();
-        return view('students.student_info')
-        ->with('allStudent', $allStudent);
-
-
-    }
-
-    /**
     * Add student information.
     *
     * @return
@@ -170,7 +155,7 @@ public function callTeacherInfoPage()
 
 
 
-public function callStudentsinfoPage()
+public function callStudentsInfoPage()
 {
     $allStudents = $this->student->getAllStudentsInfo();
     return view('students.student_info')
@@ -256,10 +241,13 @@ public function callStudentEditPage($student_id)
 {
     $prov = $this->city->getProvinces();
     $students = $this->student->getstudentByID($student_id);
+    $address = explode(",", $students->addr);
 
     return view('students.student_update')
     ->with('student_id', $student_id)
-    ->with('student', $students);
+    ->with('student', $students)
+    ->with('prov', $prov)
+    ->with('address', $address);
 }
 
      /**
