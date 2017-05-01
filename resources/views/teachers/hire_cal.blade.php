@@ -69,6 +69,9 @@
                         @else
                             <tr>
                                 <td class="text-center" colspan="8">ไม่มีข้อมูล</td>
+                                @for($i=0; $i<7; $i++)
+                                    <td style="display: none;"></td>
+                                @endfor
                             </tr>
                         @endif
                     </tbody>
