@@ -651,7 +651,7 @@ public function callStudentEditPage($student_id)
        $all_subject = $this->subject->getSubject();
        $arr_course_schedule = $this->course_schedule->getAllCourseSchedule()->where('status','=','เปิด')
                                 ->orderBy('course_schedule_id','DESC')->get();
-
+  
 
        return view('course.course_enroll')
                 ->with('all_subject',$all_subject)
