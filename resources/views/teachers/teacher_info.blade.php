@@ -32,10 +32,10 @@
             @if ($allTeacher != null && count($allTeacher) > 0 )
                 @foreach($allTeacher as $value)
                     <tr>
-                        <td>{{$value->firstname}}  {{$value->lastname}}</td>
+                        <td class="column">{{$value->firstname}}  {{$value->lastname}}</td>
                         <!-- <td>{{$value->lastname}}</td> -->
                         <td>{{$value->personal_id}}</td>
-                        <td>{{$value->getGender()}}</td>
+                        <td>{{$value->getGender($value->gender)}}</td>
                         <td>{{$value->mobile}}</td>
                         <td>{{$value->email}}</td>
                         <td>

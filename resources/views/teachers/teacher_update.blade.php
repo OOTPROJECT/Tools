@@ -70,9 +70,9 @@
                         </div>
                         <span class="col-sm-2 col-md-2 text-right">รหัสประจำตัวประชาชน:</span>
                         <div class="col-sm-4 col-md-4 text-left">
-                            <div class="form-group {{ $errors->has('personal_id') ? 'has-error' : '' }}">
-                                <input type="text" name="personal_id" class="form-control" placeholder=""
-                                value="{{ $teacher->personal_id}}" maxlength="10">
+                            <div class="form-group {{ $errors->has('personal_id') ? 'has-error' : '' }}" id="personal_id">
+                                <input type="text" name="personal_id" class="form-control" placeholder="กรุณาระบุ รหัสประจำตัวประชาชน"
+                                value="{{ $teacher->personal_id}}" maxlength="13" onKeyUp="inputDigitsPersonalID(this);">
                                 <span class="text-danger">{{ $errors->first('personal_id') }}</span>
                             </div>
                         </div>
@@ -378,6 +378,19 @@
         else {
             $( "#postcode span" ).css('display', 'none');
         }
+    }
+
+    function inputDigitsPersonalID(sensor){
+        var regExp = /[0-9]$/;
+        if(!regExp.test(sensor.value)){
+            $( "#personal_id span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+            $('#personal_id span').css('display', 'block');
+            sensor.value = sensor.value.substring(0, sensor.value.length -1);
+        }
+        else {
+            $('#personal_id span').css('display', 'none');
+        }
+
     }
 
 </script>
