@@ -540,8 +540,7 @@ public function callStudentEditPage($student_id)
         $all_course = $this->course->getCourse();
         $all_classroom = $this->time_table->getAllClassRoom();
         $all_teacher = $this->teacher->getAllTeacher();
-        $arr_course_schedule = $this->course_schedule->getAllCourseSchedule()
-                                ->orderBy('created_at', 'DESC')->get();
+        $arr_course_schedule = $this->course_schedule->getAllCourseSchedule();
 
         return view('classroom.class_mgt')
                 ->with('all_course', $all_course)
@@ -650,15 +649,11 @@ public function callStudentEditPage($student_id)
    {
 
        $all_subject = $this->subject->getSubject();
-       $arr_course_schedule = $this->course_schedule->getAllCourseSchedule()->where('status','=','เปิด')
-                                ->orderBy('course_schedule_id','DESC')->get();
-        //$arr_courseEnroll_list=$this->course_enroll->getAllCourseEnroll();
-
+       $arr_course_schedule = $this->course_schedule->getAllCourseSchedule();
 
        return view('course.course_enroll')
                 ->with('all_subject',$all_subject)
                 ->with('arr_course_schedule',$arr_course_schedule);
-                //->with('arr_courseEnroll_list',$arr_courseEnroll_list);
     }
     /**
     * Show the get course schedule by subject.
@@ -703,16 +698,16 @@ public function callStudentEditPage($student_id)
 //echo count($course_enroll);
          if($resp == 1) {
              if(count($course_enroll) == $std_max->student_max){
-                 //echo $std_max->student_max;
+                 //echo $std_max->student_max; exit();
                   $chgStatus=CourseSchedule::where('course_schedule_id','=', $cs_id)
-                             ->update(["status"=>"ปิด"]);
+                             ->update('status','=','full');
              }
-echo "success";
+echo "success"; exit();
              return array("resp" => true, "text" => "ลงทะเบียนเรียนเรียบร้อยแล้ว");
 
          }
          else {
-echo "fail";
+echo "fail"; exit();
              return array("resp" => false, "text" => "ไม่สามารถลงทะเบียนเรียนได้");
          }
 
