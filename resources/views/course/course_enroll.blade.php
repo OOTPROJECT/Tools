@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@extends('layouts.partials.scripts')
+
 
 @section('htmlheader_title')
 การซื้อคอร์ส

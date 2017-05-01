@@ -499,7 +499,7 @@ public function callStudentEditPage($student_id)
       public function deleteStudent($student_id)
       {
           if ($student_id != null){
-              $course_enroll = $this->student->courseenrollByStudentID($student_id);
+              $course_enroll = $this->course_enroll->courseenrollByStudentID($student_id);
 
               if(count($course_enroll) > 0) {
                   Toastr::info("ไม่สามารถลบนักเรียนได้ ");
