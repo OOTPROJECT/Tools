@@ -72,11 +72,4 @@ class Students extends Model
     }
 
 
-        $this->table = "course_enroll";
-        $course_enroll = CourseEnroll::where('student_id', '=', $student_id)->first();
-
-        return $course_enroll;
-    }
-
-
 }

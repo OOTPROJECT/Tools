@@ -141,10 +141,15 @@ function enrollCourse(){
                 setTimeout(function(){
                     location.reload();
                 },2000);
+
+                if(data.chgStatus == true){
+                toastr.info(data.text, ",มีการเปลี่ยนแปลงสถานะ");
+                }
             }
             else {
                 toastr.error(data.text, "ลงทะเบียนไม่สำเร็จ");
                 }
+
             }
     });
 
