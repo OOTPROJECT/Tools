@@ -211,7 +211,7 @@ public function updateStudent($student_id ,Request $request)
 
    Students::where('student_id', $student_id)->update($input_student);
 
-   Toastr::info("แก้ไขข้อมูลนักเรียนเรียบร้อยแล้ว"); 
+   Toastr::info("แก้ไขข้อมูลนักเรียนเรียบร้อยแล้ว");
    return back();
 }
 
