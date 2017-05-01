@@ -18,6 +18,7 @@
     </div>
     <!---ข้อมูลนักเรียน-->
     <div class="box-body">
+        <form action="{{ url('/createEnroll') }}" method="get">
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">เลือกนักเรียน</h3>
@@ -148,17 +149,23 @@
                                     <td class="text-center">{{$course_schedule_list->price}}</td>
                                     <td class="text-center">{{$course_schedule_list->number_of_time}}</td>
                                     <td class="text-center">{{$course_schedule_list->status}}</td>
-                                    <td class="text-center">
-                                        <a href="{{ url('/createEnroll') }}"
-                                            onclick="enrollCourse(cs_id,std_id);">
+                                    <td class="text-center"><input type="radio"></td>
+                                    <!--<td class="text-center">
+                                        <a href="javaScript:;"
+                                            onclick="enrollCourse({{$course_schedule_list->course_schedule_id}});">
                                             <i class="fa fa-check-circle-o" aria-hidden="true"></i>
                                         </a>
-                                    </td>
+                                    </td>-->
                                 </tr>
                                 @endforeach
                             </tbody>
 
                         </table>
+                        <div class="row">
+                            <div class="col-sm-15 col-md-12 row-sm-6 text-left">
+                                <button type="submit" class="btn btn-success" value=" ลงทะเบียน" style="margin-left:1000;" >ลงทะเบียน</button>
+                            </div>
+                        </div>
                     </div>
                 </div>
 

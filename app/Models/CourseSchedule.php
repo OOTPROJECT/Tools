@@ -52,4 +52,11 @@ class CourseSchedule extends Model
                           );
         return $course_schedule;
     }
+    function getMaxByCSId($cs_id) {
+
+        $max_std = CourseSchedule::select('student_max')->where('course_schedule_id', '=', $cs_id)
+                            ->first();
+
+        return $max_std;
+    }
 }

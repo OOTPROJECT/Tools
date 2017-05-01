@@ -570,16 +570,23 @@ return back();
        */
      public function createEnroll(Request $request)
      {
+         $cs_id = trim($request->input('cs_id'));
          $input = $request->except('_token');
          $resp = CourseEnroll::create($input)->saveOrFail();
-
+         $course_enroll = $this->course_enroll->getcourseEnrollByCSId($cs_id);
+         $std_max = $this->course_schedule->getMaxByCSId($cs_id);
          if($resp == 1) {
 
              return array("resp" => true, "text" => "]'ลงทะเบียนเรียนเรียบร้อยแล้ว");
+
          }
          else {
 
              return array("resp" => false, "text" => "ไม่สามารถลงทะเบียนเรียนได้");
+         }
+         if(count($course_enroll)=$std_max){
+             CourseSchedule::where('course_schedule_id', $cs_id)
+                        ->update('status',"full");
          }
      }
 

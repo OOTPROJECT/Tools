@@ -87,7 +87,8 @@ function selectSubject() {
                         $('<td class="text-center">').text(course_schedule.price),
                         $('<td class="text-center">').text(course_schedule.number_of_time),
                         $('<td class="text-center">').text(course_schedule.status),
-                        $('<td><a href="{{url('/createEnroll')}}" onclick = "enrollCourse(course_schedule_id,std_id);"><i class="fa fa-check-circle-o" aria-hidden="true">'),
+                        //$('<td><a href="javaScript:; onclick="enrollCourse({{'course_schedule.course_schedule_id'}},{{'std_id'}});" "><i class="fa fa-check-circle-o" aria-hidden="true">'),
+                        $('<td class="text-center"><input type="radio">'),
                         $('<input type="hidden" id="cs_id">').text(course_schedule.course_schedule_id)
                     ).appendTo('#tableCourse');
                 });
