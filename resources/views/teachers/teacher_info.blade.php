@@ -18,8 +18,8 @@
         <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th>ชื่อ</th>
-                <th>นามสกุล</th>
+                <th>ชื่อ - นามสกุล</th>
+                <!-- <th>นามสกุล</th> -->
                 <th>รหัสประจำตัวประชาชน</th>
                 <th>เพศ</th>
                 <th>เบอร์โทรศัพท์</th>
@@ -32,8 +32,8 @@
             @if ($allTeacher != null && count($allTeacher) > 0 )
                 @foreach($allTeacher as $value)
                     <tr>
-                        <td>{{$value->firstname}}</td>
-                        <td>{{$value->lastname}}</td>
+                        <td>{{$value->firstname}}  {{$value->lastname}}</td>
+                        <!-- <td>{{$value->lastname}}</td> -->
                         <td>{{$value->personal_id}}</td>
                         <td>{{$value->getGender()}}</td>
                         <td>{{$value->mobile}}</td>
