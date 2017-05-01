@@ -73,7 +73,13 @@ class Students extends Model
 
         return $all_students;
     }
+    public function courseenrollByStudentID($student_id) {
 
+        $this->table = "course_enroll";
+        $course_enroll = CourseEnroll::where('student_id', '=', $student_id)->first();
+
+        return $course_enroll;
+    }
 
 
 }

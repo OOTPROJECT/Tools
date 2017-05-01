@@ -44,7 +44,7 @@ class Teachers extends Model
          return $all_teacher;
      }
 
-     public function courseScheduleByTeacherID($teacher_id) {
+     public function CourseScheduleByStudentID($teacher_id) {
 
          $this->table = "course_schedule";
          $course_schedule = CourseSchedule::where('teacher_id', '=', $teacher_id)->first();

@@ -53,7 +53,7 @@
                         <td>{{$value->mobile}}</td>
                         <td>
                             <a href="{{ url('/EditStudent') }}/{{ $value->student_id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                            <a href="{{ url('/DeleteStudent') }}/{{ $value->student_id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            <a href="{{ url('/deleteStudent') }}/{{ $value->student_id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                             <!--<a href="{{ url('/teacherUpdate') }}/{{ $value->teacher_id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
 
                         </td>

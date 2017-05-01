@@ -36,6 +36,7 @@ Route::get('/studentReg', 'KingMathController@callStudentRegPage');
 Route::resource('student', 'KingMathController');
 Route::post('/updateStudent/{student_id}', 'KingMathController@updateStudent');
 Route::get('/EditStudent/{student_id}', 'KingMathController@callStudentEditPage');
+Route::get('/deleteStudent/{student_id}', 'KingMathController@deleteStudent');
 
 // Teacher
 Route::get('/teacherReg', 'KingMathController@callTeacherRegPage');
