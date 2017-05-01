@@ -183,7 +183,11 @@
                         @endforeach
                     @else
                         <tr>
-                            <td colspan="9">ไม่มีข้อมูล</td>
+                            <td colspan="9" class="text-center">ไม่มีข้อมูล</td>
+                            @for($i=0; $i<9; $i++)
+                                <td style="display: none;"></td>
+                            @endfor
+                            <td style="display: none;"></td>
                         </tr>
                     @endif
                 </tbody>
