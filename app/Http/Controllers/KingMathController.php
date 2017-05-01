@@ -649,7 +649,9 @@ public function callStudentEditPage($student_id)
    {
 
        $all_subject = $this->subject->getSubject();
-       $arr_course_schedule = $this->course_schedule->getAllCourseSchedule();
+       $arr_course_schedule = $this->course_schedule->getAllCourseSchedule()->where('status','=','เปิด')
+                                ->orderBy('course_schedule_id','DESC')->get();
+
 
        return view('course.course_enroll')
                 ->with('all_subject',$all_subject)
@@ -700,7 +702,7 @@ public function callStudentEditPage($student_id)
              if(count($course_enroll) == $std_max->student_max){
                  //echo $std_max->student_max; exit();
                   $chgStatus=CourseSchedule::where('course_schedule_id','=', $cs_id)
-                             ->update('status','=','full');
+                             ->update(["status"=>"ปิด"]);
              }
 echo "success"; exit();
              return array("resp" => true, "text" => "ลงทะเบียนเรียนเรียบร้อยแล้ว");

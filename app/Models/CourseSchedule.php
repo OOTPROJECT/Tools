@@ -23,8 +23,8 @@ class CourseSchedule extends Model
         $arr_course_schedule = CourseSchedule::select('course_schedule_id', 'course_name', 'day',
                                 'start_time','end_time', 'firstname', 'lastname', 'room_name','price',
                                 'start_date', 'end_date', 'number_of_time', 'status',
-                                'created_at')
-                                ->orderBy('created_at', 'DESC')->get();
+                                'created_at');
+                            //    ->orderBy('created_at', 'DESC')->get();
 
         return $arr_course_schedule;
     }
@@ -47,7 +47,7 @@ class CourseSchedule extends Model
                             INNER JOIN courses AS c ON cs.course_id = c.course_id
                             INNER JOIN time_table AS tt ON cs.time_table_id = tt.time_table_id
                             INNER JOIN teachers AS t ON cs.teacher_id = t.teacher_id
-                            WHERE c.subject_id = '". $subject_id ."'
+                            WHERE c.subject_id = '". $subject_id ."' AND cs.status = 'เปิด'
                             ORDER BY cs.course_schedule_id "
                           );
         return $course_schedule;
