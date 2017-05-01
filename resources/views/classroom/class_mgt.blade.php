@@ -187,7 +187,6 @@
                             @for($i=0; $i<9; $i++)
                                 <td style="display: none;"></td>
                             @endfor
-                            <td style="display: none;"></td>
                         </tr>
                     @endif
                 </tbody>
