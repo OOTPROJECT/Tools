@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@extends('layouts.partials.scripts')
 @section('htmlheader_title')
 รายชื่อนักเรียน
 @endsection
@@ -16,13 +15,10 @@
     </div>
     <div class="box-body">
 
-
-        <table id="example" >
             <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>ชื่อ</th>
-                        <th>นามสกุล</th>
+                        <th>ชื่อ - นามสกุล</th>
                         <th>ชื่อเล่น</th>
                         <th>วันเดือนปีเกิด</th>
                         <th>เพศ</th>
@@ -33,14 +29,14 @@
                         <th>ความสัมพันธ์กับนักเรียน</th>
                         <th>อีเมล์</th>
                         <th>เบอร์โทรศัพท์</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
                     @if ($allStudents != null && count($allStudents) > 0 )
                     @foreach($allStudents as $value)
                     <tr>
-                        <td>{{$value->firstname}}</td>
-                        <td>{{$value->lastname}}</td>
+                        <td>{{$value->firstname}} {{$value->lastname}}</td>
                         <td>{{$value->nickname}}</td>
                         <td>{{$value->std_birthdate}}</td>
                         <td>{{$value->gender}}</td>
@@ -53,7 +49,7 @@
                         <td>{{$value->mobile}}</td>
                         <td>
                             <a href="{{ url('/EditStudent') }}/{{ $value->student_id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                            <a href="{{ url('/DeleteStudent') }}/{{ $value->student_id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            <a href="{{ url('/deleteStudent') }}/{{ $value->student_id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
                             <!--<a href="{{ url('/teacherUpdate') }}/{{ $value->teacher_id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
 
                         </td>

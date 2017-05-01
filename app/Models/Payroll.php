@@ -12,4 +12,12 @@ class Payroll extends Model
                           "course_schedule_id", "teacher_id", "hire", "status"
                         ];
 
+
+    public function getPayrollByTeacherID($teacher_id) {
+
+        $payroll = Payroll::where('teacher_id', '=', $teacher_id)->first();
+
+        return $payroll;
+    }
+
 }

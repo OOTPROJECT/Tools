@@ -33,6 +33,7 @@ class KingMathController extends Controller
         $this->student = new Students();
         $this->subject = new Subjects();
         $this->course_enroll = new CourseEnroll();
+        $this->payroll = new Payroll();
     }
 
 
@@ -57,10 +58,12 @@ class KingMathController extends Controller
     */
     public function callStudentInfoPage()
     {
-            return view('students.student_info');
+            //return view('students.student_info');
       $allStudent = $this->students->getAllStudentInfo();
         return view('students.student_info')
         ->with('allStudent', $allStudent);
+
+
     }
 
     /**
@@ -138,7 +141,6 @@ class KingMathController extends Controller
     return back();
 }
 
-
 public function updateStudent($student_id ,Request $request)
 {
     $this->validate($request,
@@ -209,9 +211,10 @@ public function updateStudent($student_id ,Request $request)
 
    Students::where('student_id', $student_id)->update($input_student);
 
-   Toastr::info("แก้ไขข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+   Toastr::info("แก้ไขข้อมูลนักเรียนเรียบร้อยแล้ว");
    return back();
 }
+
 /**
 * Show the application teacher register.
 *
@@ -241,7 +244,7 @@ public function callTeacherInfoPage()
 
 
 
-public function callStudentsinfoPage()
+public function callStudentsInfoPage()
 {
     $allStudents = $this->student->getAllStudentsInfo();
     return view('students.student_info')
@@ -332,10 +335,8 @@ public function callStudentEditPage($student_id)
     return view('students.student_update')
     ->with('student_id', $student_id)
     ->with('student', $students)
-    ->with('address', $address)
-    ->with('prov', $prov);
-
-
+    ->with('prov', $prov)
+    ->with('address', $address);
 }
 
      /**
@@ -473,20 +474,46 @@ public function callStudentEditPage($student_id)
       {
           if ($teacher_id != null){
               $course_schedule = $this->teacher->courseScheduleByTeacherID($teacher_id);
+              $payroll = $this->payroll->getPayrollByTeacherID($teacher_id);
 
-              if(count($course_schedule) > 0) {
+              if(count($course_schedule) > 0 || count($payroll) > 0) {
                   Toastr::info("ไม่สามารถลบครูผู้สอนได้ ");
-                  //return array("resp" => false, "text" => "ไม่สามารถลบคลาสเรียนได้ เนื่องจากมีนักเรียนลงทะเบียนเรียน");
               }
               else {
                   $result = Teachers::where('teacher_id', '=', $teacher_id)->delete();
 
                   if($result == 1) {
                       Toastr::info("ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว ");
-                      //return array("resp" => true, "text" => "ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว");
                   }
                   else {
                       Toastr::info("ไม่สามารถลบครูผู้สอนได้ ");
+                  }
+
+              }
+          }
+          return back();
+
+      }
+
+
+      public function deleteStudent($student_id)
+      {
+          if ($student_id != null){
+              $course_enroll = $this->student->courseenrollByStudentID($student_id);
+
+              if(count($course_enroll) > 0) {
+                  Toastr::info("ไม่สามารถลบนักเรียนได้ ");
+                  //return array("resp" => false, "text" => "ไม่สามารถลบคลาสเรียนได้ เนื่องจากมีนักเรียนลงทะเบียนเรียน");
+              }
+              else {
+                  $result = Students::where('student_id', '=', $student_id)->delete();
+
+                  if($result == 1) {
+                      Toastr::info("ลบข้อมูลนักเรียนเรียบร้อยแล้ว ");
+                      //return array("resp" => true, "text" => "ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว");
+                  }
+                  else {
+                      Toastr::info("ไม่สามารถลบนักเรียนได้ ");
                       //return array("resp" => false, "text" => "ไม่สามารถลบข้อมูลครูผู้สอนได้");
                   }
 
@@ -495,6 +522,12 @@ public function callStudentEditPage($student_id)
           return back();
 
       }
+
+
+
+
+
+
 
     /**
      * Show the application class management page.

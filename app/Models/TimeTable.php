@@ -25,7 +25,7 @@ class TimeTable extends Model
                             ( SELECT * FROM ( SELECT time_table_id FROM course_schedule
                             WHERE '" . $start_date . "' <= end_date AND '"
                             . $end_date ."' >= start_date
-                            ) AS subquery ) ORDER BY day"
+                            AND deleted_at IS NULL) AS subquery ) ORDER BY day"
                           );
 
         return $arr_time_table;

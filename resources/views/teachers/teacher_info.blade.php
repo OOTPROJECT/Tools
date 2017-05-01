@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@extends('layouts.partials.scripts')
 
 @section('htmlheader_title')
 รายชื่อครู
@@ -19,8 +18,8 @@
         <table id="example" class="table table-striped table-bordered" width="100%" cellspacing="0">
         <thead>
             <tr>
-                <th>ชื่อ</th>
-                <th>นามสกุล</th>
+                <th>ชื่อ - นามสกุล</th>
+                <!-- <th>นามสกุล</th> -->
                 <th>รหัสประจำตัวประชาชน</th>
                 <th>เพศ</th>
                 <th>เบอร์โทรศัพท์</th>
@@ -33,10 +32,10 @@
             @if ($allTeacher != null && count($allTeacher) > 0 )
                 @foreach($allTeacher as $value)
                     <tr>
-                        <td>{{$value->firstname}}</td>
-                        <td>{{$value->lastname}}</td>
+                        <td>{{$value->firstname}}  {{$value->lastname}}</td>
+                        <!-- <td>{{$value->lastname}}</td> -->
                         <td>{{$value->personal_id}}</td>
-                        <td>{{$value->gender}}</td>
+                        <td>{{$value->getGender()}}</td>
                         <td>{{$value->mobile}}</td>
                         <td>{{$value->email}}</td>
                         <td>
@@ -54,10 +53,7 @@
     </div>
     <!-- /.box-body -->
 </div>
-<script type="text/javascript">
-$(document).ready(function() {
-    $('#example').DataTable();
-} );
-</script>
+
+
 
 @endsection

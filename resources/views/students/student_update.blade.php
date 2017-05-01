@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@extends('layouts.partials.scripts')
 
 @section('htmlheader_title')
 การสมัครเรียน
@@ -187,7 +186,7 @@
 				<div class="row"><span class="col-sm-2 col-md-2 text-right">บ้านเลขที่</span>
 					<div class="col-sm-4 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('addr') ? 'has-error' : '' }}">
-							<input type='text' class="form-control" name="addr" placeholder="กรุณาระบุบ้านเลขที่" value="@if(array_key_exists("0", $address) &&$address[0] != null){{ $address[0] }}@endif" />
+							<input type='text' class="form-control" name="addr" placeholder="กรุณาระบุบ้านเลขที่" value="@if(array_key_exists("0", $address) && $address[0] != null){{ $address[0] }}@endif" />
 						</div>
 						<span class="text-danger">{{ $errors->first('addr') }}</span>
 					</div>

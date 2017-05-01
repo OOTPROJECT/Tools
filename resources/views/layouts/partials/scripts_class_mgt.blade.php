@@ -115,7 +115,7 @@ function createCourseSchedule(time_table_id) {
 function deleteCourseSchedule(cs_id) {
 
     $.ajax({
-        type: 'POST',
+        type: 'get',
         url: "{{ url('/deleteCourseSchedule') }}",
         data: { cs_id: cs_id, _token: "{{ csrf_token() }}" },
         dataType: 'json',

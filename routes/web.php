@@ -30,12 +30,13 @@ Route::auth();
 
 // Student
 Route::get('/studentReg', 'KingMathController@callStudentRegPage');
-Route::get('/studentInfo', 'KingMathController@callStudentsinfoPage');
+Route::get('/studentInfo', 'KingMathController@callStudentsInfoPage');
 Route::post('/createStudent', 'KingMathController@createStudent');
 Route::get('/studentReg', 'KingMathController@callStudentRegPage');
 Route::resource('student', 'KingMathController');
 Route::post('/updateStudent/{student_id}', 'KingMathController@updateStudent');
 Route::get('/EditStudent/{student_id}', 'KingMathController@callStudentEditPage');
+Route::get('/deleteStudent/{student_id}', 'KingMathController@deleteStudent');
 
 // Teacher
 Route::get('/teacherReg', 'KingMathController@callTeacherRegPage');
@@ -52,7 +53,7 @@ Route::get('/deleteTeacher/{teacher_id}', 'KingMathController@deleteTeacher');
 Route::get('/classMgt', 'KingMathController@callClassMgtPage');
 Route::get('/getTimeTable', 'KingMathController@getTimeTable');
 Route::post('/createCourseSchedule', 'KingMathController@createCourseSchedule');
-Route::post('/deleteCourseSchedule', 'KingMathController@deleteCourseSchedule');
+Route::get('/deleteCourseSchedule', 'KingMathController@deleteCourseSchedule');
 
 // City
 Route::get('/districts', 'KingMathController@getDistricts');
