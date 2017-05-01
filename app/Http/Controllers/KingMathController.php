@@ -691,26 +691,26 @@ public function callStudentEditPage($student_id)
          $std_id = trim($request->input('student_id'));
 
          $input = $request->except('_token');
-         //print_r($input); exit();
          $resp = CourseEnroll::create($input)->saveOrFail();
 
          $course_enroll = $this->course_enroll->getcourseEnrollByCSId($cs_id);
          $std_max = $this->course_schedule->getMaxByCSId($cs_id);
+//echo count($course_enroll);
          if($resp == 1) {
-
+             if(count($course_enroll) == $std_max->student_max){
+                 //echo $std_max->student_max; exit();
+                  $chgStatus=CourseSchedule::where('course_schedule_id','=', $cs_id)
+                             ->update('status','=','full');
+             }
+echo "success"; exit();
              return array("resp" => true, "text" => "ลงทะเบียนเรียนเรียบร้อยแล้ว");
 
          }
          else {
-
+echo "fail"; exit();
              return array("resp" => false, "text" => "ไม่สามารถลงทะเบียนเรียนได้");
          }
 
-        if(count($course_enroll)==$std_max){
-             $chgStatus=CourseSchedule::where('course_schedule_id','=', $cs_id)
-                        ->update('status','=',"full")->saveOrFail();
-            return array("chgStatus" => true, "text" => "มีการเปลี่ยนสถานะคอร์สเรียน");
-         }
      }
 
 }

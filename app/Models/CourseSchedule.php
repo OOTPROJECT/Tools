@@ -54,9 +54,9 @@ class CourseSchedule extends Model
     }
     function getMaxByCSId($cs_id) {
 
-        $max_std = CourseSchedule::select('student_max')->where('course_schedule_id', '=', $cs_id)
+        $std_max = CourseSchedule::select('student_max')->where('course_schedule_id', '=', $cs_id)
                             ->first();
-
-        return $max_std;
+//echo 'std: '. $std_max->student_max; exit();
+        return $std_max;
     }
 }
