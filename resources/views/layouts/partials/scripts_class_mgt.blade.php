@@ -4,14 +4,60 @@ $(document).ready(function (){
     $('#tableClassMgt').dataTable();
 
     var date = new Date();
-    date.setDate(date.getDate() + 14);
+    date.setDate(date.getDate() + 15);
     var end_date = date.toISOString().slice(0,10).replace(/-/g,"-");
 
+    // Setting datepicker start date.
     $("#div_enddate, .datepicker1").datepicker({
         autoclose: true,
         todayHighlight: true,
-        startDate: "+14d"
+        startDate: "+15d"
     }).datepicker('update', end_date);
+
+    $('#div_enddate, .datepicker input').on('show', function(e){
+        console.log('show', e.date, $(this).data('stickyDate'));
+
+        if ( e.date ) {
+            $(this).data('stickyDate', e.date);
+        }
+        else {
+            $(this).data('stickyDate', null);
+        }
+    });
+
+    $('#div_enddate, .datepicker input').on('hide', function(e){
+        console.debug('hide', e.date, $(this).data('stickyDate'));
+        var stickyDate = $(this).data('stickyDate');
+
+        if ( !e.date && stickyDate ) {
+            console.debug('restore stickyDate', stickyDate);
+            $(this).datepicker('setDate', stickyDate);
+            $(this).data('stickyDate', null);
+        }
+    });
+
+    // Setting datepicker start date.
+    $('#div_stdate, .datepicker input').on('show', function(e){
+        console.log('show', e.date, $(this).data('stickyDate'));
+
+        if ( e.date ) {
+            $(this).data('stickyDate', e.date);
+        }
+        else {
+            $(this).data('stickyDate', null);
+        }
+    });
+
+    $('#div_stdate, .datepicker input').on('hide', function(e){
+        console.debug('hide', e.date, $(this).data('stickyDate'));
+        var stickyDate = $(this).data('stickyDate');
+
+        if ( !e.date && stickyDate ) {
+            console.debug('restore stickyDate', stickyDate);
+            $(this).datepicker('setDate', stickyDate);
+            $(this).data('stickyDate', null);
+        }
+    });
 
     $("#div_stdate, .datepicker").datepicker({
         autoclose: true,
@@ -19,7 +65,7 @@ $(document).ready(function (){
     })
     .on('changeDate', function(ev) {
         var newDate = new Date(ev.date)
-        newDate.setDate(newDate.getDate() + 14);
+        newDate.setDate(newDate.getDate() + 15);
 
         $("#div_enddate, .datepicker1").datepicker('remove');
         $("#div_enddate, .datepicker1").datepicker({
@@ -44,6 +90,7 @@ function chkTimeTable() {
     var start_date = $('input[name=start_date]').val();
     var end_date = $('input[name=end_date]').val();
     var room_name = $('#classroom option:selected').text();
+    var teacher_id = $('#teacher option:selected').val();
 
     // Clear tb time table
     $("#tb_time_table > tbody").empty();
@@ -54,7 +101,8 @@ function chkTimeTable() {
     $.ajax({
         type: 'GET',
         url: "{{ url('/getTimeTable') }}",
-        data: { start_date: start_date, end_date: end_date, room_name: room_name },
+        data: { start_date: start_date, end_date: end_date, room_name: room_name,
+                teacher_id: teacher_id },
         dataType: 'json',
         success: function (data) {
             if(data.length > 0) {
