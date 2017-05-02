@@ -178,7 +178,7 @@
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}" id="postcode" >
                                 <input type="text" name="postcode" class="form-control"
-                                    placeholder="" value="{{ $teacher->postcode }}"
+                                    placeholder="" value="{{ $teacher->postcode }}" maxlength="5"
                                     onclick="chkSubDistrictInput();" id="mytextbox" onKeyUp="inputDigits(this);">
                                 <span class="text-danger">{{ $errors->first('postcode') }}</span>
                             </div>
