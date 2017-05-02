@@ -561,7 +561,10 @@ public function callStudentEditPage($student_id)
          $start_date = trim($request->input('start_date'));
          $end_date = trim($request->input('end_date'));
          $room_name = trim(str_replace('%20', ' ', $request->input('room_name')));
-         $arr_time_table = $this->time_table->getTimeTable($start_date, $end_date, $room_name);
+         $teacher_id = trim($request->input('teacher_id'));
+         
+         $arr_time_table = $this->time_table->getTimeTable($start_date, $end_date,
+                            $teacher_id, $room_name);
 
          return $arr_time_table;
      }
