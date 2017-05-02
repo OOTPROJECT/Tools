@@ -158,8 +158,8 @@
                                           <td class="text-center">{{$course_schedule_list->price}}</td>
                                           <td class="text-center">{{$course_schedule_list->number_of_time}}</td>
                                           <td class="text-center">{{$course_schedule_list->status}}</td>
-                                          <td><button type="submit" class="btn btn-success" onclick="enrollCourse();">ซื้อ</button></td>
-                                          <input type="hidden" id="cs_id" value="{{$course_schedule_list->course_schedule_id}}">
+                                          <td><button type="button" class="btn btn-success" onclick="enrollCourse({{$course_schedule_list->course_schedule_id}});">ซื้อ</button></td>
+                                          <!--<input type="hidden" id="cs_id" value="{{$course_schedule_list->course_schedule_id}}">-->
                                           <!--   <td class="text-center"><input type="radio"></td>-->
                                           <!--<td class="text-center">
                                               <a href="javaScript:;"
