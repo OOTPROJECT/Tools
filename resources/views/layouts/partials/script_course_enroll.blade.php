@@ -17,6 +17,8 @@ $(document).ready(function() {
         "filter": false,
         "autoWidth" : false
     });
+    //$create table tableClassMgt
+    $('#tableClassMgt').DataTable();
 
 } );
 
@@ -27,6 +29,12 @@ function showStudent(){
     var student_lname = $('#std_lname').val();
     console.log(student_fname);
     console.log(student_lname);
+    $("#span-name").hide();
+    $("#span-lname").hide();
+    $("#showCourse").hide();
+    $("#showStudent").hide();
+    $('#tableStudentBody').empty();
+
     if((student_fname.length == 0) && (student_lname.length == 0)){
             $("#span-name").show();
                 $("#span-lname").show();
