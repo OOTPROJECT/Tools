@@ -40,7 +40,7 @@ class CourseSchedule extends Model
 
     function getCourseBySubject($subject_id) {
 
-        $course_schedule =  DB::select(
+        $course_schedule =  \DB::select(
                             "SELECT cs.course_schedule_id, c.course_name, tt.day, tt.start_time, tt.end_time
                             , t.firstname,tt.room_name,cs.start_date, cs.end_date, c.number_of_time, cs.status,c.price
                             FROM course_schedule AS cs

@@ -86,10 +86,13 @@ function selectSubject() {
     var subject_id = $('#subject_list option:selected').val();
     console.log(subject_id);
     //clear table
-    $('#tableCourseBody').empty();
-
+    $("#tableCourseBody").hide();
+    $('#tableCourseBody2').empty();
     // Replace space with %20
     //room_name=room_name.trim().replace(/ /g, '%20');
+    if(subject_id == "--เลือกวิชา--"){
+        $("#tableCourseBody").show();
+    }else{
 
     $.ajax({
         type: 'GET',
@@ -114,16 +117,17 @@ function selectSubject() {
                         $('<td><button type="button" class="btn btn-success" onclick="enrollCourse('+course_schedule.course_schedule_id+');">ซื้อ</button>')//,
                         //$('<td class="text-center"><input type="radio">'),
                         //$('<input type="hidden" id="cs_id">').val(course_schedule.course_schedule_id)
-                    ).appendTo('#tableCourse');
+                    ).appendTo('#tableCourseBody2');
                 });
             }
             else {
                 var $tr = $('<tr>').append(
                     $('<td colspan="2" class="col-sm-4 col-md-5 text-center">').text("ไม่มีช่วงเวลาเรียนว่าง")
-                ).appendTo('#tableCourse');
+                ).appendTo('#tableCourseBody2');
             }
         }
     });
+    }
 }
 function enrollCourse(cs_id){
     //alert($('#std_id').val());

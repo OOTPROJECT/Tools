@@ -170,6 +170,7 @@
                                       </tr>
                                       @endforeach
                                   </tbody>
+                                  <tbody id="tableCourseBody2"></tbody>
 
                               </table>
                           </div>
@@ -181,6 +182,7 @@
           </div>
           <div role="tabpanel" class="tab-pane" id="courseInfo">
               <!-- Class Schedule table -->
+              <br>
               <table id="tableClassMgt" class="table table-striped table-bordered" width="100%" cellspacing="0">
                   <thead>
                       <tr>
