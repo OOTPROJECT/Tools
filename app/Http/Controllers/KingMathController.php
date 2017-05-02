@@ -348,8 +348,8 @@ public function callStudentEditPage($student_id)
     {
         $this->validate($request,
           [
-            "firstname" => "required",
-            "lastname" => "required",
+            "firstname" => "required|max:255",
+            "lastname" => "required|max:255",
             "birthdate" => "required|date",
             "personal_id" => "required|digits_between:13,13",
             "gender" => "required",
@@ -700,6 +700,7 @@ public function callStudentEditPage($student_id)
        */
      public function createEnroll(Request $request)
      {
+
          $cs_id = trim($request->input('course_schedule_id'));
          $std_id = trim($request->input('student_id'));
 
@@ -713,7 +714,7 @@ public function callStudentEditPage($student_id)
              if(count($course_enroll) == $std_max->student_max){
                  //echo $std_max->student_max;
                   $chgStatus=CourseSchedule::where('course_schedule_id','=', $cs_id)
-                             ->update(["status"=>"ปิด"]);
+                             ->update('status','=','full');
              }
              return array("resp" => true, "text" => "ลงทะเบียนเรียนเรียบร้อยแล้ว");
 

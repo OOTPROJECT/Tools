@@ -169,7 +169,7 @@
                         <span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์:</span>
                         <div class="col-sm-4 col-md-4 text-left">
                             <div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}" id="postcode" >
-                                <input type="text" name="postcode" class="form-control"
+                                <input type="text" name="postcode" class="form-control" maxlength="5"
                                     placeholder="กรุณาระบุ รหัสไปรษณีย์" value="{{ old('postcode') }}"
                                     onclick="chkSubDistrictInput();" onKeyUp="inputDigits(this);"
                                     maxlength="5">
