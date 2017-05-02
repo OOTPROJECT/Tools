@@ -1,5 +1,4 @@
 @extends('layouts.app')
-@extends('layouts.partials.scripts')
 
 @section('htmlheader_title')
 การสมัครเรียน
@@ -102,29 +101,20 @@
 				<div class="col-sm-2 col-md-2 text-right">จังหวัด
 				</div>
 				<div class="col-sm-4 col-md-4 text-center">
-					<input list="opts_province" name="school_province_list"
-					class="form-control"
-					placeholder="กรุณาระบุจังหวัด">
-					<datalist id="opts_province">
+					<select class="form-control" id="school_province_id" name="school_province_id">
+						<option value="none">กรุณาเลือก จังหวัด</option>
 						@foreach($prov as $prov_list)
-						<option id="{{ $prov_list->province_id }}"
-							value="{{ $prov_list->province_name }}">
-						</option>
+							<option value="{{ $prov_list->province_id }}">
+								{{ $prov_list->province_name }}
+							</option>
 						@endforeach
-					</datalist>
-					<input type="hidden" id="school_province_id" name="school_province_id">
-
+					</select>
 				</div>
 			</div>
 
 			<div class="row">
 				<span class="col-sm-2 col-md-2 text-right">ชั้นประถมศึกษาปีที่ </span>
 				<div class="col-sm-4 col-md-4 text-center">
-
-
-
-
-
 					<div class="form-group {{ $errors->has('school_level') ? 'has-error' : '' }}">
 						<input type="text" name="school_level" class="form-control" placeholder="กรุณาระบุชั้นประถมศึกษาปีที่" value="{{ old('school_level') }}">
 						<span class="text-danger">{{ $errors->first('school_level') }}</span>
@@ -203,48 +193,31 @@
 				</div>
 				<span class="col-sm-2 col-md-2 text-right">จังหวัด</span>
 				<div class="col-sm-4 col-md-4 text-center">
-
-					<input list="opts_province" name="province_list"
-					class="form-control"
-					placeholder="กรุณาระบุจังหวัด">
-					<datalist id="opts_province">
+					<select class="form-control" id="province_id" name="province_id">
+						<option value="none">กรุณาเลือก จังหวัด</option>
 						@foreach($prov as $prov_list)
-						<option id="{{ $prov_list->province_id }}"
-							value="{{ $prov_list->province_name }}">
-						</option>
+							<option value="{{ $prov_list->province_id }}">
+								{{ $prov_list->province_name }}
+							</option>
 						@endforeach
-					</datalist>
-					<input type="hidden" id="province_id" name="province_id">
-
+					</select>
 				</div>
-
 			</div>
 			<br>
 
 			<div class="row">
 				<span class="col-sm-2 col-md-2 text-right">เขต/อำเภอ</span>
 				<div class="col-sm-4 col-md-4 text-left">
-
-					<input list="opts_district" name="district_list"
-					class="form-control"
-					placeholder="กรุณาระบุเขต/อำเภอ"
-					onclick="chkProvinceInput();">
-					<datalist id="opts_district">
-					</datalist>
-					<input type="hidden" id="district_id" name="district_id">
-
+					<select class="form-control" id="district_id" name="district_id">
+						<option value="none">กรุณาเลือก เขต/อำเภอ</option>
+					</select>
 				</div>
 
 				<span class="col-sm-2 col-md-2 text-right">ตำบล/แขวง</span>
 				<div class="col-sm-4 col-md-4 text-center">
-					<input list="opts_sub_district" name="sub_district_list"
-					class="form-control"
-					placeholder="กรุณาระบุแขวง/ตำบล"
-					onclick="chkDistrictInput();">
-					<datalist id="opts_sub_district">
-					</datalist>
-					<input type="hidden" id="sub_district_id" name="sub_district_id">
-
+					<select class="form-control" id="sub_district_id" name="sub_district_id">
+						<option value="none">กรุณาเลือก แขวง/ตำบล</option>
+					</select>
 				</div>
 			</div>
 			<br>
@@ -252,7 +225,9 @@
 			<div class="row"><span class="col-sm-2 col-md-2 text-right">รหัสไปรษณีย์</span>
 				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}">
-						<input type='text' class="form-control" name="postcode" placeholder="กรุณาระบุรหัสไปรษณีย์" value="{{ old('postcode') }}"  />
+						<input type='text' class="form-control" name="postcode"
+						placeholder="กรุณาระบุรหัสไปรษณีย์" value="{{ old('postcode') }}"
+						maxlength="5"/>
 					</div>
 					<span class="text-danger">{{ $errors->first('postcode') }}</span>
 				</div>
@@ -260,7 +235,9 @@
 				<span class="col-sm-2 col-md-2 text-right">อีเมล</span>
 				<div class="col-sm-4 col-md-4 text-center">
 					<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
-						<input type='text' class="form-control" name="email" placeholder="กรุณาระบุอีเมล์" value="{{ old('email') }}"  />
+						<input type='text' class="form-control" name="email"
+						placeholder="กรุณาระบุอีเมล์" value="{{ old('email') }}"
+						maxlength="100"/>
 					</div>
 					<span class="text-danger">{{ $errors->first('email') }}</span>
 				</div>
@@ -269,7 +246,9 @@
 				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('mobile') ? 'has-error' : '' }}">
 
-						<input type='text' class="form-control" name="mobile" placeholder="กรุณาระบุเบอร์โทรศัพท์" value="{{ old('mobile') }}"  />
+						<input type='text' class="form-control" name="mobile"
+						placeholder="กรุณาระบุเบอร์โทรศัพท์" value="{{ old('mobile') }}"
+						maxlength="10"/>
 					</div>
 					<span class="text-danger">{{ $errors->first('mobile') }}</span>
 				</div>
@@ -277,7 +256,9 @@
 				<span class="col-sm-2 col-md-2 text-right">เบอร์บ้าน</span>
 				<div class="col-sm-4 col-md-4 text-center">
 					<div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}">
-						<input type='text' class="form-control phone"  name="tel" placeholder="กรุณาระบุเบอร์บ้าน" value="{{ old('tel') }}"  />
+						<input type='text' class="form-control phone"
+						name="tel" placeholder="กรุณาระบุเบอร์บ้าน" value="{{ old('tel') }}"
+						maxlength="9"/>
 						<span class="text-danger">{{ $errors->first('tel') }}</span>
 					</div>
 				</div>
@@ -301,151 +282,60 @@
 
 <script type="text/javascript">
 
+$("#province_id").change(function () {
+	var prov_id = $('#province_id :selected').val();
 
-var prov_list_id;
-var prov_list_value;
-$('input[name=school_province_list]').on('input',function() {
-	var selectedOption = $('option[value="'+$(this).val()+'"]');
-	if(selectedOption.length) {
-		prov_list_id = selectedOption.attr('id');
-		prov_list_value = selectedOption.attr('value');
-		$('input[name=school_province_list]').val(prov_list_value);
-		$('input[name=school_province_id]').val(prov_list_id);
-	}
-});
+	var select = $("#district_id");
+	select.empty();
 
+	var select_sub_dist = $("#sub_district_id");
+	select_sub_dist.empty();
+	select_sub_dist.append($('<option/>', {
+		value: "none",
+		text: "กรุณาเลือก แขวง/ตำบล"
+	}));
 
-
-
-
-$(document).ready(function(){
-	var prov_list_id;
-	var prov_list_value;
-	var dist_list_id;
-	var dist_list_value;
-	var sub_dist_list_id;
-	var sub_dist_list_value;
-	$('input[name=province_list]').on('input',function() {
-		var selectedOption = $('option[value="'+$(this).val()+'"]');
-		if(selectedOption.length) {
-			prov_list_id = selectedOption.attr('id');
-			prov_list_value = selectedOption.attr('value');
-			$('input[name=province_list]').val(prov_list_value);
-			$('input[name=province_id]').val(prov_list_id);
-
-			getDistrict(prov_list_id);
-
-		}
-	});
-
-	$('input[name=district_list]').on('input',function() {
-		var selectedOption = $('option[value="'+$(this).val()+'"]');
-		if(selectedOption.length) {
-			dist_list_id = selectedOption.attr('id');
-			dist_list_value = selectedOption.attr('value');
-			$('input[name=district_list]').val(dist_list_value);
-			$('input[name=district_id]').val(dist_list_id);
-
-			getSubDistrict(prov_list_id, dist_list_id);
-
-		}
-	});
-
-	$('input[name=sub_district_list]').on('input',function() {
-		var selectedOption = $('option[value="'+$(this).val()+'"]');
-		if(selectedOption.length) {
-			sub_dist_list_id = selectedOption.attr('id');
-			sub_dist_list_value = selectedOption.attr('value');
-			$('input[name=sub_district_list]').val(sub_dist_list_value);
-			$('input[name=sub_district_id]').val(sub_dist_list_id);
-		}
-	});
-
-	$('input[name=district_list]').on( 'keyup', function( e ) {
-		if( e.which == 9 ) {
-			//console.log( e.target.href );
-			chkProvinceInput();
-		}
-	} );
-
-	$('input[name=sub_district_list]').on( 'keyup', function( e ) {
-		if( e.which == 9 ) {
-			//console.log( e.target.href );
-			chkDistrictInput();
-		}
-	} );
-
-	$('input[name=postcode]').on( 'keyup', function( e ) {
-		if( e.which == 9 ) {
-			//console.log( e.target.href );
-			chkSubDistrictInput();
-		}
-	} );
-});
-
-function chkProvinceInput() {
-	var prov_id
-	prov_id = $('input[name=province_id]').val();
-
-	if(prov_id.length == 0) {
-		$('input[name=province_list]').val("");
-	}
-}
-
-function chkDistrictInput() {
-	var dist_id
-	dist_id = $('input[name=district_id]').val();
-
-	if(dist_id.length == 0) {
-		$('input[name=district_list]').val("");
-	}
-}
-
-function chkSubDistrictInput() {
-	var sub_dist_id
-	sub_dist_id = $('input[name=sub_district_id]').val();
-	if(sub_dist_id.length == 0) {
-		$('input[name=sub_district_list]').val("");
-	}
-}
-
-function getDistrict(prov_id) {
 	$.ajax({
 		type: 'GET',
 		url: "{{ url('/districts') }}",
 		data: { prov_id: prov_id },
 		dataType: 'json',
 		success: function (data) {
-			var select = $("#opts_district");
-			select.empty();
+			select.append($('<option/>', {
+				value: "none",
+				text: "กรุณาเลือก เขต/อำเภอ"
+			}));
 			$.each(data, function (index, dist_data) {
 				select.append($('<option/>', {
-					id: dist_data.district_id,
-					value: dist_data.district_name
+					value: dist_data.district_id,
+					text: dist_data.district_name,
 				}));
 			});
 		}
 	});
-}
+});
 
-function getSubDistrict(prov_id, dist_id) {
+$("#district_id").change(function () {
+	var prov_id = $('#province_id :selected').val();
+	var dist_id = $('#district_id :selected').val();
+
 	$.ajax({
 		type: 'GET',
 		url: "{{ url('/sub_districts') }}",
 		data: { prov_id: prov_id, dist_id: dist_id },
 		dataType: 'json',
 		success: function (data) {
-			var select = $("#opts_sub_district");
+			var select = $("#sub_district_id");
 			select.empty();
 			$.each(data, function (index, sub_dist_data) {
 				select.append($('<option/>', {
-					id: sub_dist_data.sub_district_id,
-					value: sub_dist_data.sub_district_name
+					value: sub_dist_data.sub_district_id,
+					text: sub_dist_data.sub_district_name
 				}));
 			});
 		}
 	});
-};
+});
 
 </script>
 @endsection
