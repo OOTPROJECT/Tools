@@ -1,6 +1,7 @@
 <script type="text/javascript">
 /*Create table*/
 $(document).ready(function() {
+
     $('table.hover').DataTable({
         "paging":   false,
         "info":     false,
@@ -110,10 +111,9 @@ function selectSubject() {
                         $('<td class="text-center">').text(course_schedule.price),
                         $('<td class="text-center">').text(course_schedule.number_of_time),
                         $('<td class="text-center">').text(course_schedule.status),
-                        $('<td><button type="submit" class="btn btn-success" onclick="enrollCourse();">ซื้อ</button>'),
-
+                        $('<td><button type="button" class="btn btn-success" onclick="enrollCourse('+course_schedule.course_schedule_id+');">ซื้อ</button>')//,
                         //$('<td class="text-center"><input type="radio">'),
-                        $('<input type="hidden" id="cs_id">').val(course_schedule.course_schedule_id)
+                        //$('<input type="hidden" id="cs_id">').val(course_schedule.course_schedule_id)
                     ).appendTo('#tableCourse');
                 });
             }
@@ -125,12 +125,12 @@ function selectSubject() {
         }
     });
 }
-function enrollCourse(){
+function enrollCourse(cs_id){
     //alert($('#std_id').val());
-    //alert($('#cs_id').val());
+    //alert(cs_id);
     //var cs_id = tableCourse.$('input, select').serialize();
     var std_id = $('#std_id').val();
-    var cs_id = $('#cs_id').val();
+    //var cs_id = $('#cs_id').val();
     console.log(std_id);
     console.log(cs_id);
 

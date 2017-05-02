@@ -67,7 +67,7 @@ class Teachers extends Model
      }
 
      public function getGender($gender){
-         
+
          if ($gender == "F") {
              return "หญิง";
          }

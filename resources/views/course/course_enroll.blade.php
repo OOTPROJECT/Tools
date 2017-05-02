@@ -52,12 +52,12 @@
                           <div class="row">
                               <span class="col-sm-2 col-md-1 text-right">ชื่อ:</span>
                                   <div class="col-sm-2 col-md-2 text-left">
-                                      <input type="text" id="std_fname" name="std_fname">
+                                      <input type="text" id="std_fname" name="std_fname"><br>
                                       <span id="span-name"class="text-right" style="display:none; color:red">กรุณาระบุชื่อ</span>
                                   </div>
                               <span class="col-sm-2 col-md-1 text-right">นามสกุล:</span>
                                   <div class="col-sm-2 col-md-2 text-left">
-                                      <input type="text" id="std_lname" name="std_lname">
+                                      <input type="text" id="std_lname" name="std_lname"><br>
                                       <span id="span-lname"class="text-right" style="display:none; color:red">กรุณาระบุนามสกุล</span>
                                   </div>
                                   <div class="col-sm-4 col-md-2 text-left">
@@ -158,8 +158,8 @@
                                           <td class="text-center">{{$course_schedule_list->price}}</td>
                                           <td class="text-center">{{$course_schedule_list->number_of_time}}</td>
                                           <td class="text-center">{{$course_schedule_list->status}}</td>
-                                          <td><button type="submit" class="btn btn-success" onclick="enrollCourse();">ซื้อ</button></td>
-                                          <input type="hidden" id="cs_id" value="{{$course_schedule_list->course_schedule_id}}">
+                                          <td><button type="button" class="btn btn-success" onclick="enrollCourse({{$course_schedule_list->course_schedule_id}});">ซื้อ</button></td>
+                                          <!--<input type="hidden" id="cs_id" value="{{$course_schedule_list->course_schedule_id}}">-->
                                           <!--   <td class="text-center"><input type="radio"></td>-->
                                           <!--<td class="text-center">
                                               <a href="javaScript:;"
