@@ -259,6 +259,8 @@
         });
     });
 
+
+
     $("#district_id").change(function () {
         var prov_id = $('#province_id :selected').val();
         var dist_id = $('#district_id :selected').val();

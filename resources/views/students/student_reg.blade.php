@@ -38,14 +38,14 @@
 
 				<div class="row">
 					<span class="col-sm-2 col-md-2 text-right">ชื่อ </span>
-					<div class="col-sm-4 col-md-4 text-right">
+					<div class="col-sm-4 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('firstname') ? 'has-error' : '' }}">
 							<input type="text" name="firstname" class="form-control"placeholder="กรุณาระบุชื่อ" value="{{ old('firstname') }}">
 							<span class="text-danger">{{ $errors->first('firstname') }}</span>
 						</div>
 					</div>
 					<span class="col-sm-2 col-md-2 text-right">นามสกุล </span>
-					<div class="col-sm-4 col-md-4 text-right">
+					<div class="col-sm-4 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('lastname') ? 'has-error' : '' }}">
 							<input type="text" name="lastname" class="form-control"
 							placeholder="กรุณาระบุนามสกุล" value="{{ old('lastname') }}">
@@ -80,7 +80,7 @@
 
 				</div><br>
 				<div class="row"><span class="col-sm-2 col-md-2 text-right">เพศ</span>
-					<div class="col-sm-11 col-md-3 text-center">
+					<div class="col-sm-11 col-md-3 text-left">
 						<div class="form-group {{ $errors->has('gender') ? 'has-error' : '' }}">
 							<label class="radio-inline">
 								<input type="radio" name="gender" value="M">&nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
@@ -100,7 +100,7 @@
 				</div>
 				<div class="col-sm-2 col-md-2 text-right">จังหวัด
 				</div>
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-left">
 					<select class="form-control" id="school_province_id" name="school_province_id">
 						<option value="none">กรุณาเลือก จังหวัด</option>
 						@foreach($prov as $prov_list)
@@ -114,16 +114,16 @@
 
 			<div class="row">
 				<span class="col-sm-2 col-md-2 text-right">ชั้นประถมศึกษาปีที่ </span>
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('school_level') ? 'has-error' : '' }}">
-						<input type="text" name="school_level" class="form-control" placeholder="กรุณาระบุชั้นประถมศึกษาปีที่" value="{{ old('school_level') }}">
+						<input type="text" name="school_level" class="form-control" placeholder="กรุณาระบุชั้นประถมศึกษาปีที่" value="{{ old('school_level') }}" 	maxlength="1" onKeyUp="inputschoollevel(this)"; >
 						<span class="text-danger">{{ $errors->first('school_level') }}</span>
 					</div>
 				</div>
 			</div>
 			<div class="row">
 				<span class="col-sm-2 col-md-2 text-right">ชื่อผู้ปกครอง  </span>
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('parent_fname') ? 'has-error' : '' }}">
 						<input type="text" name="parent_fname"  class="form-control" placeholder="กรุณาระบุชื่อผู้ปกครอง" value="{{ old('parent_fname') }}">
 						<span class="text-danger">{{ $errors->first('parent_fname') }}</span>
@@ -132,7 +132,7 @@
 
 				<span class="col-sm-2 col-md-2 text-right">นามสกุล </span>
 
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('parent_lname') ? 'has-error' : '' }}">
 
 						<input type="text" name="parent_lname" class="form-control" placeholder="กรุณาระบุนามสกุลผู้ปกครอง" value="{{ old('parent_lname') }}">
@@ -141,7 +141,7 @@
 				</div>
 			</div>
 			<div class="row"><span class="col-sm-2 col-md-2 text-right">ความสัมพันธ์กับนักเรียน</span>
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('student_relationship') ? 'has-error' : '' }}">
 
 						<input type="text" name="student_relationship"  class="form-control" placeholder="กรุณาระบุความสัมพันธ์กับนักเรียน" value="{{ old('student_relationship') }}">
@@ -166,7 +166,7 @@
 
 				<span class="col-sm-2 col-md-2 text-right">อาชีพ
 				</span>
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('parent_occupation') ? 'has-error' : '' }}">
 						<input type='text' class="form-control" name="parent_occupation" placeholder="กรุณาระบุอาชีพ" value="{{ old('parent_occupation') }}"  />
 					</div>
@@ -178,11 +178,12 @@
 				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('addr') ? 'has-error' : '' }}">
 						<input type='text' class="form-control" name="addr" placeholder="กรุณาระบุบ้านเลขที่" value="{{ old('addr') }}" />
+						<span class="text-danger">{{ $errors->first('addr') }}</span>
 					</div>
-					<span class="text-danger">{{ $errors->first('addr') }}</span>
+
 				</div>
 				<span class="col-sm-2 col-md-2 text-right">ซอย</span>
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-left">
 					<input type='text' class="form-control" name="soi"  />
 				</div>
 			</div>
@@ -192,7 +193,7 @@
 					<input type='text' class="form-control" name="road"  />
 				</div>
 				<span class="col-sm-2 col-md-2 text-right">จังหวัด</span>
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-left">
 					<select class="form-control" id="province_id" name="province_id">
 						<option value="none">กรุณาเลือก จังหวัด</option>
 						@foreach($prov as $prov_list)
@@ -214,7 +215,7 @@
 				</div>
 
 				<span class="col-sm-2 col-md-2 text-right">ตำบล/แขวง</span>
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-left">
 					<select class="form-control" id="sub_district_id" name="sub_district_id">
 						<option value="none">กรุณาเลือก แขวง/ตำบล</option>
 					</select>
@@ -227,19 +228,20 @@
 					<div class="form-group {{ $errors->has('postcode') ? 'has-error' : '' }}">
 						<input type='text' class="form-control" name="postcode"
 						placeholder="กรุณาระบุรหัสไปรษณีย์" value="{{ old('postcode') }}"
-						maxlength="5"/>
+						maxlength="5" onclick="chkSubDistrictInput();"
+						 onKeyUp="inputDigits(this);"/><span class="text-danger">{{ $errors->first('postcode') }}</span>
 					</div>
-					<span class="text-danger">{{ $errors->first('postcode') }}</span>
+
 				</div>
 
 				<span class="col-sm-2 col-md-2 text-right">อีเมล</span>
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('email') ? 'has-error' : '' }}">
 						<input type='text' class="form-control" name="email"
 						placeholder="กรุณาระบุอีเมล์" value="{{ old('email') }}"
 						maxlength="100"/>
+						<span class="text-danger">{{ $errors->first('email') }}</span>
 					</div>
-					<span class="text-danger">{{ $errors->first('email') }}</span>
 				</div>
 			</div>
 			<div class="row"><span class="col-sm-2 col-md-2 text-right">เบอร์โทรศัพท์</span>
@@ -248,25 +250,24 @@
 
 						<input type='text' class="form-control" name="mobile"
 						placeholder="กรุณาระบุเบอร์โทรศัพท์" value="{{ old('mobile') }}"
-						maxlength="10"/>
+						maxlength="10" onKeyUp="inputDigitsMobile(this);"/>
+						<span class="text-danger">{{ $errors->first('mobile') }}</span>
 					</div>
-					<span class="text-danger">{{ $errors->first('mobile') }}</span>
+
 				</div>
 
 				<span class="col-sm-2 col-md-2 text-right">เบอร์บ้าน</span>
-				<div class="col-sm-4 col-md-4 text-center">
+				<div class="col-sm-4 col-md-4 text-left">
 					<div class="form-group {{ $errors->has('tel') ? 'has-error' : '' }}">
 						<input type='text' class="form-control phone"
 						name="tel" placeholder="กรุณาระบุเบอร์บ้าน" value="{{ old('tel') }}"
-						maxlength="9"/>
+						maxlength="9" onKeyUp="inputDigitsTel(this);" />
 						<span class="text-danger">{{ $errors->first('tel') }}</span>
 					</div>
 				</div>
 			</div>
 			<br>
-			<br>
 			<div class="row">
-
 				<div class="col-sm-12 col-md-12 text-center">
 					<button type="submit" class="btn btn-primary">บันทีก</button>
 					<button type="submit" class="btn">รีเซ็ต</button>
@@ -315,6 +316,8 @@ $("#province_id").change(function () {
 	});
 });
 
+
+
 $("#district_id").change(function () {
 	var prov_id = $('#province_id :selected').val();
 	var dist_id = $('#district_id :selected').val();
@@ -336,6 +339,68 @@ $("#district_id").change(function () {
 		}
 	});
 });
+
+
+
+function inputDigitsMobile(sensor){
+	var regExp = /[0-9]$/;
+	if(!regExp.test(sensor.value)){
+		$( "#mobile span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+		$('#mobile span').css('display', 'block');
+		sensor.value = sensor.value.substring(0, sensor.value.length -1);
+	}
+	else {
+		$('#mobile span').css('display', 'none');
+	}
+}
+
+
+
+
+function inputDigitsTel(sensor){
+	var regExp = /[0-9]$/;
+	if(!regExp.test(sensor.value)){
+		$( "#tel span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+		$('#tel span').css('display', 'block');
+		sensor.value = sensor.value.substring(0, sensor.value.length -1);
+	}
+	else {
+		$( "#tel span" ).css('display', 'none');
+	}
+}
+
+
+
+
+function inputDigits(sensor){
+	var regExp = /[0-9]$/;
+	if(!regExp.test(sensor.value)){
+		$( "#postcode span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข");
+		$('#postcode span').css('display', 'block');
+		sensor.value = sensor.value.substring(0, sensor.value.length -1);
+	}
+	else {
+		$( "#postcode span" ).css('display', 'none');
+	}
+}
+
+
+
+function inputschoollevel(sensor){
+	var regExp = /[1-6]$/;
+	if(!regExp.test(sensor.value)){
+		$( "#school_level span.text-danger" ).text("กรุณาระบุเฉพาะตัวเลข 1-6");
+		$('#school_level span').css('display', 'block');
+		sensor.value = sensor.value.substring(0, sensor.value.length -1);
+	}
+	else {
+		$('#school_level span').css('display', 'none');
+	}
+}
+
+
+
+
 
 </script>
 @endsection
