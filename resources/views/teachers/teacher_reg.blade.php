@@ -57,7 +57,7 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('birthdate') ? 'has-error' : '' }}">
                                 <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
-                                    <input class="form-control" type="text" name="birthdate" value="{{ old('birthdate') }}"
+                                    <input class="form-control" type="text" name="birthdate" value=""
                                     placeholder="กรุณาระบุ วันเกิด" readonly />
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
@@ -80,11 +80,13 @@
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('gender') ? 'has-error' : '' }}">
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" value="M">
+                                    <input type="radio" name="gender" value="M"
+                                    {{ (old('gender') == "M") ? 'checked' : '' }} >
                                     &nbsp;&nbsp;ชาย &nbsp;&nbsp;&nbsp;
                                 </label>
                                 <label class="radio-inline">
-                                    <input type="radio" name="gender" value="F">
+                                    <input type="radio" name="gender" value="F"
+                                    {{ (old('gender') == "F") ? 'checked' : '' }}>
                                     หญิง&nbsp;&nbsp;&nbsp;
                                 </label>
                                 <span class="text-danger">{{ $errors->first('gender') }}</span>
@@ -146,7 +148,8 @@
                             <select class="form-control" id="province_id" name="province_id">
                                 <option value="none">กรุณาเลือก จังหวัด</option>
                                 @foreach($prov as $prov_list)
-                                    <option value="{{ $prov_list->province_id }}">
+                                    <option value="{{ $prov_list->province_id }}"
+                                        {{ (old("province_id") == $prov_list->province_id  ? "selected":"") }}>
                                         {{ $prov_list->province_name }}
                                     </option>
                                 @endforeach
@@ -225,6 +228,10 @@
 </div>
 
 <script type="text/javascript">
+    $(document).ready(function (){
+
+
+    });
 
     $("#province_id").change(function () {
         var prov_id = $('#province_id :selected').val();

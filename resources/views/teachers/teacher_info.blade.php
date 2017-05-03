@@ -41,8 +41,6 @@
                         <td>
                             <a href="{{ url('/teacherEdit') }}/{{ $value->teacher_id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
                             <a href="{{ url('/deleteTeacher') }}/{{ $value->teacher_id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                            <!--<a href="{{ url('/teacherUpdate') }}/{{ $value->teacher_id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
-
                         </td>
 
                     </tr>
