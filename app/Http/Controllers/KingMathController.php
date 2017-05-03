@@ -24,7 +24,9 @@ class KingMathController extends Controller
     */
     public function __construct()
     {
-        //$this->middleware('auth');
+        // Authenticate user login
+        $this->middleware('auth');
+
         $this->city = new City();
         $this->teacher = new Teachers();
         $this->course = new Courses();
