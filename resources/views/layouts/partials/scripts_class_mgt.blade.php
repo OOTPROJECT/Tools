@@ -86,6 +86,10 @@ $("#classroom").change(function () {
     $("#div_time_table").hide();
 })
 
+$("#teacher").change(function () {
+    $("#div_time_table").hide();
+})
+
 function chkTimeTable() {
     var start_date = $('input[name=start_date]').val();
     var end_date = $('input[name=end_date]').val();
