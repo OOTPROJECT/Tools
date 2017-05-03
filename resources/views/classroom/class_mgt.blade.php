@@ -40,6 +40,7 @@
                                         @foreach($all_course as $course)
                                             <option value="{{ $course->course_id }}">
                                                 {{ $course->course_name }}
+                                                (เรียน {{ $course->number_of_time }} ครั้ง)
                                             </option>
                                         @endforeach
                                     @else
@@ -153,6 +154,7 @@
                         <th class="text-left">ชื่อคอร์ส</th>
                         <th class="text-center">วัน</th>
                         <th class="text-center">เวลา</th>
+                        <th class="text-center">จำนวนครั้งที่เรียน</th>
                         <th class="text-left">ครูผู้สอน</th>
                         <th class="text-left">ห้องเรียน</th>
                         <th class="text-left">วันที่เริ่มเรียน-ถึงวันที่</th>
@@ -168,6 +170,7 @@
                                 <td class="text-left">{{ $cs->course_name }}</td>
                                 <td class="text-center">{{ $cs->day }}</td>
                                 <td class="text-center">{{ $cs->start_time }} - {{ $cs->end_time }} น.</td>
+                                <td class="text-center">{{ $cs->number_of_time }}</td>
                                 <td class="text-left">{{ $cs->firstname }} {{ $cs->lastname }}</td>
                                 <td class="text-left">{{ $cs->room_name }}</td>
                                 <td class="text-left">{{ $cs->start_date }} - {{ $cs->end_date }}</td>
