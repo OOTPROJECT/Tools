@@ -106,7 +106,7 @@
 					<div class="col-sm-2 col-md-2 text-right">จังหวัด
 					</div>
 					<div class="col-sm-4 col-md-4 text-center">
-						<select class="form-control" id="province_id" name="province_id">
+						<select class="form-control" id="schoolprovid" name="schoolprovid">
 							@foreach($prov as $prov_list)
 							@if($student->school_province_id == $prov_list->province_id)
 							<option value="{{ $prov_list->province_id }}" selected="true">
@@ -119,7 +119,7 @@
 							@endif
 							@endforeach
 						</select>
-						<input type="hidden" id="school_province_id" name="school_province_id" value="{{ $student->school_province_id }}">
+						<input type="hidden" id="schoolprovid" name="schoolprovid" value="{{ $student->school_province_id }}">
 
 					</div>
 				</div>
@@ -301,6 +301,7 @@
         var provid = $('#provid').val();
         var distid = $('#distid').val();
         var subdistid = $('#subdistid').val();
+		var schoolprovid = $('#schoolprovid').val();
 
         getDistrict(provid, distid);
         getSubDistrict(provid, distid, subdistid);
@@ -385,6 +386,11 @@
             }
         });
     }
+
+
+
+
+
 
     $("#province_id").change(function () { //$("#elementId :selected").text();
         var prov_id = $('#province_id :selected').val();
