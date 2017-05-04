@@ -270,7 +270,7 @@
 			<div class="row">
 				<div class="col-sm-12 col-md-12 text-center">
 					<button type="submit" class="btn btn-primary">บันทีก</button>
-					<button type="submit" class="btn">รีเซ็ต</button>
+					<button type="submit" class="btn">ยกเลิก</button>
 				</div>
 			</div>
 

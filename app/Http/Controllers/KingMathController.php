@@ -54,21 +54,6 @@ class KingMathController extends Controller
     }
 
     /**
-    * Show the application student information.
-    *
-    * @return \Illuminate\Http\Response
-    */
-    public function callStudentInfoPage()
-    {
-            //return view('students.student_info');
-      $allStudent = $this->students->getAllStudentInfo();
-        return view('students.student_info')
-        ->with('allStudent', $allStudent);
-
-
-    }
-
-    /**
     * Add student information.
     *
     * @return
@@ -489,7 +474,7 @@ public function callStudentEditPage($student_id)
               $payroll = $this->payroll->getPayrollByTeacherID($teacher_id);
 
               if(count($course_schedule) > 0 || count($payroll) > 0) {
-                  Toastr::info("ไม่สามารถลบครูผู้สอนได้ ");
+                  Toastr::error("ไม่สามารถลบครูผู้สอนได้ ");
               }
               else {
                   $result = Teachers::where('teacher_id', '=', $teacher_id)->delete();
@@ -498,7 +483,7 @@ public function callStudentEditPage($student_id)
                       Toastr::info("ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว ");
                   }
                   else {
-                      Toastr::info("ไม่สามารถลบครูผู้สอนได้ ");
+                      Toastr::error("ไม่สามารถลบครูผู้สอนได้ ");
                   }
 
               }
@@ -514,7 +499,7 @@ public function callStudentEditPage($student_id)
               $course_enroll = $this->course_enroll->courseEnrollByStudentID($student_id);
 
               if(count($course_enroll) > 0) {
-                  Toastr::info("ไม่สามารถลบนักเรียนได้ ");
+                  Toastr::error("ไม่สามารถลบนักเรียนได้ ");
                   //return array("resp" => false, "text" => "ไม่สามารถลบคลาสเรียนได้ เนื่องจากมีนักเรียนลงทะเบียนเรียน");
               }
               else {
@@ -525,7 +510,7 @@ public function callStudentEditPage($student_id)
                       //return array("resp" => true, "text" => "ลบข้อมูลครูผู้สอนเรียบร้อยแล้ว");
                   }
                   else {
-                      Toastr::info("ไม่สามารถลบนักเรียนได้ ");
+                      Toastr::error("ไม่สามารถลบนักเรียนได้ ");
                       //return array("resp" => false, "text" => "ไม่สามารถลบข้อมูลครูผู้สอนได้");
                   }
 

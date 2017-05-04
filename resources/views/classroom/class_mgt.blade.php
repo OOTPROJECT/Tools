@@ -173,7 +173,7 @@
                                 <td class="text-center">{{ $cs->number_of_time }}</td>
                                 <td class="text-left">{{ $cs->firstname }} {{ $cs->lastname }}</td>
                                 <td class="text-left">{{ $cs->room_name }}</td>
-                                <td class="text-left">{{ $cs->start_date }} - {{ $cs->end_date }}</td>
+                                <td class="text-left">({{ $cs->start_date }}) - ({{ $cs->end_date }})</td>
                                 <td class="text-center">{{ $cs->status }}</td>
                                 <td class="text-left">{{ $cs->created_at }}</td>
                                 <td class="text-center">
