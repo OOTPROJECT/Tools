@@ -207,7 +207,8 @@ public function updateStudent($student_id ,Request $request)
                     $request->input('road')
                   );
     $input = $request->except('_token', 'addr', 'soi','road', 'province_list',
-                'district_list', 'sub_district_list', 'provid', 'distid', 'subdistid');
+                'district_list', 'sub_district_list', 'provid', 'distid', 'subdistid',
+                'std_bd', 'parent_bd');
 
     $input_student = array_merge($input, $input_addr);
 
@@ -465,7 +466,8 @@ public function callStudentEditPage($student_id)
                          $request->input('road_name')
                        );
          $input = $request->except('_token', 'home_no', 'road_name', 'province_list',
-                     'district_list', 'sub_district_list', 'provid', 'distid', 'subdistid');
+                     'district_list', 'sub_district_list', 'provid', 'distid', 'subdistid',
+                     'bd');
          $input_teacher = array_merge($input, $input_addr);
 
          Teachers::where('teacher_id', $teacher_id)

@@ -58,14 +58,15 @@
                         <span class="col-sm-2 col-md-2 text-right">วันเกิด:</span>
                         <div class="col-sm-4 col-md-4">
                             <div class="form-group {{ $errors->has('birthdate') ? 'has-error' : '' }}">
-                                <div id="datepicker" class="input-group date" data-date-format="yyyy-mm-dd">
+                                <div id="div_birthdate" class="datepicker1 input-group date" data-date-format="yyyy-mm-dd">
                                     <input class="form-control" type="text" name="birthdate"
-                                    value="{{ $teacher->birthdate}}" readonly />
+                                    value="" readonly />
                                     <span class="input-group-addon">
                                         <i class="glyphicon glyphicon-calendar"></i>
                                     </span>
                                 </div>
                                 <span class="text-danger">{{ $errors->first('birthdate') }}</span>
+                                <input type="hidden" id="bd" name="bd" value="{{ $teacher->birthdate }}">
                             </div>
                         </div>
                         <span class="col-sm-2 col-md-2 text-right">รหัสประจำตัวประชาชน:</span>
@@ -243,6 +244,12 @@
         getSubDistrict(provid, distid, subdistid);
         chkGender();
 
+        var birthdate = $('input[name=bd]').val();
+        // Setting datepicker start date.
+        $("#div_birthdate, .datepicker1").datepicker({
+            autoclose: true,
+            todayHighlight: true
+        }).datepicker('update', birthdate);
     });
 
     function chkGender(){

@@ -70,19 +70,17 @@
 							<span class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</span>
 							<div class="col-sm-10 col-md-4 text-left">
 								<div class="form-group {{ $errors->has('std_birthdate') ? 'has-error' : '' }}">
-									<div class="input-group date datepicker"
+									<div id="div_std_birthdate" class="input-group date datepicker1"
 									data-date-format="yyyy-mm-dd">
 									<input class="form-control" type="text" name="std_birthdate"
 									value="{{ $student->std_birthdate}}" readonly />
 									<span class="input-group-addon">
 										<i class="glyphicon glyphicon-calendar"></i>
 									</span>
+									<input type="hidden" id="std_bd" name="std_bd" value="{{ $student->std_birthdate }}">
 								</div>
-
 							</div>
 						</div>
-
-
 					</div><br>
 					<div class="row"><span class="col-sm-2 col-md-2 text-right">เพศ</span>
 						<div class="col-sm-11 col-md-3 text-center">
@@ -106,7 +104,7 @@
 					<div class="col-sm-2 col-md-2 text-right">จังหวัด
 					</div>
 					<div class="col-sm-4 col-md-4 text-center">
-						<select class="form-control" id="schoolprovid" name="schoolprovid">
+						<select class="form-control" id="school_province_id" name="school_province_id">
 							@foreach($prov as $prov_list)
 							@if($student->school_province_id == $prov_list->province_id)
 							<option value="{{ $prov_list->province_id }}" selected="true">
@@ -119,7 +117,7 @@
 							@endif
 							@endforeach
 						</select>
-						<input type="hidden" id="schoolprovid" name="schoolprovid" value="{{ $student->school_province_id }}">
+						<input type="hidden" id="school_province_id" name="school_province_id" value="{{ $student->school_province_id }}">
 
 					</div>
 				</div>
@@ -165,12 +163,13 @@
 					<span class="col-sm-2 col-md-2 text-right">วันเดือนปีเกิด</span>
 					<div class="col-sm-4 col-md-4 text-left">
 						<div class="form-group {{ $errors->has('parent_birthdate') ? 'has-error' : '' }}">
-							<div  class="input-group date datepicker" data-date-format="yyyy-mm-dd">
-								<input class="form-control" type="text" name="parent_birthdate" value="{{ $student->birthdate}}" readonly />
+							<div  id="div_parent_birthdate" class="input-group date datepicker2" data-date-format="yyyy-mm-dd">
+								<input class="form-control" type="text" name="parent_birthdate" value="" readonly />
 								<span class="input-group-addon">
 									<i class="glyphicon glyphicon-calendar"></i>
 								</span>
 							</div>
+							<input type="hidden" id="parent_bd" name="parent_bd" value="{{ $student->parent_birthdate }}">
 						</div>
 					</div>
 					<span class="col-sm-2 col-md-2 text-right">อาชีพ
@@ -203,10 +202,9 @@
 					<span class="col-sm-2 col-md-2 text-right">จังหวัด</span>
 					<div class="col-sm-4 col-md-4 text-center">
 
-						<select name="province_id"
+						<select name="province_id" id="province_id"
 						class="form-control"
 						placeholder="กรุณาระบุจังหวัด">
-						<datalist id="opts_province">
 							@foreach($prov as $prov_list)
 								@if($student->province_id == $prov_list->province_id)
 									<option value="{{ $prov_list->province_id }}" selected="true">
@@ -218,7 +216,6 @@
 									</option>
 								@endif
 							@endforeach
-						</datalist>
 						<input type="hidden" id="provid" name="provid" value="{{ $student->province_id }}">
 					</div>
 
@@ -301,11 +298,25 @@
         var provid = $('#provid').val();
         var distid = $('#distid').val();
         var subdistid = $('#subdistid').val();
-		var schoolprovid = $('#schoolprovid').val();
+		var school_province_id = $('#school_province_id').val();
 
         getDistrict(provid, distid);
         getSubDistrict(provid, distid, subdistid);
         chkGender();
+
+		var std_birthdate = $('input[name=std_bd]').val();
+		var parent_birthdate = $('input[name=parent_bd]').val();
+        // Setting datepicker student birthdate.
+        $("#div_std_birthdate, .datepicker1").datepicker({
+            autoclose: true,
+            todayHighlight: true
+        }).datepicker('update', std_birthdate);
+
+		// Setting datepicker parent birthdate.
+        $("#div_parent_birthdate, .datepicker2").datepicker({
+            autoclose: true,
+            todayHighlight: true
+        }).datepicker('update', parent_birthdate);
 
     });
 
@@ -386,11 +397,6 @@
             }
         });
     }
-
-
-
-
-
 
     $("#province_id").change(function () { //$("#elementId :selected").text();
         var prov_id = $('#province_id :selected').val();
