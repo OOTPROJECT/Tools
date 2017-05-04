@@ -9,7 +9,7 @@ class TimeTable extends Model
     // Table name
     protected $table = 'time_table';
 
-    function getAllClassRoom() {
+    public function getAllClassRoom() {
         $arr_all_classroom = TimeTable::select('room_name')->distinct()
                                 ->orderBy('room_name')
                                 ->get();
@@ -17,7 +17,7 @@ class TimeTable extends Model
         return $arr_all_classroom;
     }
 
-    function getTimeTable($start_date, $end_date, $teacher_id, $room_name) {
+    public function getTimeTable($start_date, $end_date, $teacher_id, $room_name) {
 
         $arr_time_table = \DB::select(
                             "SELECT time_table_id, day, start_time, end_time

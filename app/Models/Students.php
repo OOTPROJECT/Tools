@@ -64,7 +64,7 @@ class Students extends Model
         return $student;
     }
     //get student info
-    function getStudentInfo($firstname, $lastname) {
+    public function getStudentInfo($firstname, $lastname) {
         $arr_student = Students::where('firstname','=', $firstname)
                         ->where('lastname','=', $lastname)->get();
 

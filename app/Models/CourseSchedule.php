@@ -17,7 +17,7 @@ class CourseSchedule extends Model
                         ];
     protected $dates = ['deleted_at'];
 
-    function getAllCourseSchedule() {
+    public function getAllCourseSchedule() {
 
         $this->table = "v_course_schedule";
         $arr_course_schedule = CourseSchedule::select('course_schedule_id', 'course_name', 'day',
@@ -29,16 +29,7 @@ class CourseSchedule extends Model
         return $arr_course_schedule;
     }
 
-    function courseEnrollByCSId($course_schedule_id) {
-
-        $this->table = "course_enroll";
-        $course_enroll = CourseSchedule::where('course_schedule_id', '=', $course_schedule_id)
-                            ->first();
-
-        return $course_enroll;
-    }
-
-    function getCourseBySubject($subject_id) {
+    public function getCourseBySubject($subject_id) {
 
         $course_schedule =  \DB::select(
                             "SELECT cs.course_schedule_id, c.course_name, tt.day, tt.start_time, tt.end_time
@@ -52,7 +43,16 @@ class CourseSchedule extends Model
                           );
         return $course_schedule;
     }
-    function getMaxByCSId($cs_id) {
+
+    public function courseScheduleByTeacherID($teacher_id) {
+
+        //$this->table = "course_schedule";
+        $course_schedule = CourseSchedule::where('teacher_id', '=', $teacher_id)->first();
+
+        return $course_schedule;
+    }
+
+    public function getMaxByCSId($cs_id) {
 
         $std_max = CourseSchedule::select('student_max')->where('course_schedule_id', '=', $cs_id)
                             ->first();

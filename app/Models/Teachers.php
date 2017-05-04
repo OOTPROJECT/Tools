@@ -44,14 +44,6 @@ class Teachers extends Model
          return $all_teacher;
      }
 
-     public function courseScheduleByTeacherID($teacher_id) {
-
-         $this->table = "course_schedule";
-         $course_schedule = CourseSchedule::where('teacher_id', '=', $teacher_id)->first();
-
-         return $course_schedule;
-     }
-
      public function getCourseEnrollByEnddate($current_month_year) {
 
          $course_enroll = \DB::select(

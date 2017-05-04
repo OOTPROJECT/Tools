@@ -9,11 +9,11 @@ class Courses extends Model
     // table name
     protected $table = 'courses';
 
-    function getCourse() {
+    public function getCourse() {
         $all_course = Courses::orderBy('course_name')->get();
 
         return $all_course;
     }
-    
+
 
 }

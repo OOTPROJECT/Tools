@@ -485,7 +485,7 @@ public function callStudentEditPage($student_id)
       public function deleteTeacher($teacher_id)
       {
           if ($teacher_id != null){
-              $course_schedule = $this->teacher->courseScheduleByTeacherID($teacher_id);
+              $course_schedule = $this->course_schedule->courseScheduleByTeacherID($teacher_id);
               $payroll = $this->payroll->getPayrollByTeacherID($teacher_id);
 
               if(count($course_schedule) > 0 || count($payroll) > 0) {
@@ -511,7 +511,7 @@ public function callStudentEditPage($student_id)
       public function deleteStudent($student_id)
       {
           if ($student_id != null){
-              $course_enroll = $this->course_enroll->courseenrollByStudentID($student_id);
+              $course_enroll = $this->course_enroll->courseEnrollByStudentID($student_id);
 
               if(count($course_enroll) > 0) {
                   Toastr::info("ไม่สามารถลบนักเรียนได้ ");
@@ -615,7 +615,7 @@ public function callStudentEditPage($student_id)
 
      public function deleteCourseSchedule(Request $request) {
          $course_schedule_id = trim($request->input('cs_id'));
-         $course_enroll = $this->course_schedule->courseEnrollByCSId($course_schedule_id);
+         $course_enroll = $this->course_enroll->courseEnrollByCSId($course_schedule_id);
 
          if(count($course_enroll) > 0) {
              return array("resp" => false, "text" => "ไม่สามารถลบคลาสเรียนได้ เนื่องจากมีนักเรียนลงทะเบียนเรียน");
@@ -713,7 +713,7 @@ public function callStudentEditPage($student_id)
          $input = $request->except('_token');
          $resp = CourseEnroll::create($input)->saveOrFail();
 
-         $course_enroll = $this->course_enroll->getcourseEnrollByCSId($cs_id);
+         $course_enroll = $this->course_enroll->getCourseEnrollByCSId($cs_id);
          $std_max = $this->course_schedule->getMaxByCSId($cs_id);
 //echo count($course_enroll);
          if($resp == 1) {
