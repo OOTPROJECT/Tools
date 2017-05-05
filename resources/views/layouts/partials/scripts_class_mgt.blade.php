@@ -126,7 +126,7 @@ function chkTimeTable() {
                             " (" + time_table.start_time
                             + " - " + time_table.end_time + " น.)"),
                         $('<td class="col-sm-3 col-md-3 text-left">').html(
-                            '<button type="button" class="btn btn-success"' +
+                            '<button id="btnReserved" type="button" class="btn btn-success"' +
                             ' onclick="createCourseSchedule(' + time_table.time_table_id +
                             ');" tootip="เลือกและบันทึก">' +
                             ' จอง</button>')

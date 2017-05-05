@@ -40,7 +40,7 @@ class CourseEnroll extends Model
         public function courseEnrollByCSId($course_schedule_id) {
 
             //$this->table = "course_enroll";
-            $course_enroll = CourseSchedule::where('course_schedule_id', '=', $course_schedule_id)
+            $course_enroll = CourseEnroll::where('course_schedule_id', '=', $course_schedule_id)
                                 ->first();
 
             return $course_enroll;

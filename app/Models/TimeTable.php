@@ -33,7 +33,8 @@ class TimeTable extends Model
                             ON t.time_table_id = cs.time_table_id
                             WHERE cs.teacher_id = " . $teacher_id . "
                             AND '".  $start_date ."' <= end_date
-                            AND '". $end_date . "' >= start_date) AS subquery2 )
+                            AND '". $end_date . "' >= start_date
+                            AND cs.deleted_at IS NULL) AS subquery2 )
                             ORDER BY day"
                         );
 
