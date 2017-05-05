@@ -33,16 +33,16 @@
                 @foreach($allTeacher as $value)
                     <tr>
                         <td class="column">{{$value->firstname}}  {{$value->lastname}}</td>
-                        <!-- <td>{{$value->lastname}}</td> -->
                         <td>{{$value->personal_id}}</td>
                         <td>{{$value->getGender($value->gender)}}</td>
                         <td>{{$value->mobile}}</td>
                         <td>{{$value->email}}</td>
                         <td>
-                            <a href="{{ url('/teacherEdit') }}/{{ $value->teacher_id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                            <a href="{{ url('/deleteTeacher') }}/{{ $value->teacher_id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                            <a href="{{ url('/teacherEdit') }}/{{ $value->teacher_id }}" data-toggle="tooltip"
+                            data-placement="top" title="แก้ไข"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a href="{{ url('/deleteTeacher') }}/{{ $value->teacher_id }}" data-toggle="tooltip"
+                            data-placement="top" title="ลบ"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
-
                     </tr>
                 @endforeach
             @endif

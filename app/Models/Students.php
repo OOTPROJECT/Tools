@@ -71,4 +71,14 @@ class Students extends Model
         return $arr_student;
     }
 
+    public function getGender($gender){
+
+        if ($gender == "F") {
+            return "หญิง";
+        }
+        else {
+            return "ชาย";
+        }
+    }
+
 }
