@@ -20,13 +20,12 @@
                     <tr>
                         <th>ชื่อ - นามสกุล</th>
                         <th>ชื่อเล่น</th>
-                        <th>วันเดือนปีเกิด</th>
+                        <!-- <th>วันเดือนปีเกิด</th> -->
                         <th>เพศ</th>
-                        <th>ชื่อโรงเรียน</th>
-                        <th>ระดับชั้นประถมศึกษา</th>
-                        <th>ชื่อผู้ปกครอง</th>
-                        <th>นามสกุลผู้ปกครอง</th>
-                        <th>ความสัมพันธ์กับนักเรียน</th>
+                        <th>โรงเรียน</th>
+                        <th>ระดับชั้น</th>
+                        <th>ชื่อ - นามสกุลผู้ปกครอง</th>
+                        <!-- <th>ความสัมพันธ์กับนักเรียน</th> -->
                         <th>อีเมล์</th>
                         <th>เบอร์โทรศัพท์</th>
                         <th></th>
@@ -38,20 +37,19 @@
                     <tr>
                         <td>{{$value->firstname}} {{$value->lastname}}</td>
                         <td>{{$value->nickname}}</td>
-                        <td>{{$value->std_birthdate}}</td>
-                        <td>{{$value->gender}}</td>
+                        <!-- <td>{{$value->std_birthdate}}</td> -->
+                        <td>{{$value->getGender($value->gender)}}</td>
                         <td>{{$value->schoolname}}</td>
                         <td>{{$value->school_level}}</td>
-                        <td>{{$value->parent_fname}}</td>
-                        <td>{{$value->parent_lname}}</td>
-                        <td>{{$value->student_relationship}}</td>
+                        <td>{{$value->parent_fname}} {{$value->parent_lname}}</td>
+                        <!-- <td>{{$value->student_relationship}}</td> -->
                         <td>{{$value->email}}</td>
                         <td>{{$value->mobile}}</td>
                         <td>
-                            <a href="{{ url('/EditStudent') }}/{{ $value->student_id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-                            <a href="{{ url('/deleteStudent') }}/{{ $value->student_id }}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-                            <!--<a href="{{ url('/teacherUpdate') }}/{{ $value->teacher_id }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>-->
-
+                            <a href="{{ url('/EditStudent') }}/{{ $value->student_id }}"data-toggle="tooltip"
+                            data-placement="top" title="แก้ไข"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+                            <a href="{{ url('/deleteStudent') }}/{{ $value->student_id }}" data-toggle="tooltip"
+                            data-placement="top" title="ลบ"><i class="fa fa-trash" aria-hidden="true"></i></a>
                         </td>
 
                     </tr>
