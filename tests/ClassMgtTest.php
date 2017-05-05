@@ -21,14 +21,18 @@ class ClassMgtTest extends TestCase
      */
     public function testCalHire()
     {
-        $number_of_time = -12;
-        $hiring_rate = 500;
+        for($i=0; $i<=100000; $i++) {
+            $number_of_time = -1-$i;
+            $hiring_rate = 500;
 
-        $number_of_time1 = 12;
-        $hiring_rate1 = 500;
-        $result = $number_of_time1 * $hiring_rate;
+            $number_of_time1 = 1+$i;
+            $hiring_rate1 = 500;
+            $result = $number_of_time1 * $hiring_rate;
 
-        $this->assertEquals($result, $this->km->calHire($number_of_time, $hiring_rate));
+            $this->assertEquals($result, $this->km->calHire($number_of_time, $hiring_rate));
+            //echo $result ." == ";
+            //echo $this->km->calHire($number_of_time, $hiring_rate) . "\n";
+        }
         //$this->assertTrue(true);
     }
 }
