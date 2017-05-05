@@ -117,7 +117,7 @@
 							@endif
 							@endforeach
 						</select>
-						<input type="hidden" id="school_province_id" name="school_province_id" value="{{ $student->school_province_id }}">
+						<!--<input type="hidden" id="school_province_id" name="school_province_id" value="{{ $student->school_province_id }}">-->
 
 					</div>
 				</div>

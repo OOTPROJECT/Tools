@@ -39,6 +39,7 @@ class CourseSchedule extends Model
                             INNER JOIN time_table AS tt ON cs.time_table_id = tt.time_table_id
                             INNER JOIN teachers AS t ON cs.teacher_id = t.teacher_id
                             WHERE c.subject_id = '". $subject_id ."' AND cs.status = 'เปิด'
+                            AND cs.deleted_at IS NULL
                             ORDER BY cs.course_schedule_id "
                           );
         return $course_schedule;
